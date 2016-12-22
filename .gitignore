@@ -1,0 +1,4 @@
+public/
+*~
+.DS_Store
+.htpasswd

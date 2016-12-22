@@ -1,0 +1,9 @@
+languageCode = "en-us"
+baseurl = "http://learntla.com"
+title = "Learn TLA"
+theme = "hugo-theme-learn"
+PygmentsCodeFences = true
+
+[Params]
+  Author = "Hillel Wayne"
+  menu = ["introduction", "pluscal", "concurrency", "tla", "snippets"]
