@@ -1,2 +1,0 @@
-{{$path := printf "%s" (.Get 0)}}
-{{ printf "```tla\n%s\n```" (readFile $path) | markdownify }}

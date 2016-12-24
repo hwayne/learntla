@@ -16,3 +16,10 @@ Sum(Set) == LET FSum[S \in SUBSET Set] ==
 ```
 
 ### Min and Max
+
+### Set Compositon
+
+```
+S ** n = [1..n -> S]
+S ** n = UNION {[1..m -> S] : m \in 1..n}
+```

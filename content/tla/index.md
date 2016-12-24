@@ -1,40 +1,17 @@
 +++
-title = "[Basic TLA+]"
+title = "Basic TLA+"
 weight = 0
 +++
 
-Up until now we've been working almost exclusively in PlusCal. That's been enough to write interesting specs. Now it's time to dive into TLA+, which will dramatically increase the breadth and specificity of the systems we can model.
+Up until now we've been able to model fairly simple systems and discover some subtle bugs in them. We're still fairly limited, however, in what we're able to do. In practical problems we tend to be interested in are far more complicated and require some concepts we can't yet implement. For example, how do you test the invariant "at most one element in the sequence can be a duplicate" or "the largest and smallest element must be within a certain distance of each other"? We don't even have a way yet of specifying "the largest element".
 
-The key difference between TLA+ and programming languages is that TLA+ is a mathematically descriptive, not prescriptive. Lamport designed TLA+ to easily describe any system, even impossible or nonsensical ones. For example,
 
-```
-Primes == {n \in N: /\ n > 1 /\ ~\E i \in 2..n : n % i = 0}
-GoldbachCounters == {n \in N: /\ n > 2 /\ n % 2 = 0 /\ \A p1, p2 \in Primes : p1 + p2 # n}
-```
+For this, we need TLA+.
 
-`GoldbachCounters` is the set of all counterexamples to the [Goldbach Conjecture](https://en.wikipedia.org/wiki/Goldbach's_conjecture). Do any exist? Who knows? But you can easily define that set in TLA+. And we can just as easily write a function that only exists if the `GoldbachCounters` is nonempty.
+TLA+ is a mathematical description language. Instead of saying how to find the value you want, you instead say the properties of what you want. For example, the largest element of a set is `CHOOSE x \in S : \A y \in S : y <= x }`. That's not an algorithm. It's just "the number that's bigger than the other numbers."
 
-As a consequence of this, we can't actually _run_ TLA+. Nor can we model check _all_ of it: doing so would break the Halting Problem! But we can check a fairly large subsystem of it, more than enough to [do cool stuff.]
+[A consequence of its descriptiveness is it's possible to build uncheckable models. It's easy, for example, to define the set of all universal turing machines that halt. If you feed that into TLC, though, it will throw an error back. Generally, avoid using infinite sets and you'll probably be fine.]
 
-Unfortunately for our purposes
- 
+TLA+ gives us incredible specification power. Not only can we specify complex invariants with it, we can also weave it into our PlusCal code. We can specify per-process flags with `Flags == [pc -> Bool]`. We can []. We can []. PlusCal makes using TLA+ much easier, but TLA+ is what makes PlusCal worthwhile in the first place. Let's get started.
+
 Point of note: we're going to be almost completely ignoring the "temporal" part of "Temporal Logic of Actions". As a simple heuristic, we're never, _ever_ going to be talking about "primed and unprimed operators", which make up like 95% of Specifying Systems. At it's core, TLA+ is a beautiful way to elegantly express the temporal properties of a complicated system. For our uses, TLA+ is a way of writing better PlusCal specs. Sacriligious? Probably. Easier? Yup.
-
-## Stuff
-
-A TLA+ operator is like a function.
-
-That's a _massive_ oversimplification, but it's an ok intuition for our scope. Throw in some arguments, get some output. Some examples:
-
-```
-IsFooEmpty == foo = {}
-IsBarInFoo(bar) == bar \in foo
-IsBarInBaz(bar, baz) == bar \in baz
-```
-
-Etc etc etc.
-
-Considered a core expession, use in invariants
-Has to come after the translation
-Recursion?
-Let In

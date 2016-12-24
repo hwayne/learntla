@@ -21,5 +21,3 @@ x := x + 1;
 One note: PlusCal was invented over 10 years after TLA+ was. A consequence of this is that TLC (the TLA+ model checker) doesn't understand PlusCal. Instead, the Toolbox IDE can automatically transpile PlusCal to TLA+.
 
 This section will focus on single process systems.
-
-

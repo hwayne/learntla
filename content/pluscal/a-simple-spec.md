@@ -100,7 +100,7 @@ end while;
 
 ### Goto
 
-``` tla
+```
 A:
   if TRUE then goto B else goto C endif;
 B:

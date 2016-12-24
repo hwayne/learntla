@@ -4,6 +4,7 @@ weight = 1
 +++
 
 When writing a concurrent system, the PlusCal code is a little different.
+
 ```
 ---- MODULE module_name ----
 \* TLA+ code

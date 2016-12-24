@@ -3,12 +3,14 @@ title = "Sets, Tuples, and Structures"
 weight = 7
 +++
 
+
 In the last sequence we saw how we could model complicated behavior with PlusCal. We also saw that it could get a little unwieldy. In this section we'll introduce a couple of extra types, as well as some information on how to use them.
 
 ## Types
 
 ### Sets
 
+[TALK ABOUT MULTIPLE SELECT]
 You've seen sets before. `{1, 2}` is a set. `1..N` is the set of all numbers between 1 and 2.
 
 Is there a convenient shorthand to say "the set of all odd numbers under 100"? We can do this with _set constructors_, the map and filter analogs of a set.
@@ -38,6 +40,8 @@ token | operation | example
 `UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`
 
 ### Tuples
+
+[TODO DOMAIN]
 
 Tuples are pretty much what you think they are. They have an ordering and everything. You specify them with `<<>>` and they are 1-indexed.
 
@@ -110,25 +114,5 @@ _Solve the Tower of Hanoi._
 Quick refresher on the [rules](https://www.cs.sfu.ca/~tamaras/recursion/Rules_Towers_Hanoi.html). This kind of problem flips TLA+ on its head. Instead of checking if our solution has no problems, we're checking that our problem has a solution! A common way to do this is to turn the spec inside out: we say the spec is "valid" if the solution is unreachable. Then TLC will flag it as an "error" and show us the steps required to reproduce the solution.
 
 (Improve this code it's the worst)
-```
-EXTENDS TLC, Tuples, Integers
 
-Headish(seq) == IF DOMAIN seq = {} 
-                THEN 99
-                ELSE Head(seq)
-(* --algorithm towers
-variables tower = <<<<1, 2, 3>>, <<>>, <<>>>>;
-begin
-while TRUE do
-    assert tower[3] # <<1, 2, 3>>;
-
-    with x \in DOMAIN tower, y \in (DOMAIN tower) \ {x} do
-        if (Len(tower[x]) # 0)
-        /\ (Head(tower[x]) < Headish(tower[y])) then
-            tower[x] := Tail(tower[x]) ||
-            tower[y] := <<Head(tower[x])>> \o tower[y];
-        end if;
-    end with;
-end while;
-end algorithm; *)
-```
+{{% code hanoi %}}

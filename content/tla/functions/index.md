@@ -1,10 +1,7 @@
 +++
 title = "Functions"
-weight = 1
-draft = true
+weight = 3
 +++
-
-[TODO learn how to render]
 
 Beyond the basic four types in TLA+ (number, string, boolean, model value), there are two 'complex' types. The first we've already used - that's the set. The other is the function. Functions form the basis of all the 'practical' complex types, so we're going to spend some time on them. Fortunately, the theory is pretty simple.
 
@@ -18,14 +15,12 @@ Here, foo can be any equation, and can be dependent on s. Other than that, you h
 
 Or multiple variables:
 
-`And == [x, y \in S |-> x /\ y]`
+`Sum == [x, y \in S |-> x + y]`
 
 You call a function with f[x]. [], not (). () are for operators.
 
 {{% notice info %}}
-So, what exactly is the difference between functions and operators? There's a few important difference, but here's the practical ones. You can't have a set of operators. Functions can't express certain actions that operators can. Finally, you can't use functions as invariants.
-
-A good rule of thumb is that if you want to manipulate it as part of your algorithm, prefer functions. Otherwise, prefer operators.
+So, what exactly is the difference between functions and operators? There's a few important difference, but here's the practical ones. You can't have a set of operators. Functions can't express certain actions that operators can. Finally, you can't use functions as invariants. A good rule of thumb is that if you want to manipulate it as part of your algorithm, prefer functions. Otherwise, prefer operators.
 {{% /notice %}}
 
 ### Sequences and Structs
@@ -72,7 +67,7 @@ Finally, we have `SmallestExactChange`. Compared to the others, it's a doozy. Th
 
 The greedy algorithm is “subtract quarters until you can't anymore, then subtract dimes, then nickels, then pennies”.
 
-{{% embed "change.tla" %}}
+{{% code change %}}
 
 And we can see this works for any number between 1 and 100 cents.
 

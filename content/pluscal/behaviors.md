@@ -1,5 +1,5 @@
 +++
-title = "[Behaviors]"
+title = "Behaviors"
 weight = 4
 +++
 
@@ -40,7 +40,6 @@ MAKE THIS A DRAWING
 
 ### With
 
-[Maybe avoid this entirely?]
 ```
 with a \in {1, 2, 3} do
   x := x + a
