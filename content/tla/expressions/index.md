@@ -1,93 +1,89 @@
 +++
-title = "Set [Thingy]"
+title = "Expressions"
 weight = 2
-draft = true
 +++
 
-Often, when we have a set of things, we're interested in how those things relate to each other and the set itself. For example, "Given this set of [], are any broken?" Additionally, we often want to choose things out of a set with specific properties, for example "the smallest element". In order to do this, we'll introduce three new set operators. For all these examples, let's assume we've already written the following operator:
+We've been implicitly using _expressions_ up until now; we just haven't clarified them. Doing so it useful, because will help us interview our TLA+ and PlusCal. For our purposes, an expression is __anything that follows a `==`, `=`, `:=`, or `\in`__. All expressions are valid TLA+ and can leverage anything in TLA+. For example, let's say we had the following PlusCal code:
 
-`IsEven(x) == x % 2 = 0`
+[FIXME]
+```
+Foo == 1..10
+(* --algorithm foo
+variables a \in Foo, b = a = 0;
+begin
+  b := CHOOSE x \in Foo : x # a;
+end algorithm; *)
+```
 
-### \E
+[[TODO remove CHOOSE b/c this is now before the section on sets]]
 
-`\E` means "exists". We write `\E x \in S : P(x)` to say "there is at least one x in the set such that P(x) is true." If we wanted to check that a set had an even  number in it, we could write `HasEvenNumber(S) == \E x \in S : IsEven(x)`. If there are any even numbers, `HasEvenNumber` is true. Otherwise it's false. Simple.
+Some things to note here:
 
-`~\E` is the opposite: it says that there are no such elements. `\E x \in {}: Foo` is always false, since there are no elements in `{}`.
+* In the initial variable setup, we were able to define be a boolean on "is a zero". The first `=` was assignment that started the expression, the second one was an equality check. While you don't need to, it's recommended to wrap the expression here in (), so as to make it clear that the `=` is semantically overloaded.
+* In the algorithm itself, we were able to assign b based on a `CHOOSE` operation. We could just as easily do `b := CHOOSE x \in SUBSET Foo: TRUE` to grab an arbitrary subset.
 
-### \A
-
-`\A` means "all". We write `\A x \in S : P(x)` to say "For every x in the set,P(x) is true." If we wanted to check that a set had an even number in it, we could write `OnlyEvenNumbers(S) == \A x \in S : IsEven(x)`. If there are only even numbers, `HasEvenNumber` is true. Otherwise it's false. Simple.
-
-`~\A` is the opposite: it says that there is at least one element where P(x) is false. `\A x \in {}: Foo` is always true, since there are no elements in `{}`.
-
-{{% notice warning %}}
-`\A x \in {}: FALSE` is still true!
+{{% notice tip %}}
+One nice reason to inline `CHOOSE` is to replace a `with`, which can't make procedure calls or use while loops.
 {{% /notice %}}
 
-### CHOOSE
+* A third thing after I make the algorithm better, this is not the editing phase
 
-`CHOOSE` means exactly that. We write `CHOOSE x \in S : P(x)` to say "Throw me whatever x is in S for which P(x) is true". For example, we could write `AnEvenNumber(s) : CHOOSE x \in S : IsEven(x)` to mean "I want an even number." 
+Beyond that, there are ways of increasing the complexity of an expression. Let's examine them.
 
-If there are multiple elements that satisfy the CHOOSE, TLC will create a separate behavior for each element. If there are no elements that satisfy the CHOOSE, TLC will raise an error. That's because there's a problem in your spec. If the set is infinite, TLC will raise an error. That's because TLC can't choose from an infinite sets. There still may be a problem with your spec.
+### LET-IN
 
-## Composing Set Operators
-
-You can specify surprisingly complex properties with just those three additional operators. To demonstrate this, let's burn through some common whiteboard interview problems.
-
-_Find the largest element in the set._
+Any expression can use LET-IN to add local operators and definitions to just that expression alone.
 
 ```
-Max(S) == CHOOSE x \in S : \A y \in S : y <= x
-\* Or
-Max(S) == CHOOSE x \in S : \A y \in S \ {x} : y < x
+LET IsEven(x) == x % 2 = 0
+IN  IsEven(5)
+
+LET IsEven(x) == x % 2 = 0
+    Five == 5
+IN  IsEven(Five)
+
+LET IsEven(x) == LET Zero == 2
+                 IN  x % Zero = Zero
+    Five == 5
+IN  IsEven(Five)
 ```
 
-"Choose an element of a set where all other elements are smaller than it."
+The whitespace is nonsignificant: we can write `LET IsEven(x) == x % 2 = 0 Five == 5 IN IsEven(Five)` and it will correctly parse it as two separate operators in the LET.
 
-_Here's a list of numbers, do any two add up to N?_
+{{% notice info %}}
+Please use newlines. _Please_.
+{{% /notice %}}
 
-```
-IsTwo(Seq, N) == \E x, y \in 1..Len(Seq) : x # y /\ Seq[x] + Seq[y] = N
-```
+### IF-THEN-ELSE
 
-"Are there two different numbers that correspond to the points in the sequence that add up to N."
-
-_Do any THREE add up to N?_
+C'mon, you know this one.
 
 ```
-IsThree(Seq, N) == \E x, y, z \in 1..Len(Seq) : Cardinality({x, y, z}) = 3 /\ Seq[x] + Seq[y] + Seq[z] = N
+IsEven(x) == IF x % 2 = 0 THEN TRUE
+                          ELSE FALSE
 ```
 
-To make this a little nicer we show that `x # y # z` by saying "If we throw them all into a set, the set should be size three." Otherwise, one of them was a duplicate.
+As before, alignment doesn't matter, but you should align them anyway unless you really hate your coworkers.
 
-_[That annoying stock problem]_
+### CASE 
 
-TODO CLEANUP
-
-```
-BestSell(Prices) == CHOOSE <<min, max>> \in 1..Len(Prices) \X 1..Len(Prices) :
-                      /\ max >= min
-                      /\ \A a, b \in 1..Len(Prices) : 
-                        a <= b 
-                        => Prices[b] - Prices[a] <= Prices[min] - Prices[max]
-```
-
-[Explain]
-
-_Given lists of numbers A and B, determine if one is a rotation of the other. Eg 1, 2, 3, 4 is a rotation of 2, 3, 4, 1_
+Case is _mostly_ how you'd expect it to act, with one subtle difference.
 
 ```
-IsRotation(Seq1, Seq2) == LET len == Len(Seq2)
-                          IN /\ Len(Seq1) = len
-                             /\ \E x \in 1..len :
-                                \A n \in 1..len : Seq1[((n+x)%len)+1] = Seq2[n]
-\* Or
-
-IsRotation(Seq1, Seq2) == LET AllRotations(S) ==
-                              { [ n \in 1..Len(S) |-> S[((n+x)%Len(S))+1]] : x \in 1..Len(S) } 
-                          IN Seq1 \in AllRotations(Seq2)
+CASE x = 1 -> TRUE
+[] x = 2 -> TRUE
+[] x = 3 -> 7
+OTHER -> FALSE
 ```
 
-"Here's what it means to be a rotation. Does Se1 match that definition?" [Dislike this]
+OTHER is the default. If none of the cases match and you leave out an OTHER, TLC considers that an error. If _more than one match_, though, you [HIT A BUG IN TLC]
 
-[PlusCal Example?]
+{{% notice warning %}}
+**THIS IS BROKEN PAGE 298**
+{{% /notice %}}
+
+## Nesting
+
+Of course you can.
+
+[Example]

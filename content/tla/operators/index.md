@@ -1,5 +1,5 @@
 +++
-title = "[Operators]"
+title = "Operators"
 weight = 1
 +++
 
@@ -30,7 +30,9 @@ You can use them anywhere you use any other expression.
 
 Operators can't recursively call themselves unless you [foo]:
 
-So, how do we use them! A few different ways!
+[BAR]
+
+So, how do we use them? A few different ways! [what follows is dumb]
 
 ### Generic Helper Operators
 

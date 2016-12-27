@@ -1,6 +1,6 @@
 +++
 title = "Functions"
-weight = 3
+weight = 40
 +++
 
 Beyond the basic four types in TLA+ (number, string, boolean, model value), there are two 'complex' types. The first we've already used - that's the set. The other is the function. Functions form the basis of all the 'practical' complex types, so we're going to spend some time on them. Fortunately, the theory is pretty simple.
