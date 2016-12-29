@@ -7,16 +7,16 @@ We now have all of the pieces we need, so let's put it all into practice.
 
 ## The Problem
 
-As part of your project, you need to scrape BryceTech's API for Widget results. Because nothing can be easy, the API has two restrictions you know about:
+As part of your project, you need to call a third party API. There are two types of calls you need to make:
 
-1. The results are paginated. If you have more than N results, you will get the first N and a `next` token. You need to get all of the results.
-1. The API is ratelimited. Any query can return a `PAST_LIMIT` error instead of the results you need.
+1. A GET for a collection of objects. Each call will return some results and, potentially, a pagination token.
+1. A GET for a single object, followed by, if necessary, a PUT to update it.
 
-As part of your requirements, you don't want to make any requests if the limit expires. (more stuff)
+There is a known rate limit of N calls per unit of time on this API, and you do not want to exceed this. The first type may make an arbitrary number of calls, but it's less critical and you are comfortable waiting between calls. For the second, it will make either 1 or 2 calls; however, being higher priority, you want to _immediately_ update the object if necessary. With these constraints in mind, how do you guarantee you never exceed the rate limit?
 
 ### Initial Design
 
-We'll start by building an extremely simple skeleton of the pagination and rate limiting logic. We store
+We start with the minimum possible case.
 
 {{% code "tla/init" %}}
 
