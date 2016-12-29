@@ -11,4 +11,3 @@ Range(f) == {f[x] : x \in DOMAIN f}
 ```
 
 Just a fairly simple application of mapping over a set.
-

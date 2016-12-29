@@ -59,8 +59,9 @@ Please use newlines. _Please_.
 C'mon, you know this one.
 
 ```
-IsEven(x) == IF x % 2 = 0 THEN TRUE
-                          ELSE FALSE
+IsEven(x) == IF x % 2 = 0 
+             THEN TRUE
+             ELSE FALSE
 ```
 
 As before, alignment doesn't matter, but you should align them anyway unless you really hate your coworkers.

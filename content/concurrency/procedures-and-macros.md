@@ -39,8 +39,17 @@ The return just ends the procedure. If your procedure never reaches it, then it'
 
 In order to call a procedure, you have to explicitly use `call Name(val1, ...);`, and the following line must be a label or a `return` (if you called it from another procedure).
 
+{{% notice warning %}}
+ If you want to use procedures you _must_ `EXTEND Sequences`.
+{{% /notice %}}
+
+### Order of operations
+[[
+* It has to be macro THEN procedure THEN processes
+]]
 ### Macros vs Procedures
 
 [So when should you use which? Macros are faster and less complicated. If you can use them, use them. Use procedures when you have multiple separate processes that can do the same actions.]
+
 
 EXAMPLE

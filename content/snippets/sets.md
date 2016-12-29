@@ -19,7 +19,14 @@ Sum(Set) == LET FSum[S \in SUBSET Set] ==
 
 ### Set Compositon
 
+Returns all tuples of length n.
+
 ```
-S ** n = [1..n -> S]
-S ** n = UNION {[1..m -> S] : m \in 1..n}
+S ** n == [1..n -> S]
+```
+
+Returns are sequences of length n or less. Remember, sequences and tuples are different names for the same data structure.
+
+```
+S ** n == UNION {[1..m -> S] : m \in 1..n}
 ```
