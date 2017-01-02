@@ -6,7 +6,7 @@ weight = 4
 So far we've seen the basics of PlusCal as well as how to run a model. We've also seen that if our starting variables are specified as belonging to a set, it expands the state space that TLC can search. This takes up most of the way to writing useful specifications. The last step is to add divergent _behaviors_: allow the system to do different things at a given step. In a single process PlusCal algorithm, there are two simple ways to introduce concurrency: a `with` statement and an `either` statement.
 
 ### Either
-`Either` looks a lot like a basic if statement. The syntax is as follows: 
+`either` looks a lot like a basic if statement. The syntax is as follows: 
 
 ```
 either
@@ -39,6 +39,8 @@ MAKE THIS A DRAWING
 ```
 
 ### With
+
+`with` does the same thing, except instead of creating a new behavior for each possible branch, it creates a behavior for each element in the set. In this case, we have three possible behaviors:
 
 ```
 with a \in {1, 2, 3} do

@@ -1,21 +1,22 @@
-EXTENDS TLC, Tuples, Integers
+---- MODULE hanoi ----
+EXTENDS TLC, Sequences, Integers
+                
+(* --algorithm hanoi
+variables tower = <<<<1, 2, 3>>, <<>>, <<>>>>, D = DOMAIN tower;
 
-Headish(seq) == IF DOMAIN seq = {} 
-                THEN 99
-                ELSE Head(seq)
-(* --algorithm towers
-variables tower = <<<<1, 2, 3>>, <<>>, <<>>>>;
 begin
 while TRUE do
-    assert tower[3] # <<1, 2, 3>>;
-
-    with x \in DOMAIN tower, y \in (DOMAIN tower) \ {x} do
-        if (Len(tower[x]) # 0)
-        /\ (Head(tower[x]) < Headish(tower[y])) then
-            tower[x] := Tail(tower[x]) ||
-            tower[y] := <<Head(tower[x])>> \o tower[y];
-        end if;
-    end with;
+  assert tower[3] # <<1, 2, 3>>;
+  with from \in {x \in D : tower[x] # <<>>},
+       to \in {
+                y \in D : 
+                  \/ tower[y] = <<>>
+                  \/ Head(tower[from]) < Head(tower[y])
+              } 
+  do
+    tower[from] := Tail(tower[from]) ||
+    tower[to] := <<Head(tower[from])>> \o tower[to];
+  end with;
 end while;
 end algorithm; *)
-
+====

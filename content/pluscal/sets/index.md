@@ -39,9 +39,9 @@ token | operation | example
 `SUBSET S` | The set of all subsets of S | `SUBSET {1, 2} = {{}, {1}, {2}, {1, 2}}`
 `UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`
 
-### Tuples
+[[Something about run the following in the expression evaluator.]]
 
-[TODO DOMAIN]
+### Tuples
 
 Tuples are pretty much what you think they are. They have an ordering and everything. You specify them with `<<>>` and they are 1-indexed.
 
@@ -54,6 +54,8 @@ x = <<4, 5, 6>>;
 x[1] + x[2] + x[3] = 15;
 ```
 
+In addition, you have the `DOMAIN` operator. `DOMAIN Tuple` is the set `1..Len(Tuple)`. For example, `DOMAIN <<"hello", "world", "!">> = {1, 2, 3}`.
+
 If you add `EXTENDS Sequences` to your spec, they also do double duty as sequences, which adds some more functionality. None of these operations will mutate the sequence. If you want to pop the head, for example, you have to do `seq := Tail(seq)`.
 
 token | operation | example
@@ -64,8 +66,10 @@ Append | Add element to end of sequence | `Append(<<1>>, 2) = <<1, 2>>`
 `\o` | Combine two sequences | `<<1>> \o <<2>> = <<1, 2>>`
 Len | Length of sequence | `Len(<<1, 2>>) = 2`
 
+Note that these use parenthesis, unlike DOMAIN, SUBSET, and UNION. A very rough rule of thumb is that if it's from a module, it uses parenthesis, and if it's part of the core language, it will be in ALL CAPS.
+
 {{% notice info %}}
-If the value is undefined (for example, `Tail(<<1>>)`), the model crashes. This is a Good Thing- better you know something is wrong with the model than get bad results.
+If the value is undefined (for example, `Tail(<<>>)`), the model considers that an error in your spec. And let's be honest, it probably is.
 {{% /notice %}}
 
 ### Structures
@@ -85,15 +89,11 @@ x = [a |-> 1, b : {2, 3}];
 x = { [a |-> 1, b |-> 2], [a |-> 1, b -> 3] }
 ```
 
-Neat, huh? It's pretty neat.
+You can also use DOMAIN on structures, which will give the set of keys, as strings.
 
 
 {{% notice info %}}
-Aside from sets, sequences, and structures, there's a fourth complex type: functions. They're a little more complicated, so I cover them in a couple of chapters. Feel free to [skip ahead] if you want.
-{{% /notice %}}
-
-{{% notice note %}}
-The above is a blatant lie. There's actually only two complex types: sets and functions. Tuples and structures are just functions with some syntactic sugar.
+Sequences and structures are special cases of ‘functions’, which I introduce in the TLA+ chapter. They are a little different from programming functions. Feel free to skip ahead.
 {{% /notice %}}
 
 ### Type Composition
@@ -116,3 +116,6 @@ Quick refresher on the [rules](https://www.cs.sfu.ca/~tamaras/recursion/Rules_To
 (Improve this code it's the worst)
 
 {{% code hanoi %}}
+
+[[Explanation]]
+

@@ -50,8 +50,8 @@ We can run the model by clicking the green arrow in the top left. TLC will explo
 ![](/img/pluscal/using-the-toolbox/model_run.png)
 What happens if we change `x = 5` to `x \in 1..5`? Retranslate the algorithm and rerun the model. You'll see that while the diamater is still 2, there are now 10 distinct states. Since there are five potential initial values, TLC will run the model with all of them in case one of them fails the (still nonexistant) invariants.
 
-{{% notice tip %}}
-These numbers don't change the invariance, but they're useful to understanding and debugging your system. Additionally, if a model is taking too long and there's a huge number of states, paring it down will speed it up (I hate this section)
+{{% notice info %}}
+These numbers are mostly metadata: they don't effect if the spec is valid or not, but it's helpful to look at them if you need to make optimizations.
 {{% /notice %}}
 
 Let's actually make it fail an invariant, then! Move back to the model overview and add `x # 6` to the "Invariants" section. This, unsurprisingly, says that a core invariant of our program is that x is never 6. This obviously fails when x is five, which is one of the potential initial states. When we rerun the model, we get something like this:
@@ -63,8 +63,11 @@ Let's actually make it fail an invariant, then! Move back to the model overview 
 Not only does this show us what failed, it shows us **how** it failed. In this case, "Initial Predicate" tells us the starting state: x is five. The following "action" line shows that the "Add" step finished and x changed to 6, which invalidates our invariant.
 
 {{% notice tip %}}
-Only values highlighted in [red] changed in a given step.
+TLA+ Toolbox doesn't have a default shortcut for "Run Model". You can set one by going to preferences, then "globals", then "keys". It'll make things smoother.
 {{% /notice %}}
 
-[Suitable ending. Get draft thoughts here?]
-[MUST TALK ABOUT EVALUATE CONSTANT EXPRESSION SOMEWHERE]
+## Evaluating Expressions
+
+Switch back to the main overview section. Change the behavior spec to "no behavior spec". This tells TLC that there’s no system you are modelling, and you’re just playing around with the TLA+ syntax. We can’t run anything here. But what we can do is go over to "model checking results" and put TLA in "evaluate constant expression". Try putting in `CHOOSE x \in {1, 2, 3} : x*x = 4` in that box and rerun the model. You should see [[2]] appear in the "Value" box.
+
+We won’t be using the "no behavior spec" mode for testing actual systems, but it’s a nice tool to test that you understand how some TLA+ expression will work. Don’t worry, we’ll be reintroducing this when we dive into TLA+ proper.
