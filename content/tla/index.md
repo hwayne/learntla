@@ -1,5 +1,5 @@
 +++
-title = "Basic TLA+"
+title = "TLA+"
 weight = 0
 +++
 

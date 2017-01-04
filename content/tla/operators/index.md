@@ -19,35 +19,45 @@ IsFive(x) == x = 5
 Or multiple arguments.
 
 ```
-MakeSeq(a, b) == <<a, b, Five>>
+SumWithFive(a, b) == a + b + 5
 ```
 
 You can use them anywhere you use any other expression.
 
 ```
-{x \in 1..10 : IsFive(x)} = {5}
+{ Five, SumWithFive(Five, Five) } \* { 5, 15 }
 ```
 
 Operators can't recursively call themselves unless you [foo]:
 
 [BAR]
 
-So, how do we use them? A few different ways! [what follows is dumb]
+Simple.
 
-### Generic Helper Operators
+## Integrating with PlusCal
 
-You can put them _before_ the PlusCal algorithm to use them as helpers, for example if you need to define a set filter a lot:
+There are generally three ways to use operators with pluscal:
 
-[example]
+### Generic Helpers
 
-Operators defined this way can't reference the variables in the pluscal algorithm itself. If you want them to be able to, you have to put them in a _define_ block:
-
-[example]
+Anything that doesn't specifically reference your variables, like `IsEmpty(Set) == Set = {}`. The best place to put this are _before_ the `--algorithm` line, and your PlusCal code can use it like any other expression.
 
 ### Invariants
 
-You know how in our models we've been testing, say, `pos \in board`? Instead we could define `InBoard == pos \in board` and put that after the translation, which makes writing models easier and more elegant.
+Something you want to check in a model, like `HasMoneyLeft == money > 0`. TLA+ parses top down; if you want to reference a variable in your operator, it has to come after the TLA+ definition. So your invariant has to go _after_ the `\* END TRANSLATION` block.
 
-[example]
 
-## Example
+### PlusCal Helpers
+
+A helper operator that uses PlusCal variables, like `CanGamble == money > 25`. You can't put it above the `--algorithm`, because it needs to know about the PlusCal variables, and you can't put it below the `end algorithm`, because PlusCal needs to know about the operator. To work around this edge case, PlusCal adds an additional structure called `define`:
+
+```
+define
+  Foo(bar) == baz
+  \* ...
+end define
+```
+
+Your `define` block must come before the `begin`.
+
+Here's an example with all three use cases.

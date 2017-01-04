@@ -1,2 +1,2 @@
-{{$path := printf "content/%s/%s.tla" (.Page.File.Dir) (.Get 0)}}
+{{$path := printf "content/%s/tla/%s.tla" (.Page.File.Dir) (.Get 0)}}
 {{ printf "```tla\n%s\n```" (readFile $path) | markdownify }}

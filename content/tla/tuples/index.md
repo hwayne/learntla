@@ -1,45 +1,7 @@
 +++
-title = "Sets, Tuples, and Structures"
-weight = 7
+title = "Tuples and Structures"
+weight = 4
 +++
-
-
-In the last sequence we saw how we could model complicated behavior with PlusCal. We also saw that it could get a little unwieldy. In this section we'll introduce a couple of extra types, as well as some information on how to use them.
-
-## Types
-
-### Sets
-
-[TALK ABOUT MULTIPLE SELECT]
-You've seen sets before. `{1, 2}` is a set. `1..N` is the set of all numbers between 1 and 2.
-
-Is there a convenient shorthand to say "the set of all odd numbers under 100"? We can do this with _set constructors_, the map and filter analogs of a set.
-
-First, we can filter a set with `{x \in S: P(x)}`, which is the set of all x \in S where P(x) is true. Some examples:
-
-- `{x \in 1..100 : x % 2 = 1}`
-- `{x \in S : x \in Z \/ x >= 5}`
-- `{x \in S : FALSE}`
-
-We can also map with `{F(x) : x \in S}`. `{x * 2 : x \in 1..3}` is the set `{2, 4, 6}`.
-
-Finally, there are extra operations for working with sets:
-
-logic | token | `TRUE` | `FALSE`
-------|--------|--------|--------
-in set|  `\in` | `1 \in {1, 2}` | `1 \in {{1}, 2}` 
-not in set | `\notin` | `1 \notin {}` | `{1} \notin {{1}}`
-is subset | `\subseteq` | `{1, 2} \subseteq {1, 2, 3}` | `{1, 2} \subseteq {1, 3}`
-
-token | operation | example
--------|-----------|--------
-`\cup`, `\union` | Set Union | `{1, 2} \cup {2, 3} = {1, 2, 3}`
-`\cap`, `\intersect` | Set Intersection | `{1, 2} \cap {2, 3} = {2}`
-`S1 \ S2` | The elements in S1 not in S2 | `{1, 2} \ {2, 3} = {1}, {2, 3} \ {1, 2} = {3}`
-`SUBSET S` | The set of all subsets of S | `SUBSET {1, 2} = {{}, {1}, {2}, {1, 2}}`
-`UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`
-
-[[Something about run the following in the expression evaluator.]]
 
 ### Tuples
 

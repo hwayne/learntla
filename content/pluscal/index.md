@@ -1,5 +1,5 @@
 +++
-title = "Introducing PlusCal"
+title = "PlusCal"
 weight = 0
 +++
 

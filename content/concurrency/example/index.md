@@ -18,13 +18,13 @@ There is a known rate limit of N calls per unit of time on this API, and you do 
 
 We start with the minimum possible case.
 
-{{% code "tla/init" %}}
+{{% code init %}}
 
 Since most of the business logic is irrelevant to our use case, we simply leave it out. `get_collection` makes an arbitrary number of calls, represented by the `either goto`. Every time TLC reaches that branch point it will explore both branches, so we know this can be an arbitrary number of calls. Similarly, the `get_put` makes either one or two calls in a transaction. Finally, every time the `made_calls` changes we check that we haven't gone over the maximum.
 
 If we run this, we'll get an error: the assert fails pretty trivially. We can fix this by adding a check in the macro, so that we only make a call if we have enough rate left. One fix is this:
 
-{{% code "tla/if_macro" %}}
+{{% code if_macro %}}
 
 Which makes the call fail silently if it would take us past the limit.
 
@@ -32,11 +32,11 @@ Which makes the call fail silently if it would take us past the limit.
 
 Our solution works, but misses the business case: we don't want to not make the calls, we want to _wait_ on them until the rate limit refreshes. We can simulate that with an _await_:
 
-{{% code "tla/await_macro" %}}
+{{% code await_macro %}}
 
 If we run this, though, we get a deadlock. That's because all of our processes are waiting for the limit to refresh... which we never actually coded. Here's one way of doing this:
 
-{{% code "tla/limit_process" %}}
+{{% code limit_process %}}
 
 If we add that, the spec passes as normal.
 
@@ -44,7 +44,7 @@ If we add that, the spec passes as normal.
 
 Let's add a complication: all of the processes are running on different workers, so they don't automatically know the number of calls made. In order to avoid going past the limit, we need to share that information, which takes time. One way we can do this is by having each process query a central cache that only move forward if there's enough calls remaining. One representation would be
 
-{{% code "tla/with_delay" %}}
+{{% code with_delay %}}
 
 When we run this, we see it fails, as between the get and the request another process can make a call. If we want to resolve this we need some form of locking or priority.
 
@@ -56,6 +56,6 @@ Locking works, but it also explodes the diameter. Every process needs to wait on
 
 One solution we can use is to reserve calls: when a process checks that there are calls remaining, it reserves N calls that are considered made in our cache but not in the API endpoint. Then, once we make the appropriate calls, we return the necessary reserves.
 
-{{% code "tla/with_reserves" %}}
+{{% code with_reserves %}}
 
 [[ending]]

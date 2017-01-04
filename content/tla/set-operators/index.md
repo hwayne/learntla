@@ -1,6 +1,6 @@
 +++
-title = "Sets"
-weight = 3
+title = "Logic"
+weight = 40
 +++
 
 Often, when we have a set of things, we're interested in how those things relate to each other and the set itself. For example, "Given this set of [], are any broken?" Additionally, we often want to choose things out of a set with specific properties, for example "the smallest element". In order to do this, we'll introduce three new set operators. For all these examples, let's assume we've already written the following operator:
@@ -23,15 +23,6 @@ Often, when we have a set of things, we're interested in how those things relate
 `\A x \in {}: FALSE` is still true!
 {{% /notice %}}
 
-### CHOOSE
-
-`CHOOSE` means exactly that. We write `CHOOSE x \in S : P(x)` to say "Throw me whatever x is in S for which P(x) is true". For example, we could write `AnEvenNumber(s) : CHOOSE x \in S : IsEven(x)` to mean "I want an even number." 
-
-If there are multiple elements that satisfy the CHOOSE, TLC will create a separate behavior for each element. If there are no elements that satisfy the CHOOSE, TLC will raise an error. That's because there's a problem in your spec. If the set is infinite, TLC will raise an error. That's because TLC can't choose from an infinite sets. There still may be a problem with your spec.
-
-{{% notice tip %}}
-A common pattern is `CHOOSE x \in S : TRUE` to grab an arbitrary element, like using `\in` in a PlusCal variable declaration.
-{{% /notice %}}
 
 ## Composing Set Operators
 

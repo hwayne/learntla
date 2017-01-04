@@ -15,8 +15,6 @@ begin
 end algorithm; *)
 ```
 
-[[TODO remove CHOOSE b/c this is now before the section on sets]]
-
 Some things to note here:
 
 * In the initial variable setup, we were able to define be a boolean on "is a zero". The first `=` was assignment that started the expression, the second one was an equality check. While you don't need to, it's recommended to wrap the expression here in (), so as to make it clear that the `=` is semantically overloaded.

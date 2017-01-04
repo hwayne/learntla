@@ -1,5 +1,5 @@
 +++
-title = "Concurrent PlusCal"
+title = "Concurrency"
 weight = 0
 +++
 
