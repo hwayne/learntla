@@ -3,30 +3,7 @@ title = "Expressions"
 weight = 2
 +++
 
-We've been implicitly using _expressions_ up until now; we just haven't clarified them. Doing so it useful, because will help us interview our TLA+ and PlusCal. For our purposes, an expression is __anything that follows a `==`, `=`, `:=`, or `\in`__. All expressions are valid TLA+ and can leverage anything in TLA+. For example, let's say we had the following PlusCal code:
-
-[FIXME]
-```
-Foo == 1..10
-(* --algorithm foo
-variables a \in Foo, b = a = 0;
-begin
-  b := CHOOSE x \in Foo : x # a;
-end algorithm; *)
-```
-
-Some things to note here:
-
-* In the initial variable setup, we were able to define be a boolean on "is a zero". The first `=` was assignment that started the expression, the second one was an equality check. While you don't need to, it's recommended to wrap the expression here in (), so as to make it clear that the `=` is semantically overloaded.
-* In the algorithm itself, we were able to assign b based on a `CHOOSE` operation. We could just as easily do `b := CHOOSE x \in SUBSET Foo: TRUE` to grab an arbitrary subset.
-
-{{% notice tip %}}
-One nice reason to inline `CHOOSE` is to replace a `with`, which can't make procedure calls or use while loops.
-{{% /notice %}}
-
-* A third thing after I make the algorithm better, this is not the editing phase
-
-Beyond that, there are ways of increasing the complexity of an expression. Let's examine them.
+We've been implicitly using _expressions_ up until now; we just haven't clarified them. For our purposes, an expression is __anything that follows a `==`, `=`, `:=`, or `\in`__. As we'll see [[TODO]]. in this section we'll cover some general expression modifiers.
 
 ### LET-IN
 
@@ -46,7 +23,7 @@ LET IsEven(x) == LET Zero == 2
 IN  IsEven(Five)
 ```
 
-The whitespace is nonsignificant: we can write `LET IsEven(x) == x % 2 = 0 Five == 5 IN IsEven(Five)` and it will correctly parse it as two separate operators in the LET.
+The whitespace does not matter: we can write `LET IsEven(x) == x % 2 = 0 Five == 5 IN IsEven(Five)` and it will correctly parse it as two separate operators in the LET. 
 
 {{% notice info %}}
 Please use newlines. _Please_.
@@ -54,7 +31,7 @@ Please use newlines. _Please_.
 
 ### IF-THEN-ELSE
 
-C'mon, you know this one.
+This is exactly what you expect it to be.
 
 ```
 IsEven(x) == IF x % 2 = 0 
@@ -75,11 +52,7 @@ CASE x = 1 -> TRUE
 OTHER -> FALSE
 ```
 
-OTHER is the default. If none of the cases match and you leave out an OTHER, TLC considers that an error. If _more than one match_, though, you [HIT A BUG IN TLC]
-
-{{% notice warning %}}
-**THIS IS BROKEN PAGE 298**
-{{% /notice %}}
+OTHER is the default. If none of the cases match and you leave out an OTHER, TLC considers that an error. If _more than one match_, though, TLC will pick one for you and _not_ branch. Sometimes that's what you want, sometimes it isn't. Depends on your use case, really.
 
 ## Nesting
 

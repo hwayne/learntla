@@ -55,3 +55,5 @@ As with before, `<>(x = 1)` is not true: we can do `4 -> 2 -> 0`. But the tempor
 
 `<>[]` means _stays as_: `<>[]P` says that at some point P becomes true and then **stays** true. If your program terminates, the final state has to have P as true. [more]
 
+
+[[ TODO Some examples ]]

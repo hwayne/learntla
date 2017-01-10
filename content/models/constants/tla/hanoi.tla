@@ -5,7 +5,7 @@ EXTENDS TLC, Sequences, Integers
 variables tower = <<<<1, 2, 3>>, <<>>, <<>>>>, 
 
 define 
-  D == DOMAIN tower;
+  D == DOMAIN tower
 end define;
 
 begin
@@ -24,3 +24,4 @@ while TRUE do
 end while;
 end algorithm; *)
 ====
+

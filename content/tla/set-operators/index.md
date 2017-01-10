@@ -3,6 +3,7 @@ title = "Logic"
 weight = 40
 +++
 
+[[ TODO COMBINE WITH LOGIC ]]
 Often, when we have a set of things, we're interested in how those things relate to each other and the set itself. For example, "Given this set of [], are any broken?" Additionally, we often want to choose things out of a set with specific properties, for example "the smallest element". In order to do this, we'll introduce three new set operators. For all these examples, let's assume we've already written the following operator:
 
 `IsEven(x) == x % 2 = 0`

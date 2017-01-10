@@ -1,38 +1,44 @@
 +++
 title = "Constants"
 weight = 5
-draft = true
 +++
 
-Imagine we have the following dummy program:
+Let's go back to our old Hanoi solver. As a refresher, this is the code we started with.
 
-```
-M == 5
-N == 4
-(* --algorithm foo
-process \in 1..M
-*);
-```
+{{% code hanoi %}}
 
-We want to test the invariant works for all numbers 1-N and up to M processes. This means there are [N] initial states and [N*M!] timelines. Doable for a pretty high number of processes- even 6 processes is just 720*N states to check.
+It works, but what if we wanted to change one of the parameters (more towers, more disks in a tower), we'd have to directly edit the code. It would be better to make a generic spec and test different parameters in the models instead. To do this, we introduce _constants_.
 
-Now what if each process has two steps? 6 processes jumps to over 7 million! For M processes with L steps, the number of behaviors is N*(ML)!/(L!^M), aka out of hand _extremely_ quickly. We know our models may take a while to run, but we still want them to finish before we die.
+{{% code constants %}}
 
-There's a number of optimizations we can do: reduce the number of labels, reducing branch points, etc. At some extent, though, it starts making sense to reduce the scope of the model: instead of checking everything on everything, test that the behaviors are correct for a restricted set of starting states and the the starting states are correct for a restricted set of behaviors. We verify our invariants hold in a variety of restricted subsets of the total behavior and informally link them, so as to make the model checking tolerable.
-
-To start, instead of simply defining the bounds, we put them in as _constants_:
-
-```
-
-CONSTANTS M
-
-(*
-```
-
-If we now try to run this, the model will fail, because M is not defined:
+This is the same as the old code, except that we now define the tower in terms of constants. Instead of the spec assigning the constant a value, the model does instead.
 
 [screenshot]
 
-When we click "edit", we have three options. The latter two, _model value_ and _set of model values_, we'll learn in the next section. Right now we're interested in "ordinary assignment". In there, we can assign an arbitrary value to N: `1`, `<<"a", "b", "c">>`, `[1..10 -> {x \in {1, 2, 3} : x > 2]`, etc.
+When we click edit we can assign a specific value to each constant.
 
-[more]
+[screenshot]
+
+
+### Assumptions
+
+What if we also wanted to vary the solution? For example, we all know that it's possible to move the entire tower over. But is it possible to reach `<<<<1, 2>>, <<>>, <<3, 4>>>>`? By moving the solution to a constant, we can vary that in the model, too:
+
+``` tla
+CONSTANT SOLUTION
+\* ...
+assert tower # SOLUTION
+```
+
+And now we can put the new solution in an ordinary assignment:
+
+[screenshot]
+
+One problem: we can now specify a "nonsensical" solution. For example, the solution may involve four towers when TSPACES is three, or it could leave out a number. In these cases, TLA+ can't find a solution because the solution isn't even defined! One way to catch this kind of error is with an `ASSUME` statement:
+
+{{% code sensical %}}
+
+TLC will check that our assignments don't break any of the `ASSUME` expressions, so we can use `ASSUME` to make sure nobody makes a bad model. Of course, it can only check what we remember to check: for example, a solution with two "5"s can still slip through. As always, with programming, be paranoid.
+
+[[ TODO how to tell which assumption is violated ]]
+
