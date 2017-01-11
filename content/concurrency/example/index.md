@@ -3,7 +3,7 @@ title = "Example: Rate Limiting"
 weight = 7
 +++
 
-We now have all of the pieces we need, so let's put it all into practice.
+[[ TODO add constants ]]
 
 ## The Problem
 

@@ -14,3 +14,7 @@ The label rules:
 - You can't put labels in a `with` statement.
 
 Beyond that, there's one rule that's a little more complicated: you can only assign to a variable __once__ in a given label. That's because, as mentioned above, labels are moments of time. A variable can't change twice between two instants, because that doesn't make sense. There are some cases where this can get annoying; for example, switching two variables. In these cases you can use `||` to chain assignments: `x := y || y := x;`
+
+### ENABLED
+
+Labels are converted into "Actions" by the PlusCal translator. I think actions are a bit out of scope for this guide, but there's one consequence of this we can find useful: we can 'apply' operators to Labels. The main one we're interested in is `ENABLED`. For a label `A`, `ENABLED A` means "this specific action can happen in the next step. For example, if we wanted to ensure that we don't download a file if a specific flag is set, we can write the invariant as `no_download_flag => ~ENABLED A`.

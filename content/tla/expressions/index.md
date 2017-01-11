@@ -3,7 +3,33 @@ title = "Expressions"
 weight = 2
 +++
 
-We've been implicitly using _expressions_ up until now; we just haven't clarified them. For our purposes, an expression is __anything that follows a `==`, `=`, `:=`, or `\in`__. As we'll see [[TODO]]. in this section we'll cover some general expression modifiers.
+We've been implicitly using _expressions_ up until now; we just haven't clarified them. For our purposes, an expression is __anything that follows a `==`, `=`, `:=`, or `\in`__. In this section we'll cover some general expression modifiers.
+
+### `/\` and `\/`
+
+We've used these for a while now: /\ is and, \/ is or. We can join expressions with them. The one sublety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an indented [[]], TLA+ considers that the start of a subclause. For example,
+
+```
+/\ TRUE
+ \/ TRUE
+/\ FALSE \* (T \/ T) /\ F
+
+/\ TRUE
+ \/ TRUE
+ \/ FALSE \* (T /\ (T \/ F))
+
+\/ TRUE
+\/ TRUE
+ /\ FALSE \* T \/ (T /\ F)
+```
+
+Etc. As a general rule of thumb:
+
+* If two logical operators are on the same level of indentation, they are part of the same level of expression.
+* If a logical operator is on a higher level of indentation, it's part of the previous operator statement.
+* Use only one type of operator per level of indentation.
+
+Generally if you mess this up the spec will crash, so you're unlikely to get a logic bug through this.
 
 ### LET-IN
 
