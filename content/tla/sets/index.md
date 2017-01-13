@@ -19,11 +19,11 @@ As always, you can nest filters, and `{x \in {y \in S : P(y)} : Q(x)}` will filt
 
 `{P(x): x \in S}` applies P to every element in the set. `{ x * x : x \in 1..4 }` is the set `{1, 4, 9, 16}`. `{ x % 2 = 1:x \in 1..8 }` is the set `{TRUE, FALSE}`. 
 
-You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. [[EXAMPLE]]
+You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. `{ x + y : x \in 0..9, y \in { y * 10 : y \in 0..9} }` is the first hundred numbers, in case you wanted to obfusciate `0..99`.
 
 ### CHOOSE
 
-`CHOOSE x \in S : P(x)` is some x where P(x) is true. `CHOOSE x \in 1..8 : x % 2 = 1` will be one of 1, 3, 5, 7. TLC does _not_ branch here; while the number it chooses is arbitrary, it will _always_ return that number. Usually this isn't a problem, but it's something to be aware of.
+`CHOOSE x \in S : P(x)` is some x where P(x) is true. `CHOOSE x \in 1..8 : x % 2 = 1` will be one of 1, 3, 5, 7. TLC does _not_ branch here; while the number it chooses is arbitrary, it will _always_ return that number. This is similar to how CASE statements work: `CHOOSE x \in S : TRUE` is _some_ element of S, but TLC won't check all of them.
 
 TLC assumes that you always intend for there to be at least one element to choose. If there aren't any (trivial example: `CHOOSE x \in S : FALSE`), it will consider this a problem in your spec and raise an error. TLC will also raise if S is infinite because TLC can't evaluate P on an infinite number of elements. There still may be a problem with your spec, though, and it's a good idea to try it on a finite subset.
 
@@ -31,7 +31,7 @@ TLC assumes that you always intend for there to be at least one element to choos
 
 Each of these is an expression and can be used anywhere else an expression can be used.
 
-* Return the squares of the odds.
+[[ TODO ]]
 
 ## Set Operators
 
@@ -51,8 +51,13 @@ token | operation | example
 `SUBSET S` | The set of all subsets of S | `SUBSET {1, 2} = {{}, {1}, {2}, {1, 2}}`
 `UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`
 
-If you `EXTEND FiniteSets`, you also get the following operators:
+If you add `EXTENDS FiniteSets`, you also get the following operators:
 
-[[todo]]
+operator | operation
+-------|-------
+IsFiniteSet(S) | TRUE iff S is finite
+Cardinality(S) | Number of elements of S, if S is finite
 
 # Exercises
+
+[[ TODO ]]

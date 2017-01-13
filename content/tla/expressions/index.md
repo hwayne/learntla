@@ -5,9 +5,9 @@ weight = 2
 
 We've been implicitly using _expressions_ up until now; we just haven't clarified them. For our purposes, an expression is __anything that follows a `==`, `=`, `:=`, or `\in`__. In this section we'll cover some general expression modifiers.
 
-### `/\` and `\/`
+### Logical Junctions
 
-We've used these for a while now: /\ is and, \/ is or. We can join expressions with them. The one sublety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an indented [[]], TLA+ considers that the start of a subclause. For example,
+We've used these for a while now: /\ is and, \/ is or. We can join expressions with them. The one sublety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an indented junction, TLA+ considers that the start of a subclause. For example,
 
 ```
 /\ TRUE
@@ -49,11 +49,7 @@ LET IsEven(x) == LET Zero == 2
 IN  IsEven(Five)
 ```
 
-The whitespace does not matter: we can write `LET IsEven(x) == x % 2 = 0 Five == 5 IN IsEven(Five)` and it will correctly parse it as two separate operators in the LET. 
-
-{{% notice info %}}
-Please use newlines. _Please_.
-{{% /notice %}}
+The whitespace does not matter: we can write `LET IsEven(x) == x % 2 = 0 Five == 5 IN IsEven(Five)` and it will correctly parse it as two separate operators in the LET. You should use newlines though, because you care about legibility.
 
 ### IF-THEN-ELSE
 
@@ -78,10 +74,15 @@ CASE x = 1 -> TRUE
 OTHER -> FALSE
 ```
 
-OTHER is the default. If none of the cases match and you leave out an OTHER, TLC considers that an error. If _more than one match_, though, TLC will pick one for you and _not_ branch. Sometimes that's what you want, sometimes it isn't. Depends on your use case, really.
+OTHER is the default. If none of the cases match and you leave out an OTHER, TLC considers that an error. If _more than one match_, though, TLC will pick one for you and _not_ branch. In other words, the following code
+
+```
+CASE TRUE -> FALSE
+  [] TRUE -> TRUE
+```
+
+_May or may not be TRUE._ Sometimes that's what you want, more often it isn't. Be careful.
 
 ## Nesting
 
 Of course you can.
-
-[Example]

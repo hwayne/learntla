@@ -7,9 +7,10 @@ Beyond the basic four types in TLA+ (number, string, boolean, model value), ther
 
 The word 'function' can cause a lot of misunderstanding. They are not similar to functions in other languages- that's operators. Instead, functions are closer in nature to hashes or dictionaries, except that you can choose to programmatically determine the value from the key. There are two ways to define a function:
 
-`Function == [s \in S |-> foo]`
+* `Function == [s \in S |-> foo]`
+* `Function[s \in S] == foo`
 
-Here, foo can be any equation, and can be dependent on s. Other than that, you have complete-near freedom. For example, you can use an infinite set:
+Here, foo can be any equation, and can be dependent on s. Other than that, you have near-complete freedom. For example, you can use an infinite set:
 
 `Doubles == [n \in Nat |-> 2 * n]`
 

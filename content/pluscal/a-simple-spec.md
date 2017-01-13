@@ -109,4 +109,4 @@ C:
   skip;
 ```
 
-
+Goto considered useful in PlusCal.
