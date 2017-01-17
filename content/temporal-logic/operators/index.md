@@ -31,7 +31,7 @@ begin
 end algorithm; *)
 ```
 
-[TODO check this]. There exists one timeline where x never passes through 1: "x = 3 -> x = 2 -> x = 0". So it's not true that 'eventually, x is 1'. As long as every behavior has at least one state satisfying the statement, an eventually is true.
+There exists one timeline where x never passes through 1: "x = 3 -> x = 2 -> x = 0". So it's not true that 'eventually, x is 1'. As long as every behavior has at least one state satisfying the statement, an eventually is true.
 
 ### ~>
 
@@ -47,9 +47,7 @@ begin
 end algorithm; *)
 ```
 
-As with before, `<>(x = 1)` is not true: we can do `4 -> 2 -> 0`. But the temporal property `(x = 3) ~> (x = 1)` is _true_: there's no way to pass through 3 without also passing through 1.
-
-[adjust this for stuttering]
+As with before, `<>(x = 1)` is not true: we can do `4 -> 2 -> 0`. But the temporal property `(x = 3) ~> (x = 1)` is _true_: there's no way to pass through 3 without also passing through 1 (unless it stutters).
 
 ### <>[]
 

@@ -10,7 +10,7 @@ The word 'function' can cause a lot of misunderstanding. They are not similar to
 * `Function == [s \in S |-> foo]`
 * `Function[s \in S] == foo`
 
-Here, foo can be any equation, and can be dependent on s. Other than that, you have near-complete freedom. For example, you can use an infinite set:
+Here, `foo` can be any equation, and can be dependent on `s`. Other than that, you have near-complete freedom. For example, you can use an infinite set:
 
 `Doubles == [n \in Nat |-> 2 * n]`
 
@@ -26,13 +26,17 @@ Similarly, you can write `DOMAIN F` to get the set of values F is defined on.
 So, what exactly is the difference between functions and operators? There's a few important difference, but here's the practical ones. You can't have a set of operators. Functions can't express certain actions that operators can. Finally, you can't use functions as invariants. A good rule of thumb is that if you want to manipulate it as part of your algorithm, prefer functions. Otherwise, prefer operators.
 {{% /notice %}}
 
+### Recursive Functions
+
+[[ TODO ]]
+
 ## Function Sets
 
-Imagine you are trying to model some sort of flag, like a lock or whatever, on multiple processes. Or you're writing a trading algorithm and match people to what they're interested in. [[ TODO That'd be a good example.]] Or any case where you know that a set of things has an initial value but you're not sure what initial value. Or you need to test arbitrary sequences. It'd be helpful to say "generate all functions with these properties" so we can harden our algorithm against them. The syntax for that is
+Imagine you are trying to model some sort of flag, like a concurrency lock, on multiple processes. Or you're writing a trading algorithm and match people to what they're interested in. Or any case where you know that a set of things has an initial value but you're not sure what initial value. Or you need to test arbitrary sequences. It'd be helpful to say "generate all functions with these properties" so we can harden our algorithm against them. The syntax for that is
 
 `SetOfFunctions == [A -> B]`
 
-That generates every function which maps an element of A to an element of B. You can use normal set operations on either set if you want.
+That generates every function which maps an element of A to an element of B. A and B must be sets, or more specifically expressions that evaluate to sets.
 
 **`|->` and `->` are different.** This is going to mess you up at least once. Use `|->` when you want one function that maps the domain to a specific range. Use `->` when you want the set of functions that maps the domain to the range. 
 
@@ -46,8 +50,8 @@ A fun trick is to stack `->` with `SUBSET`.
 
 ```
 [s \in SUBSET S |-> S] = {[{} |-> {1, 2}, {1} |-> {1, 2}, {2} |-> {1, 2}, {1, 2} |-> {1, 2}]}
-[SUBSET S -> S] = \* set of 16 functions
-[S -> SUBSET S] = \* different set of 16 functions
+[SUBSET S -> S] \* set of 16 functions
+[S -> SUBSET S] \* different set of 16 functions
 [SUBSET S -> SUBSET S] = \* set of 256 functions
 ```
 
@@ -55,7 +59,7 @@ It can get out of hand pretty fast.
 
 ## Example
 
-Write a program that returns the minimum amount of change in pennies, nickels, dimes, and quarters.
+_Write a program that returns the minimum amount of change in pennies, nickels, dimes, and quarters._
 
 This is a fairly standard interview question. The trick is that the simple way to solve it, a greedy algorithm, fails for the general case. Let's implement it in PlusCal and see how the general case breaks down.
 
@@ -91,9 +95,3 @@ This is usually where the interviewer is satisfied and the problem ends. The bas
 [[ TODO ]]
 
 For certain values of coins, the "minimum change" is ill-defined! 21 cents is 10+10+1 or 7+7+7. Both are three coins. Which is the minimum? We'd have to define a tie-breaker. 
-
-What if we try a range of coin values?
-
-...
-
-The minimum change might not exist. [6 cents is impossible with 5,7]

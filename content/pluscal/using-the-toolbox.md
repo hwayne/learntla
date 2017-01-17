@@ -7,7 +7,7 @@ Our goal with writing specifications is to look for errors in the specification.
 
 ``` tla
 ---- MODULE example ----
-EXTENDS Naturals
+EXTENDS Integers
 
 (* --algorithm example
 variables x = 5
@@ -18,7 +18,7 @@ end algorithm; *)
 ====
 ```
 
-Create a new spec (remember that the name must match) and copy that in. Run the translator with [%%T]. The first thing you will see that your file was updated with something like this:
+Create a new spec (remember that the name must match) and copy that in. Run the translator. The first thing you will see that your file was updated with something like this:
 
 ```
 \* BEGIN TRANSLATION
@@ -28,7 +28,7 @@ A WHOLE LOTTA STUFF
 \* END TRANSLATION
 ```
 
-That's the generated TLA+. Probably makes sense now as to why we're starting with PlusCal. Don't worry, we'll be covering TLA+ in depth later, but you're not expected to completely understand the entire translation. But that's the actual code we'll be model checking.
+That's the generated TLA+. Probably makes sense now as to why we're starting with PlusCal. Don't worry, we'll be covering TLA+ in depth in the next chapter, but you're not expected to completely understand the entire translation. But that's the actual code we'll be model checking.
 
 Next, we create a _model_, which tells TLC what to check. The section we're interested in is the overview, which should look like this:
 
@@ -38,7 +38,7 @@ Terms:
 
 - **Model Description:** No semantic meaning, just for documentation.
 - **What is the behavior spec?:** Out of scope. Just leave this at "Temporal Formula" for now.
-- **What is the model?:** We'll cover this in section [N].
+- **What is the model?:** We'll cover this in the "Models" chapter.
 - **What to check?:** This is the meat of what we care about. 
   - _Deadlock_ checks that the program can't Catch-22 itself. 
   - _Invariants_ check that some equation, for example `x = TRUE`, is true for all possible states TLC can reach.
@@ -48,6 +48,7 @@ Terms:
 We can run the model by clicking the green arrow in the top left. TLC will explore the entire state space, looking for possible failures in our invariants. Since we don't actually have any invariants yet, it won't find any failures, so this will be successful. Notice that it lists of the diameter as 2 and the number of distincts states as 2. The former means that the longest interesting progression was two steps long: the initial state where `x = 5` and the `Add` step where `x = 6`. Since there's only one possible starting state, there are 2 distinct states total.
 
 ![](/img/pluscal/using-the-toolbox/model_run.png)
+
 What happens if we change `x = 5` to `x \in 1..5`? Retranslate the algorithm and rerun the model. You'll see that while the diamater is still 2, there are now 10 distinct states. Since there are five potential initial values, TLC will run the model with all of them in case one of them fails the (still nonexistant) invariants.
 
 {{% notice info %}}
@@ -68,6 +69,6 @@ TLA+ Toolbox doesn't have a default shortcut for "Run Model". You can set one by
 
 ## Evaluating Expressions
 
-Switch back to the main overview section. Change the behavior spec to "no behavior spec". This tells TLC that there’s no system you are modelling, and you’re just playing around with the TLA+ syntax. We can’t run anything here. But what we can do is go over to "model checking results" and put TLA in "evaluate constant expression". Try putting in `CHOOSE x \in {1, 2, 3} : x*x = 4` in that box and rerun the model. You should see [[2]] appear in the "Value" box.
+Switch back to the main overview section. Change the behavior spec to "no behavior spec". This tells TLC that there’s no system you are modelling, and you’re just playing around with the TLA+ syntax. We can’t run anything here. But what we can do is go over to "model checking results" and put TLA in "evaluate constant expression". Try putting in `CHOOSE x \in {1, 2, 3} : x*x = 4` in that box and rerun the model. You should see `2` appear in the "Value" box.
 
 We won’t be using the "no behavior spec" mode for testing actual systems, but it’s a nice tool to test that you understand how some TLA+ expression will work. Don’t worry, we’ll be reintroducing this when we dive into TLA+ proper.

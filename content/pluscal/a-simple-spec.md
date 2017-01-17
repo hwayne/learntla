@@ -3,11 +3,11 @@ title = "A simple spec"
 weight = 2
 +++
 
-TLA+ started as a notation, and the model checker, TLC, only came out 5 years later. As it was never intended to be run, there's some assumptions of it being a design document vs being a specification language. That means that there's a little bit of boilerplate bwe'll need to get through first.
+TLA+ started as a notation, and the model checker, TLC, only came out 5 years later. As it was never intended to be run, there's some assumptions of it being a read document instead of being runable code. That means that there's a little bit of boilerplate we'll need to get through first.
 
 In order for TLC to analyze a spec, it **must** have the following format:
 
-```
+``` tla
 ---- MODULE module_name ----
 \* TLA+ code
 
@@ -20,10 +20,10 @@ begin
 TLC will only analyze the code between the `----` beginning and the `====` end. Anything outside of those boundaries is ignored. `module_name` **must** be the same as the filename, while `algorithm_name` can be whatever you want. `\*` is a line comment and `(*` is a block comment. Note we're putting our algorithm in a comment. If you don't put it in a comment, you'll get a syntax error, because PlusCal isn't TLA+.
 
 {{% notice note %}}
-This might seem a little odd to you. It's this way because of backwards compatibility. TLA+ came out in 1994. TLC came out in 1999. PlusCal came out in 2009. TLC is supposed to perfectly follow the semantics of TLA+, and since PlusCal is a completely different style it can't be fit into the same schema. Behind the scenes, the TLC toolbox actually uses three separate tools for model checking: the `--algorithm` in comments is there to let the PlusCal translator know what it's supposed to be translating.
+This might seem a little odd to you. It's this way because of backwards compatibility. PlusCal came out fifteen years after TLA+ did. TLC is supposed to perfectly follow the semantics of TLA+, and since PlusCal is a completely different style it can't be fit into the same schema. Behind the scenes, we transpile the PlusCal to raw TLA+, and the `--algorithm` in comments is there to let the PlusCal translator know what it's supposed to be translating.
 {{% /notice %}}
 
-[question, can you have two algorithms in one file?]
+You can only have one PlusCal algorithm per file.
 
 As for the PlusCal itself, here's the layout of a basic single process algorithm:
 
@@ -34,18 +34,19 @@ begin
 end algorithm;
 ```
 
-[talk about extends Naturals]
-For the variables block (and only the variables block)[more], `=` is assignment. Everywhere else, `=` is the equality check and `:=` is assignment.
+In the `variables` block, `=` is assignment. Everywhere else, `=` is the equality check and `:=` is assignment.
 
-You might have notices the `z \in {3, 4}`. That's set notation. It means that for the purposes of this algorithm, z can be 3 **or** 4. `z = {3, 4}`, on the other hand, means that z is the **set** {3, 4}. You'll find yourself using both quite a lot.
+You might have noticed the `z \in {3, 4}`. That's set notation. It means that for the purposes of this algorithm, z can be 3 **or** 4. When you check the model, TLC will make sure it works for __all__ possible values of z. It will first test that nothing fails with `z = 3`, and then test that nothing fails with `z = 4`. 
+
+You could also write `z = {3, 4}`, which means that z is the **set** {3, 4}. Any sort of data structure can be assigned to a variable in TLA+.
 
 {{% notice note %}}
-Since TLA+ is a specification language, it was designed to output really nice documents. That's why we use TeX like `\in` and `\union` and stuff. Fun fact: Leslie Lamport, the inventor of TLA+, also invented LaTeX! Another fun fact: we won't be talking about outputting as a specification in any way whatsoever. Cool stuff, but not _immediately_ relevant to model checking.
+Since TLA+ is a specification language, it was designed to output really nice documents. That's why we use TeX like `\in` and `\union` and such. Fun fact: Leslie Lamport, the inventor of TLA+, also invented LaTeX! Another fun fact: we won't be talking about outputting as a specification in any way whatsoever. Cool stuff, but not _immediately_ relevant to model checking.
 {{% /notice %}}
 
 Let's get Hello World out of the way.
 
-```
+``` tla
 EXTENDS TLC
 
 (* --algorithm hello_world
@@ -56,16 +57,15 @@ begin
 end algorithm; *)
 ```
 
-The `EXTENDS` is the `#include` analog for TLA+. `TLC` is a module that adds `print` and `assert`. `print` is, incidentally, the only IO possible with TLA+.
+The `EXTENDS` is the `#include` analog for TLA+. `TLC` is a module that adds `print` and `assert`. `print` is, incidentally, the only IO possible with TLA+ and is provided for debugging purposes.
 
-The only thing that is different here is the `A:`. That is called a _label_. TLC treats labels as the "steps" in a specification; everything in the label happens at once. It's only between labels that the model can check invariants and switch processes. Also, you can't assign to the same variable twice in the same label. For the most part, it isn't too useful here. But it will be pretty important later.
-
+The only thing that may be unusual here is the `A:`. That is called a _label_. TLC treats labels as the "steps" in a specification; everything in the label happens at once. It's only between labels that the model can check invariants and switch processes. Also, you can't assign to the same variable twice in the same label. For the most part, it isn't too useful here. But it will be pretty important later.
 
 {{% notice warning %}}
-If you leave the `A:` out, your PlusCal will still transpile. This is because the TLC can infer the labels in a single process app. **Do not get into this habit.** You'll want to feel comfortable with them by the time we start concurrency. [this is bad]
+If you leave the `A:` out, your PlusCal will still transpile. This is because the TLC can infer the labels in a single process app. For the most part it's fine to leave them out in single process apps, but you should keep them in mind.
 {{% /notice %}}
 
-I assume that you're familiar with other programming languages. Be make modeling more familiar, PlusCal has a bunch of similar constructs. The semantics are fairly obvious, so here's what they look like. Assume all variables have been initialized before and we're in a `begin` block.
+I assume that you're familiar with other programming languages. To make modeling more familiar, PlusCal has similar constructs. The semantics are fairly obvious, so here's what they look like. Assume all variables have been initialized before and we're in a `begin` block.
 
 ### Logic Operators
 
@@ -97,6 +97,8 @@ while x > 0 do
   x := x - 1;
 end while;
 ```
+
+This is the only form of looping.
 
 ### Goto
 

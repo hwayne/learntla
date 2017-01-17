@@ -39,6 +39,3 @@ One problem: we can now specify a "nonsensical" solution. For example, the solut
 {{% code sensical %}}
 
 TLC will check that our assignments don't break any of the `ASSUME` expressions, so we can use `ASSUME` to make sure nobody makes a bad model. Of course, it can only check what we remember to check: for example, a solution with two "5"s can still slip through. As always, with programming, be paranoid.
-
-[[ TODO how to tell which assumption is violated ]]
-

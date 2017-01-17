@@ -5,7 +5,7 @@ weight = 0
 
 Programming is hard. There's a lot of keep track of, and a lot of ways things can go horribly wrong. To clamp down on the number of ways things can go horribly wrong, we use a variety of tools: unit tests, static analysis, code reviews, etc. All of these help make sure that the code works as intended.
 
-But they do **not** help make sure that what you intended is what you actually want. They help with the code, but what if there's a bug in the design itself? That happens far more often than we'd like to admit. Think of all the times where you said "That'll never happen" and it happened. [] How can we make sure we're not making mistakes in our flowcharts?
+But they do **not** help make sure that what you intended is what you actually want. They help with the code, but what if there's a bug in the design itself? That happens far more often than we'd like to admit. Think of all the times where you said "That'll never happen" and it happened. How can we make sure we're not making mistakes in our flowcharts?
 
 Turns out we've known how to do this for decades: build a blueprint in a _specification language_, then run a model checker on it. By rigorously describing your high-level design in a concrete, analyzable language, you can test the design itself. We call this formal methods, and studies estimate fixing a bug takes only 1% as long when caught in the specification than in the actual code.
 
@@ -17,4 +17,4 @@ So let's teach it better.
 
 Let's learn some TLA.
 
-[I dislike this]
+[[ TODO I dislike this]]

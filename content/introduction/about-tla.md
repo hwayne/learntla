@@ -32,12 +32,8 @@ end process;
 
 If the algorithm has one "race condition" point, there are now over 500,000 possible behaviors, and TLA+ will check every single one. Might take a while, but it will check them.
 
-Finally, TLA+ prevents you from handwaving things away. If it can reach a place where it doesn’t understand the blueprint, it will consider that an error. [talk about more]
+Finally, TLA+ prevents you from handwaving things away. If it can reach a place where it doesn’t understand the blueprint, it will consider that an error. This means you create a comprehensive design that provides a deeper understanding into the system you're building.
 
-That said, TLA+ is not a panacea. First of all, it’s slow. Simple models can take seconds or minutes, complex ones can take hours, and [a model taking days is not unheard of]. Second, it can’t check everything it can specify: for example, it cannot handle real numbers or infinite sets. Third, it can only check what you ask it to check; it gives you confidence but not certainty. Most importantly, though, it can’t tell you anything about your implementation. You still need to test your code.
+That said, TLA+ is not a panacea. First of all, it’s slow. Simple models can take seconds or minutes and complex ones can take hours or days. Second, it can’t check everything it can specify: for example, it cannot handle real numbers or infinite sets. Third, it can only check what you ask it to check; it gives you confidence but not certainty. Most importantly, though, it can’t tell you anything about your implementation. You still need to test your code.
 
-So, to summarize:
-
-* TLA+ __does not__ replace unit tests, integration tests, or code reviews.
-* TLA+ __does__ help find complex bugs in your design.
-* TLA+ __does__ help you to think clearly about your design.
+So, to summarize: TLA+ __does not__ replace unit tests, integration tests, or code reviews, but it __does__ help you find complex bugs in your design as well as more clearly understand what you're designing. I think those are definitely worth the investment.

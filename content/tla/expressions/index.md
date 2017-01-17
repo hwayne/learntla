@@ -85,4 +85,4 @@ _May or may not be TRUE._ Sometimes that's what you want, more often it isn't. B
 
 ## Nesting
 
-Of course you can.
+All parts of expressions are expressions or identifiers, so you can put expressions inside other expressions.

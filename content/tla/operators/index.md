@@ -28,15 +28,32 @@ You can use them anywhere you use any other expression.
 { Five, SumWithFive(Five, Five) } \* { 5, 15 }
 ```
 
-Operators can't recursively call themselves unless you [foo]:
+### Higher-Order Operators
 
-[BAR]
+You can write operators that take other operators if you use a special syntax:
 
-Simple.
+``` tla
+Sum(a, b) == a + b
+Do(op(_,_), a, b) == op(a, b)
+
+Do(Sum, 1, 2) = 3
+```
+
+You can also make operators recursive if you specify them with the `RECURSIVE` keyword before invocation:
+
+``` tla
+RECURSIVE SetReduce(_, _, _)
+
+SetReduce(Op(_, _), S, value) == IF S = {} THEN value
+                              ELSE LET s == CHOOSE s \in S: TRUE
+                              IN SetReduce(Op, S \ {s}, Op(s, value)) 
+
+CandlesOnChannukah == SetReduce(Sum, 2..9, 0) \* 44
+```
 
 ## Integrating with PlusCal
 
-There are generally three ways to use operators with pluscal:
+There are generally three ways to use operators with PlusCal:
 
 ### Generic Helpers
 
