@@ -13,11 +13,11 @@ It works, but what if we wanted to change one of the parameters (more towers, mo
 
 This is the same as the old code, except that we now define the tower in terms of constants. Instead of the spec assigning the constant a value, the model does instead.
 
-[screenshot]
+![](img/show.png)
 
 When we click edit we can assign a specific value to each constant.
 
-[screenshot]
+![](img/edit.png)
 
 
 ### Assumptions
@@ -32,9 +32,9 @@ assert tower # SOLUTION
 
 And now we can put the new solution in an ordinary assignment:
 
-[screenshot]
+![](img/solution.png)
 
-One problem: we can now specify a "nonsensical" solution. For example, the solution may involve four towers when TSPACES is three, or it could leave out a number. In these cases, TLA+ can't find a solution because the solution isn't even defined! One way to catch this kind of error is with an `ASSUME` statement:
+One problem: this solution is nonsensical. It has four numbers when `TSIZE` is 3. In these cases, TLA+ can't find a solution because the solution isn't even defined! One way to catch this kind of error is with an `ASSUME` statement:
 
 {{% code sensical %}}
 
