@@ -31,15 +31,15 @@ So how do we run this? Well, we can't. First of all, we it's not real code, we h
 
 The TLA+ Toolbox is the main (and only) IDE for TLA+. Using TLA+ has enough moving parts that using and IDE is the right choice here, regardless of your preferences.
 
-![](/img/pluscal/sampleguide/intro_toolbox.png)
+![](img/intro_toolbox.png)
 
 Let's open it up and add our current project. There's two parts to a specification: the modules and the models. Modules have our code, models test them. [Elaborate] Try creating a new spec with the above code in it, and then translate that into PlusCal (on Mac it’s ⌘T).
 
-![](/img/pluscal/sampleguide/translated.png)
+![](img/translated.png)
 
 Immediately, you’ll see a bunch of code appear. That’s the TLA+ translation of our PlusCal algorithm, aka what the model checker will actually run. Speaking of which, let’s also create a model:
 
-![](/img/pluscal/sampleguide/model.png)
+![](img/model.png)
 
 It’s okay for it to be empty right now; even without any configuration we’ll be able to use it in the next section.
 
@@ -63,7 +63,7 @@ The only thing we changed was `money = 5` to `money \in 1..20`. That means, as y
 
 When we run this, we immediately get an error:
 
-![](/img/pluscal/sampleguide/model_assert_fail.png)
+![](img/model_assert_fail.png)
 
 We can fix this by wrapping the check if an if-block:
 
@@ -75,7 +75,6 @@ Quick aside: this is closer to testing all possible cases, but isn't testing all
 
 ### TLA+ and Invariants
 
-[REWIRE THIS SECTION]
 Can you transfer a negative amount of money? We could add an `assert money > 0` to the beginning of the algorithm. This time, though, we're going to introduce a new method in preparation for the next section
 
 {{% code 5 %}}
@@ -84,8 +83,6 @@ Can you transfer a negative amount of money? We could add an `assert money > 0` 
 A few things should leap out here. First, this isn't part of the PlusCal algorithm. It's pure TLA+ that we put in the bottom of the file so as to be able to reference the transpiled TLA+. TLA+ can reference anything that your PlusCal can, as long as it comes after the `END TRANSLATION` marker. Second, it doesn't change anything. Instead, it's a property of the system. If money is negative, MoneyNotNegative is false. Otherwise, it's true. Properties are specified with `==`.
 
 How is this different from `assert`? Assert checks in one place. We can specify MoneyNotNegative as an _Invariant_ of the system, something that must be true in all possible system states. It'll check before money is pulled from Alice's account, being the deposit and the withdrawal, etc. If we added a `money := money - 2` step anywhere the MoneyNotNegative invariant will catch that the spec fails when `money = 1`.
-
-That probably doesn’t make a whole lotta sense, but I wanted to introduce TLA+ invariants now because the next section is a doozy.
 
 ### One step further: checking Atomicity
 
@@ -104,14 +101,14 @@ We already have all of the tools to check this. First, we need to figure out wha
 
 Then, we declare the checked Invariant to the model:
 
-![](/img/pluscal/sampleguide/model_moneyinvariant1.png)
-![](/img/pluscal/sampleguide/model_moneyinvariant2.png)
+![](img/model_moneyinvariant1.png)
+![](img/model_moneyinvariant2.png)
 
 When we run this, TLC finds a counterexample: between steps A and B the invariant doesn't hold.
 
-![](/img/pluscal/sampleguide/model_moneyinvariant_fail.png)
+![](img/model_moneyinvariant_fail.png)
 
-How do we solve this? It depends on the level of abstraction we care about. If you were designing a database, you'd want to spec the exact steps required to keep the system consistent. At our level, though, we probably have access to database transactions and can 'abstract out' the atomicity checks. The way we do that is to combine A and B into a single "Transaction" step. That tells TLA+ that both actions happen simultaneously, and the system never passes through an invalid state. [this is confusing]
+How do we solve this? It depends on the level of abstraction we care about. If you were designing a database, you'd want to spec the exact steps required to keep the system consistent. At our level, though, we probably have access to database transactions and can 'abstract out' the atomicity checks. The way we do that is to combine A and B into a single "Transaction" step. That tells TLA+ that both actions happen simultaneously, and the system never passes through an invalid state.
 
 {{% code 7 %}}
 
@@ -127,7 +124,7 @@ The accounts are global variables, while money is a local variable to the proces
 
 When we run this, we find an error. 
 
-![](/img/pluscal/sampleguide/multiprocess_fail.png)
+![](img/multiprocess_fail.png)
 
 There's a gap between when we check that Alice has enough money and when we actually transfer the money. With one process this wasn't a problem, but with two, it means her account can go negative. TLC is nice enough to provide the initial state and steps required to reproduce the bug.
 

@@ -47,12 +47,11 @@ In order to call a procedure, you have to explicitly use `call Name(val1, ...);`
 
 Procedures must be defined after any macros and before any processes.
 
+{{% notice info %}}
+So when should you use which? Macros are faster and less complicated. If you can use them, use them. Use procedures when you have multiple separate processes that can do the same actions.
+{{% /notice %}}
+
 ### Order of operations
 
 PlusCal enforces a strict ordering of its blocks. The `define` block hass to come before any macros, which has to come before any procedures, which has to come before any processes.
 
-### Macros vs Procedures
-
-So when should you use which? Macros are faster and less complicated. If you can use them, use them. Use procedures when you have multiple separate processes that can do the same actions.
-
-EXAMPLE

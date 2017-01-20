@@ -76,6 +76,6 @@ Eveyrthing should look familiar with the exception of the set syntax we use to d
 
 For `to`, we pull it from a more restricted set: We either want the tower to be empty, or have a smaller top stone than the tower we're moving from. Finally, in the block itself, we simulate a move with `Tail` and concatting. The concat is a bit of a hack, actually- while it seems like `Append` would be the appropriate operator here, it would put it at the wrong end of the sequence. For example, `Append(<<2, 1>>, 3) = <<2, 1, 3>>`, when we actually want `<<3, 2, 1>>`.
 
-![](img/solution)
+![](img/solution.png)
 
 Running this model throws an 'error' and shows the steps required to reproduce the bug, aka find the solution. In general, TLA+ isn't that well suited for solving constraint problems like these, but it can be used to do so in a pinch. Another common example is using TLA+ to solve the [water bucket puzzle](https://github.com/tlaplus/Examples/tree/master/specifications/DieHard).

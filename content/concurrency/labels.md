@@ -3,17 +3,72 @@ title = "Labels"
 weight = 2
 +++
 
-Now you see why labels are so critical: they determine when your system can switch between processes. In this section we'll talk a little more about the requirements of labels, as well as where you can and cannot put them.
+### Valid Labels
 
-Labels represent moments of time. Everything in the label happens at once.
-The label rules:
+Since labels represent steps, single moments of time, there are some rules on how you have to place them.
 
 - The first line in a process has to have a label. That includes the first `begin` if it's a single-process algorithm.
-- Put a label before a `while`.
-- On the line after `call`, `return`, `goto`, or a control statement that also has a label in it.
-- You can't put labels in a `with` statement.
 
-Beyond that, there's one rule that's a little more complicated: you can only assign to a variable __once__ in a given label. That's because, as mentioned above, labels are moments of time. A variable can't change twice between two instants, because that doesn't make sense. There are some cases where this can get annoying; for example, switching two variables. In these cases you can use `||` to chain assignments: `x := y || y := x;`
+```
+begin
+Foo:
+  skip;
+```
+
+- A label must come before a `while` statement.
+
+```
+Foo:
+  while FALSE do
+    skip;
+  end while;
+```
+
+- A label must come right after a `call`, `return`, or `goto`. 
+
+```
+A:
+  skip;
+B:
+  goto A;
+Foo: \* this one is necessary even if it's never reached
+  skip;
+```
+
+- If you have a control statement, such as `if` or `either`, and one possible branch has a label in it, then the whole control structure must be followed with a label.
+
+```
+either 
+  A: 
+    skip;
+or 
+  skip;
+end either;
+Foo: \* Necessary because of the A label
+```
+
+- You can not put labels in a `with` statement.
+
+```
+with x \in {1, 2} do
+  Foo: \* INVALID
+    skip
+end with;
+```
+
+- You cannot assign to any given variable more than once in a label.
+
+```
+Foo:
+  x := 1;
+  q := 2; \* VALID
+
+Bar:
+  x := 1;
+  x := 2; \* INVALID
+```
+
+Sometimes this can cause issues: for example, switching two variables, or assigning to different records of the same structure. In these cases you can use `||` to chain assignments: `x := y || y := x;`
 
 ### ENABLED
 

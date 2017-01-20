@@ -32,7 +32,7 @@ That's the generated TLA+. Probably makes sense now as to why we're starting wit
 
 Next, we create a _model_, which tells TLC what to check. The section we're interested in is the overview, which should look like this:
 
-![](/img/pluscal/using-the-toolbox/model_overview.png)
+![](img/model_overview.png)
 
 Terms:
 
@@ -47,7 +47,7 @@ Terms:
 
 We can run the model by clicking the green arrow in the top left. TLC will explore the entire state space, looking for possible failures in our invariants. Since we don't actually have any invariants yet, it won't find any failures, so this will be successful. Notice that it lists of the diameter as 2 and the number of distincts states as 2. The former means that the longest interesting progression was two steps long: the initial state where `x = 5` and the `Add` step where `x = 6`. Since there's only one possible starting state, there are 2 distinct states total.
 
-![](/img/pluscal/using-the-toolbox/model_run.png)
+![](img/model_run.png)
 
 What happens if we change `x = 5` to `x \in 1..5`? Retranslate the algorithm and rerun the model. You'll see that while the diamater is still 2, there are now 10 distinct states. Since there are five potential initial values, TLC will run the model with all of them in case one of them fails the (still nonexistant) invariants.
 
@@ -57,9 +57,9 @@ These numbers are mostly metadata: they don't effect if the spec is valid or not
 
 Let's actually make it fail an invariant, then! Move back to the model overview and add `x # 6` to the "Invariants" section. This, unsurprisingly, says that a core invariant of our program is that x is never 6. This obviously fails when x is five, which is one of the potential initial states. When we rerun the model, we get something like this:
 
-![](/img/pluscal/using-the-toolbox/invariant.png)
+![](img/invariant.png)
 
-![](/img/pluscal/using-the-toolbox/error_trace.png)
+![](img/error_trace.png)
 
 Not only does this show us what failed, it shows us **how** it failed. In this case, "Initial Predicate" tells us the starting state: x is five. The following "action" line shows that the "Add" step finished and x changed to 6, which invalidates our invariant.
 

@@ -31,7 +31,6 @@ end while
 
 The inner loop will happen twice. Each time the model can either add two or double x, meaning that there's four possible end results:
 
-[[ TODO MAKE THIS A DRAWING ]]
 ```
      3
   5     6
@@ -50,8 +49,7 @@ end with;
 
 This creates a separate timeline for each element in the set.
 
-[[ TODO DRAWING ]]
-
-## Example
-
-[[ TODO ]]
+```
+ a=1 a=2 a=3
+ x+1 x+2 x+3
+```

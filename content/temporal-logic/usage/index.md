@@ -17,11 +17,11 @@ An especially important one to watch out for are symmetric models. TLC can check
 
 ### Stuttering and Fairness
 
-TODO
+If you want to check that a system terminates, add `PlusCal options (terminate)` in a comment to your module. If you run into stuttering problems in a system that you don't expect to terminate, add `PlusCal options (wf)`. If either of these are the base, I recommend reading the official documentation to understand why this works.
 
 ## Recommendations
 
 * Use separate models for invariants and temporal properties.
-* Use smaller sets of model values to check liveness than safety. 
+* Use smaller sets of model values to check invariants than you do for temporal properties.
 * Consider testing the same temporal property among several models with different setups.
 * Do not use symmetric model sets when testing liveness.

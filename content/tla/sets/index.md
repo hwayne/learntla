@@ -27,12 +27,6 @@ You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. `{ x + y : x \in 0.
 
 TLC assumes that you always intend for there to be at least one element to choose. If there aren't any (trivial example: `CHOOSE x \in S : FALSE`), it will consider this a problem in your spec and raise an error. TLC will also raise if S is infinite because TLC can't evaluate P on an infinite number of elements. There still may be a problem with your spec, though, and it's a good idea to try it on a finite subset.
 
-## Combining Transformations
-
-Each of these is an expression and can be used anywhere else an expression can be used.
-
-[[ TODO ]]
-
 ## Set Operators
 
 Finally, there are extra operations for working with sets:
@@ -57,7 +51,3 @@ operator | operation
 -------|-------
 IsFiniteSet(S) | TRUE iff S is finite
 Cardinality(S) | Number of elements of S, if S is finite
-
-# Exercises
-
-[[ TODO ]]

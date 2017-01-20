@@ -3,8 +3,6 @@ title = "Example: Rate Limiting"
 weight = 7
 +++
 
-[[ TODO add constants ]]
-
 ## The Problem
 
 As part of your project, you need to call a third party API. There are two types of calls you need to make:
@@ -57,5 +55,3 @@ Locking works, but it also explodes the diameter. Every process needs to wait on
 One solution we can use is to reserve calls: when a process checks that there are calls remaining, it reserves N calls that are considered made in our cache but not in the API endpoint. Then, once we make the appropriate calls, we return the necessary reserves.
 
 {{% code with_reserves %}}
-
-[[ending]]
