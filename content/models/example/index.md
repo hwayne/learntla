@@ -11,14 +11,29 @@ To start, we need to specify the data structure we use. The simplest way is to s
 ValidMarkets == [V \X I -> [buy : P, sell : P]]
 ```
 
-[[ TODO first order arbitrage ]]
+Let's build a simple PlusCal algorithm around this. On every step, you can either buy an item you don't have or sell an item you do.
+
 {{% code market %}}
 
-We don't care about deadlock, so we can uncheck that as a thing to check and add `NoArbitrage` as an invariant. Try making a model with 2 items, 2 vendors, a max price of 6, and a max actions of 5. Run the model to confirm there are no problems. Finally, add a third vendor and compare the runtimes.
+We don't care about deadlock, so we can uncheck that as a thing to check and add `NoArbitrage` as an invariant. Try making a model with 1 item, 1 vendor, a max price of 6, and a max actions of 5. This will fail; nothing's stopping a vendor from buying an item for more than they would sell it. What we want to do is ban that:
 
-One variant we can make: Right now it doesn't matter how many different types of items you have, because none of the items interact with each other. So it makes sense to test this with only one item. That speeds things up considerably.
+``` tla
+ValidMarkets == LET Markets == [V \X I -> [buy : P, sell : P]]
+                IN {m \in Markets : 
+                    \A item \in I, vendor \in V:
+                      m[<<vendor, item>>].buy <= m[<<vendor, item>>].sell
+                   }
+```
 
-[[ TODO etc ]]
+Confirm that works. Now rerun the model with 2, then 3, then 4 items, comparing all of the run times. How does the runtime change?
+
+In this case, by inspection of the model, we see that items don't 'interact' with each other. For optimization reasons, we can run our model with just one item. One thing that does 'interact', though, are the vendors. What happens when you run the model with 1 item and 2 vendors?
+
+We can't require that every vendor sells items for more than they buy them; vendors have to sell for more than _any_ vendor buys them.
+
+{{% code market2 %}}
+
+Rerun this and confirm it matches the spec.
 
 ### Trades
 
@@ -32,7 +47,7 @@ ValidTrades == LET Trades == [SUBSET I -> SUBSET I]
                       }
 ```
 
-This requires us to extend FiniteSets. Note there are some weird cases here: for example, you can trade an item for nothing. However, these are all strictly bad options, so it's only an optimization problem. A big optimization problem, it turns out; With three items, `Trades` is has approximately 16 million elements. So instead we want to do a preoptimization of only mapping sets to individual items.
+This requires us to extend FiniteSets. Note there are some weird cases here: for example, you can trade an item for nothing. However, these are all strictly bad options, so it's only an optimization problem. A big optimization problem, it turns out; With three items, `Trades` has approximately 16 million elements. So instead we want to do a preoptimization of only mapping sets to individual items.
 
 ``` tla
 ValidTrades == [{ i \in SUBSET I : Cardinality(i) > 1} -> I]

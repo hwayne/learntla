@@ -81,7 +81,7 @@ CASE TRUE -> FALSE
   [] TRUE -> TRUE
 ```
 
-_May or may not be TRUE._ Sometimes that's what you want, more often it isn't. Be careful.
+_May or may not be true._ Sometimes that's what you want, more often it isn't. Be careful.
 
 ## Nesting
 

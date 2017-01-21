@@ -31,16 +31,16 @@ TLC assumes that you always intend for there to be at least one element to choos
 
 Finally, there are extra operations for working with sets:
 
-logic | token | `TRUE` | `FALSE`
+logic | operator | `TRUE` | `FALSE`
 ------|--------|--------|--------
 in set|  `\in` | `1 \in {1, 2}` | `1 \in {{1}, 2}` 
 not in set | `\notin` | `1 \notin {}` | `{1} \notin {{1}}`
 is subset | `\subseteq` | `{1, 2} \subseteq {1, 2, 3}` | `{1, 2} \subseteq {1, 3}`
 
-token | operation | example
+operator | operation | example
 -------|-----------|--------
-`\cup`, `\union` | Set Union | `{1, 2} \cup {2, 3} = {1, 2, 3}`
-`\cap`, `\intersect` | Set Intersection | `{1, 2} \cap {2, 3} = {2}`
+`\union` | Set Union | `{1, 2} \union {2, 3} = {1, 2, 3}`
+`\intersect` | Set Intersection | `{1, 2} \intersect {2, 3} = {2}`
 `S1 \ S2` | The elements in S1 not in S2 | `{1, 2} \ {2, 3} = {1}`, `{2, 3} \ {1, 2} = {3}`
 `SUBSET S` | The set of all subsets of S | `SUBSET {1, 2} = {{}, {1}, {2}, {1, 2}}`
 `UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`

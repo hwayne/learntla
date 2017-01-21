@@ -43,42 +43,4 @@ S == {1, 2}
 [S -> S] = {[1 |-> 1, 2 |-> 1], [1 |-> 1, 2 |-> 2], [1 |-> 2, 2 |-> 1], [1 |-> 2, 2 |-> 2]} 
 ```
 
-Since each side is a set, 
-## Example
-
-_Write a program that returns the minimum amount of change in pennies, nickels, dimes, and quarters._
-
-This is a fairly standard interview question. The trick is that the simple way to solve it, a greedy algorithm, fails for the general case. Let's implement it in PlusCal and see how the general case breaks down.
-
-[[TODO REWROTE THIS]]
-
-``` tla
-CV == [p |-> 1, n |-> 5, d |-> 10, q |-> 25] \* CoinValue
-IsExactChange(cents, coins) == LET CentsPerCoin == [c \in DOMAIN coins |-> CV[c]*coins[c]]
-                               IN  Sum(CentsPerCoin) = cents
-
-ExactChangeSet(cents) == {c \in [Coins -> 0..20] : IsExactChange(cents, c)}
-SmallestExactChange(cents) == CHOOSE s \in ExactChangeSet(cents) : \A y \in ExactChangeSet(cents) : Sum(y) >= Sum(s)
-```
-
-Let's walk through each piece. `Sum(f)` is a snippet from [here]. `CoinValue` is the relative worth of each coin (American coins) as a struct, CV is a shorthand for that, and `IsExactChange` checks if a bag of coins is worth the change. So far, everything is fairly straightforward.
-
-Things get more interesting with `ExactChangeSet`. As always, the easiest way to read it is inside-out. The first part is the inner piece, `[Coins -> ...]`. It's our first set of functions! __Remember that -> means set of functions.__ So that expands to `[0 0 0 0], [0 0 0 1], ... [20 20 20 19], [20 20 20 20]`. There's no particular reason why I capped it at 20. After that, we filter on `IsExactChange`, leaving us with only the set of collections of coins that add up to exactly our number.
-
-Finally, we have `SmallestExactChange`. The `CHOOSE s` tells us it will be the exact change set with the fewest number of coins (`Sum(s)`). The fewest number of coins is defined by that every other number is _more_ than it, which gives us the filter: choose the bag such that every single bag of change has as many or more coins. We could also do `ExactChangeSet(cents) / {s}` to replace the `Sum(y) >= Sum(s)` with `Sum(y) > Sum(s)`, but eh, more characters.
-
-The greedy algorithm is "subtract quarters until you can't anymore, then subtract dimes, then nickels, then pennies".
-
-{{% code change %}}
-
-And we can see this works for any number between 1 and 100 cents.
-
-This is where the interviewer generally throws in the twist: what if you had different denominations of coins? The algorithm breaks down if you have, for example, pennies, nickels, and 7-cent coins; it would give you four coins for ten where two nickels would work.
-
-[Updated algorithm]
-
-This is usually where the interviewer is satisfied and the problem ends. The base case works, the edge case works, and our algorithm is solid. But we're modeling, not programming, so we have a higher standard of rigour. Let's first confirm our algorithm works for _every_ choice of change:
-
-[[ TODO ]]
-
-For certain values of coins, the "minimum change" is ill-defined! 21 cents is 10+10+1 or 7+7+7. Both are three coins. Which is the minimum? We'd have to define a tie-breaker. 
+Since each side is a set, you can use normal set expressions on them.

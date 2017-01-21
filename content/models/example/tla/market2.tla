@@ -6,7 +6,11 @@ I == Items
 V == Vendors
 P == 1..MaxPrice
 
-ValidMarkets == [V \X I -> [buy : P, sell : P]]
+ValidMarkets == LET Markets == [V \X I -> [buy : P, sell : P]]
+                IN {m \in Markets : 
+                    \A item \in I, vendors \in V \X V:
+                      m[<<vendors[1], item>>].buy <= m[<<vendors[2], item>>].sell
+                   }
 
 (* --algorithm market
 variables market \in ValidMarkets, 

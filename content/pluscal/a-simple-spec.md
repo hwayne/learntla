@@ -69,7 +69,7 @@ I assume that you're familiar with other programming languages. To make modeling
 
 ### Logic Operators
 
-logic | token | `TRUE` | `FALSE`
+logic | operator | `TRUE` | `FALSE`
 ------|--------|--------|-------
 equal | `=` | `1 = 1` | `1 = 2`
 not equal | `#` | `1 # 2` | `1 # 1`

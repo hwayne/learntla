@@ -26,5 +26,3 @@ In this section, we'll introduce the basics of propositional logic. Even if you'
 `P => Q` means "If P is true, then Q must also be true." Note that P can be false and Q can be true, or both can be false. It's equivalent to writing `~P \/ Q`, which is how TLC interprets it.
 
 `P <=> Q` means "Either both P and Q are true or both are false." It's equivalent to writing `(~P /\ ~Q) \/ (P /\ Q)`. `P <=> ~Q` is P XOR Q.
-
-[[ TODO examples ]]

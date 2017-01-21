@@ -3,6 +3,7 @@ title = "Introduction"
 weight = 0
 +++
 
+_NOTE: This is still being worked on. **Most of the content is here but there's still a lot of editing to be done.** If you see something that doesn't make sense or is explained badly, please contact me at [h@learntla.com](mailto:h@learntla.com)._
 
 Programming is hard. There's a lot of keep track of, and a lot of ways things can go horribly wrong. To clamp down on the number of ways things can go horribly wrong, we use a variety of tools: unit tests, static analysis, code reviews, etc. All of these help make sure that the code works as intended.
 
@@ -14,6 +15,5 @@ If formal methods are so powerful, why isn't everybody using them? They have a r
 
 At eSpark Learning, though, we found that this was completely wrong. Our modeling tool of choice, TLA+, can be taught in a few days and a model that finds critical bugs can be written in under an hour. It turns out the problem isn't how hard formal methods are, it's that everybody just thinks they're hard. Everybody assumes they're only for critical systems, so people don't try to apply them to anything simpler.
 
-This is intended to be a guide to TLA+, aimed at making it practical for day-to-day startup work.
+This is intended to be a guide to TLA+, aimed at making it practical for day-to-day startup work. It assumes you have some experience with programming (otherwise this will be nonsensical) and familiarity with unit testing (otherwise that's probably worth learning first). If you've got both of those, let's learn some TLA!
 
-NOTE: This is still being worked on. **Most of the content is here but there's still a lot of editing to be done.** If you see something that doesn't make sense or is explained badly, please contact me at hwayne+tla@gmail.com.

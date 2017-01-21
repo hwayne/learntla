@@ -76,7 +76,3 @@ end define
 ```
 
 Your `define` block must come before the `begin`.
-
-Here's an example with all three use cases.
-
-[[ TODO ]]

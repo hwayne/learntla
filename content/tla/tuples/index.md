@@ -20,7 +20,7 @@ In addition, you have the `DOMAIN` operator. `DOMAIN Tuple` is the set `1..Len(T
 
 If you add `EXTENDS Sequences` to your spec, they also do double duty as sequences, which adds some more functionality. None of these operations will mutate the sequence. If you want to pop the head, for example, you have to do `seq := Tail(seq)`.
 
-token | operation | example
+operator | operation | example
 ------|-----------|--------
 Head | First element | `Head(<<1, 2>>) = 1`
 Tail | Sequence aside from head | `Tail(<<1, 2>>) = <<2>>`
