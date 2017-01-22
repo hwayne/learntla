@@ -44,11 +44,7 @@ Let's add a complication: all of the processes are running on different workers,
 
 {{% code with_delay %}}
 
-When we run this, we see it fails, as between the get and the request another process can make a call. If we want to resolve this we need some form of locking or priority.
-
-[[Stuff on the lock]]
-
-Locking works, but it also explodes the diameter. Every process needs to wait on every other process, even when there's plenty of calls to go around. We should instead look for a more optimized way of handling this issue.
+When we run this, we see it fails, as between the get and the request another process can make a call. If we want to resolve this we need some form of locking or priority. This will work, but it also explodes the diameter. Every process needs to wait on every other process, even when there's plenty of calls to go around. We should instead look for a more optimized way of handling this issue.
 
 ### Preassignment
 
