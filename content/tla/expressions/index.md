@@ -85,4 +85,4 @@ _May or may not be true._ Sometimes that's what you want, more often it isn't. B
 
 ## Nesting
 
-All parts of expressions are expressions or identifiers, so you can put expressions inside other expressions.
+All parts of expressions are expressions or identifiers, so you can put expressions inside other expressions. Additionally, all expressions can be used inside PlusCal code.

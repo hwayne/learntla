@@ -26,7 +26,6 @@ Similarly, you can write `DOMAIN F` to get the set of values F is defined on.
 So, what exactly is the difference between functions and operators? There's a few important difference, but here's the practical ones. You can't have a set of operators. Functions can't express certain actions that operators can. Finally, you can't use functions as invariants. A good rule of thumb is that if you want to manipulate it as part of your algorithm, prefer functions. Otherwise, prefer operators.
 {{% /notice %}}
 
-[[ TODO exercise: Range of function ]]
 ## Function Sets
 
 Imagine you are trying to model some sort of flag, like a concurrency lock, on multiple processes. Or you're writing a trading algorithm and match people to what they're interested in. Or any case where you know that a set of things has an initial value but you're not sure what initial value. Or you need to test arbitrary sequences. It'd be helpful to say "generate all functions with these properties" so we can harden our algorithm against them. The syntax for that is

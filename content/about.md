@@ -1,5 +1,5 @@
 +++
-title = "About"
+title = "about"
 +++
 
 This is an introductory guide for TLA+ (Temporal Logic of Actions), a specification language used for writing code blueprints.

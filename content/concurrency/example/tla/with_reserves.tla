@@ -30,7 +30,8 @@ begin
   Request:
     make_calls(1);
     reserved_calls := reserved_calls - 1;
-    either goto GCGetCalls or skip 
+    either goto GCGetCalls 
+    or skip 
     end either;
 end process;
 

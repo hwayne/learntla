@@ -19,7 +19,7 @@ Basically, an invariant. When you put `P` in the invariant box, TLC interprets t
 
 `<>` means _eventually_: `<>P` means that for every possible behavior, at least one state has P as true. For example, the following code is wrong under the temporal property `<>(x = 1)`
 
-```
+``` tla
 (* --algorithm example
 variables x = 3
 begin
@@ -37,7 +37,7 @@ There exists one timeline where x never passes through 1: "x = 3 -> x = 2 -> x =
 
 `~>` means _leads to_: `P ~> Q` implies that if P ever becomes true, at some point afterwards Q must be true. For example:
 
-```
+``` tla
 (* --algorithm example
 variables x = 4, decrement \in {1, 2}
 begin

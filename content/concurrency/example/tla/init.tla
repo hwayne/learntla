@@ -13,7 +13,9 @@ process get_collection = 0
 begin 
   Request:
     make_calls(1);
-    either goto Request or skip end either;
+    either goto Request 
+    or skip 
+    end either;
 end process;
 
 process get_put \in 1..3

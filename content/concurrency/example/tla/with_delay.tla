@@ -25,7 +25,9 @@ begin
     gc_local := made_calls;
   Request:
     make_calls(1);
-    either goto GCGetCalls or skip end either;
+    either goto GCGetCalls 
+    or skip 
+    end either;
 end process;
 
 process get_put \in 1..3

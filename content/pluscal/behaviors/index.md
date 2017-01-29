@@ -53,3 +53,19 @@ This creates a separate timeline for each element in the set.
  a=1 a=2 a=3
  x+1 x+2 x+3
 ```
+
+## Example
+
+_Specify a system with three flags that can be on or off._
+
+Right now we're a little limited in what we can practically do, but we can already start constructing simple patterns. Here's one way to write this in PlusCal:
+
+{{% code gates %}}
+
+`BOOLEAN` is a TLA+ builtin and is equal to the set `{TRUE, FALSE}`. As you can see, every step this picks a single flag and either sets it to true or false. Fairly simple.
+
+To give a better sense of where we're going, here's how we could write it instead, once we're more comfortable with the language:
+
+{{% code gates2 %}}
+
+
