@@ -24,8 +24,14 @@ The important thing is that TLC will run _every_ branch. When it encounters an e
 variables x = 3, i = 2;
 begin
 while i > 0 do
-  either A: x := x + 2 or B: x := x * 2 end either
-  i := i - 1
+  either 
+    A: 
+      x := x + 2;
+  or 
+    B: 
+      x := x * 2;
+  end either;
+  i := i - 1;
 end while
 ```
 
@@ -56,7 +62,7 @@ This creates a separate timeline for each element in the set.
 
 ## Example
 
-_Specify a system with three flags that can be on or off._
+_Specify a system with three flags that can be on or off, as well as can change the state of a flag._
 
 Right now we're a little limited in what we can practically do, but we can already start constructing simple patterns. Here's one way to write this in PlusCal:
 

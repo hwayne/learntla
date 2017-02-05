@@ -26,26 +26,3 @@ In this section, we'll introduce the basics of propositional logic. Even if you'
 `P => Q` means "If P is true, then Q must also be true." Note that P can be false and Q can be true, or both can be false. It's equivalent to writing `~P \/ Q`, which is how TLC interprets it.
 
 `P <=> Q` means "Either both P and Q are true or both are false." It's equivalent to writing `(~P /\ ~Q) \/ (P /\ Q)`. `P <=> ~Q` is P XOR Q.
-
-## Example
-
-_Given a sequence of sets, find the element that appears in the most sets._
-
-To have a simple set to work over, let's imagine four sets of at most five elements:
-
-``` tla
-EXTENDS FiniteSets
-TestSeq == LET S == SUBSET 1..5 IN S \X S \X S \X S
-```
-
-``` tla
-MostCommonElement(Seq) ==
-  LET R                == Range(Seq)
-      AllElements      == UNION R
-      Count(x)         == Cardinality({S \in R : x \in S})
-  IN  CHOOSE x \in AllElements:
-      \A y \in AllElements:
-         Count(y) <= Count(x)
-```
-
-If we run the test harness, though. [[TODO]]

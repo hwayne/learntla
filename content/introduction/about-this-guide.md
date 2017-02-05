@@ -10,3 +10,5 @@ However, that power comes at a cost: TLA+ is also very _complicated_, and I've f
 So, this guide. I'll be focusing on the bare minimum required to get you up and running as fast as possible as well as some intermediate techniques to improve your models. This approach will ignore or skim over the vast majority of TLA+ in order to make that small chunk easier to learn. This doesn't mean the other parts boring, difficult, or useless. Far from it. But they're outside the scope of this guide.
 
 If you want a more comprehensive guide to TLA+, I'd recommend reading Specifying Systems and the [PlusCal manual](https://research.microsoft.com/en-us/um/people/lamport/tla/pluscal.html). In fact, I'd recommend downloading both to use as a reference while reading this guide.
+
+**This guide assumes you're an experienced programmer.** If you're just starting out, most of this will probbly be nonsensical. I'm deliberately glazing over a lot of the commonalities with other languages to focus on the new stuff.

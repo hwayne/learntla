@@ -69,9 +69,9 @@ Case is _mostly_ how you'd expect it to act, with one subtle difference.
 
 ```
 CASE x = 1 -> TRUE
-[] x = 2 -> TRUE
-[] x = 3 -> 7
-OTHER -> FALSE
+  [] x = 2 -> TRUE
+  [] x = 3 -> 7
+  OTHER -> FALSE
 ```
 
 OTHER is the default. If none of the cases match and you leave out an OTHER, TLC considers that an error. If _more than one match_, though, TLC will pick one for you and _not_ branch. In other words, the following code

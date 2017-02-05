@@ -19,7 +19,7 @@ We don't care about deadlock, so we can uncheck that as a thing to check and add
 
 ``` tla
 ValidMarkets == LET Markets == [V \X I -> [buy : P, sell : P]]
-                IN {m \in Markets : 
+                IN {m \in Markets :
                     \A item \in I, vendor \in V:
                       m[<<vendor, item>>].buy <= m[<<vendor, item>>].sell
                    }
@@ -41,7 +41,7 @@ We can be reasonably confident there are no arbitrage opportunities here. What i
 
 ``` tla
 ValidTrades == LET Trades == [SUBSET I -> SUBSET I]
-               IN { T \in Trades : 
+               IN { T \in Trades :
                     \A s \in DOMAIN T :
                       Cardinality(s) > Cardinality(T[s])
                       }
@@ -66,4 +66,6 @@ So we need to run this with at least three items. Since vendor arbitrage doesn't
 
 ![](img/failure.png)
 
-What happens if the buyer can buy two cheap items and trade for a third expensive item, which they sell back. That's arbitrage for you. Besides the spec failure, there's a couple of interesting points of note. The first is that the smallest error in the spec required four actions on the part of the buyer. If we capped `MaxActions` at 3, we would not have detected the bug. The other is that, at least on my laptop, it took almost two minutes to find the error. If I remove the invariant check, it will take six minutes to explore the whole state space. We can reduce the time by making `Items` a symmetry set, in which case TLC finds the error in a little over 20 seconds. Symmetry sets can be very beneficial, and this is a case where it doesn't change the rigor of your spec.
+What happens if the buyer can buy two cheap items and trade for a third expensive item, which they sell back. That's arbitrage for you. Besides the spec failure, there's a couple of interesting points of note. The first is that the smallest error in the spec required four actions on the part of the buyer. If we capped `MaxActions` at 3, we would not have detected the bug.
+
+The other is that, at least on my laptop, it took almost two minutes to find the error. If I remove the invariant check, it will take six minutes to explore the whole state space. We can reduce the time by making `Items` a symmetry set, in which case TLC finds the error in a little over 20 seconds. Symmetry sets can be very beneficial, and this is a case where it doesn't change the rigor of your spec.

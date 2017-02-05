@@ -5,23 +5,6 @@ weight = 2
 
 All snippets here assume you've extended `Sequences`.
 
-### Count
-
-Returns the number of elements of the tuple of value `value`.
-
-```
-Count(Tuple, value) == LET test(x) == x = value
-                       IN Len(SelectSeq(Tuple, test))
-```
-
-### Accumulate
-
-```
-Counter(Tuple) == [val \in Range(Tuple) |-> Count(Tuple, val)]
-```
-
-Uses `Range` from function snippets. Takes advantage of the fact that tuples are also a kind of function.
-
 ### Is Sequence of Set
 
 Determine if all elements of a sequence belong to a set.
@@ -46,7 +29,7 @@ We can't do `{seq \in Seq(S) : Len(seq) <= n}` because `Seq` is infinite. This i
 SeqMaxLen(S, n) ==  UNION {[1..m -> S] : m \in 0..n}
 ```
 
-ie `SeqMaxLen(S, 3) == {<<>>} \union Tup(S, 1) \union Tup(S, 2) \union Tup(S, 3)`. This can also be done with `SetReduce`:
+ie `SeqMaxLen(S, 2) == {<<>>} \union Tup(S, 1) \union Tup(S, 2)`. This can also be done with `SetReduce`:
 
 ```
 SeqMaxLen(S, n) == LET _op(a, b) == Tup(S, a) \union Tup(s, b)

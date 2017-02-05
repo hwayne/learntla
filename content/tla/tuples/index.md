@@ -47,11 +47,15 @@ x["b"] = {2, 3};
 Aside from that, there's one extra trick structures have. Instead of `key |-> value`, you can do `key : set`. In that case, instead of a structure you get the set of all structures which have, for each given key, a value in the set.
 
 ```
-x = [a |-> 1, b : {2, 3}];
+x = [a : {1}, b : {2, 3}];
 x = { [a |-> 1, b |-> 2], [a |-> 1, b -> 3] }
 ```
 
 You can also use `DOMAIN` on structures, which will give the set of keys, as strings.
+
+{{% notice warning %}}
+If you use `:` syntax and _any_ of the values are not sets, then the entire construct is invalid. In other words, while `[a: {1}, b: {2,3}]` is the above set, `[a: 1, b: {2, 3}]` will throw an error if you try to use it.
+{{% /notice %}}
 
 ### Type Composition
 
