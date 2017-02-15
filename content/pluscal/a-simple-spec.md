@@ -21,7 +21,7 @@ end algorithm; *)
 TLC will only analyze the code between the `----` beginning and the `====` end. Anything outside of those boundaries is ignored. `module_name` **must** be the same as the filename, while `algorithm_name` can be whatever you want. `\*` is a line comment and `(*` is a block comment. Note we're putting our algorithm in a comment. If you don't put it in a comment, you'll get a syntax error, because PlusCal isn't TLA+.
 
 {{% notice note %}}
-It's this way because of backwards compatibility. PlusCal came out fifteen years after TLA+ did. TLC is supposed to perfectly follow the semantics of TLA+, and since PlusCal is a completely different style it can't be fit into the same schema. Behind the scenes, we transpile the PlusCal to raw TLA+, and the `--algorithm` in comments is there to let the PlusCal translator know what it's supposed to be translating.
+PlusCal came out fifteen years after TLA+ did. TLC is supposed to perfectly follow the semantics of TLA+, and since PlusCal is a completely different style it can't be fit into the same schema. Behind the scenes, we transpile the PlusCal to raw TLA+, and the `--algorithm` in comments is there to let the PlusCal translator know what it's supposed to be translating.
 {{% /notice %}}
 
 You can only have one PlusCal algorithm per file.

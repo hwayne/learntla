@@ -19,11 +19,9 @@ Before we start messing with it, let's break down the current syntax we have. Si
 
 * If the filename is "transfer", the first line of the spec must be `---- MODULE transfer ----`. You must have at least four dashes on each side. Similarly, the last line must be at least four equal signs. Anything before the MODULE or after the bottom are ignored.
 * EXTENDS is the equivalent of an import statement.
-* `\*` is a comment, `(* *)` are comment blocks. Note that the algorithm is in a comment block. This is intentional. Since PlusCal algorithms aren't syntatically valid TLA+, we can't run it in a TLA file. Instead, you leave them in comments and let the PlusCal translator translate it. Similarly, note the EXTENDS is outside of the comment. That's because it's actual TLA+. Confused yet? I am.
+* `\*` is a comment, `(* *)` are comment blocks. Note that the algorithm is in a comment block. This is intentional. Since PlusCal algorithms aren't syntatically valid TLA+, we can't run it in a TLA file. Instead, you leave them in comments and let the PlusCal translator translate it.
 * `variables` is, shockingly enough, variables. Note that we use `=` when declaring variables, while in the algorithm itself we use `:=`. Outside of variable definition = is the comparison operator. Not equals is written as # (like an equals with two lines through it!). `1 + 2 = 3; 2 + 3 # 4.`
-* `A:` and `B:` are labels. They define the steps the algorithm takes. In really simple algorithms, you don't need them, because PlusCal can infer them. This is a bad habit to used to, though. Understanding how labels work is critical to writing more complex algorithms, as they define the places where your concurrency can go horribly awry. We'll be diving into them a bit deeper later.
-
-[Can I remove the bullet points, on account of being an example?]
+* `A:` and `B:` are labels. They define the steps the algorithm takes. Understanding how labels work is critical to writing more complex algorithms, as they define the places where your concurrency can go horribly awry. We'll be diving into them a bit deeper later.
 
 So how do we run this? Well, we can't. First of all, we it's not real code, we have to transpile it first. Also, we don't exactly 'run' it. Instead, we design models to test against it. Let's get that set up right now.
 
