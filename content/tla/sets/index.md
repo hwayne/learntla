@@ -21,6 +21,14 @@ As always, you can nest filters, and `{x \in {y \in S : P(y)} : Q(x)}` will filt
 
 You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. `{ x + y : x \in 0..9, y \in { y * 10 : y \in 0..9} }` is the first hundred numbers, in case you wanted to obfusciate `0..99`.
 
+{{% q %}}
+Write an operator that takes a set of numbers and returns the set containing the squares of the odd numbers in the input.
+
+{{% ans sq-odds %}}
+`SquareOdds(S) == {x*x : x \in {y \in S : y % 2 = 1 }}`
+{{% /ans %}}
+{{%/q %}}
+
 ### CHOOSE
 
 `CHOOSE x \in S : P(x)` is some x where P(x) is true. `CHOOSE x \in 1..8 : x % 2 = 1` will be one of 1, 3, 5, 7. TLC does _not_ branch here; while the number it chooses is arbitrary, it will _always_ return that number. This is similar to how CASE statements work: `CHOOSE x \in S : TRUE` is _some_ element of S, but TLC won't check all of them.

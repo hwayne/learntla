@@ -208,3 +208,15 @@ p {
     margin: 1rem 0;
 }
 
+/* hate css */
+.exercise {
+    padding: 15px;
+    display: block;
+    font-size: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    color: #666;
+    border: 1px solid gray;
+}
+
+.

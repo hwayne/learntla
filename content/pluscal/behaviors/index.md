@@ -43,6 +43,22 @@ The inner loop will happen twice. Each time the model can either add two or doub
 7  10 8  12
 ```
 
+{{% q %}}
+Will the following code pass or fail?
+
+```
+either
+  assert TRUE;
+or
+  assert FALSE;
+end either;
+```
+
+{{% ans either %}}
+Fail, as the second branch can fail.
+{{% /ans %}}
+{{%/q %}}
+
 ### With
 
 `with` does the same thing, except instead of creating a new behavior for each possible branch, it creates a behavior for each element in the set. In this case, we have three possible behaviors:
@@ -70,6 +86,13 @@ Right now we're a little limited in what we can practically do, but we can alrea
 
 `BOOLEAN` is a TLA+ builtin and is equal to the set `{TRUE, FALSE}`. As you can see, every step this picks a single flag and either sets it to true or false. Fairly simple.
 
+{{% q %}}
+How many possible _behaviors_ are there after three loops? Keep in mind that distinct behaviors can have the same end state.
+
+{{% ans 3havior %}}
+There are 8 initial states. On each loop, the model chooses one of three variables and takes one of two actions with it, for a total of 6 paths per loop. So after three loops there are 8*6^3 ~ 1800 behaviors. However, there are only 8 possible current states: most of the behaviors lead to a duplicate outcome.
+{{% /ans %}}
+{{%/q %}}
 To give a better sense of where we're going, here's how we could write it instead, once we're more comfortable with the language:
 
 {{% code gates2 %}}

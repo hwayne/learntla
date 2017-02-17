@@ -1,3 +1,5 @@
+CONSTANTS TSIZE, TSPACES
+
 FullTower[n \in 1..TSIZE] == n \* <<1, 2, 3, ...>>
 Board[n \in 1..TSPACES] == IF n = 1 THEN FullTower ELSE <<>>  
               
