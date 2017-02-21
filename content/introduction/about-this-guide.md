@@ -11,4 +11,4 @@ So, this guide. I'll be focusing on the bare minimum required to get you up and 
 
 If you want a more comprehensive guide to TLA+, I'd recommend reading Specifying Systems and the [PlusCal manual](https://research.microsoft.com/en-us/um/people/lamport/tla/pluscal.html). In fact, I'd recommend downloading both to use as a reference while reading this guide.
 
-**This guide assumes you're an experienced programmer.** If you're just starting out, most of this will probbly be nonsensical. I'm deliberately glazing over a lot of the commonalities with other languages to focus on the new stuff.
+**This guide assumes you're an experienced programmer.** If you're just starting out, most of this will probably be nonsensical. I'm deliberately glazing over a lot of the commonalities with other languages to focus on the new stuff.

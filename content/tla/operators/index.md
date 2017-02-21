@@ -28,6 +28,14 @@ You can use them anywhere you use any other expression.
 { Five, SumWithFive(Five, Five) } \* { 5, 15 }
 ```
 
+{{% q %}}
+Write an operator that tests if two numbers are not equal.
+
+{{% ans neq %}}
+`Neq(a,b) == a # b` works, as does `Neq(a,b) == ~(a = b)`.
+{{% /ans %}}
+{{%/q %}}
+
 ### Higher-Order Operators
 
 You can write operators that take other operators if you use a special syntax:
@@ -50,6 +58,14 @@ SetReduce(Op(_, _), S, value) == IF S = {} THEN value
 
 CandlesOnChannukah == SetReduce(Sum, 2..9, 0) \* 44
 ```
+
+{{% q %}}
+Write an operator that determines whether a second operator is commutative over two given numbers. An operator is commutative if `f(a,b) = f(b,a)`.
+
+{{% ans commutative %}}
+`IsCommutative(f(_, _), a, b) == f(a, b) = f(b, a)`
+{{% /ans %}}
+{{%/q %}}
 
 ## Integrating with PlusCal
 

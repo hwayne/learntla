@@ -74,8 +74,8 @@ logic | operator | `TRUE` | `FALSE`
 ------|--------|--------|-------
 equal | `=` | `1 = 1` | `1 = 2`
 not equal | `#` | `1 # 2` | `1 # 1`
-and | `\/` | `TRUE \/ TRUE` | `TRUE \/ FALSE`
-or | `/\` | `FALSE /\ TRUE` | `FALSE /\ FALSE`
+and | `/\` | `TRUE /\ TRUE` | `TRUE /\ FALSE`
+or | `\/` | `FALSE \/ TRUE` | `FALSE \/ FALSE`
 not | `~` | `~FALSE` | `~TRUE`
 
 ### If

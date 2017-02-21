@@ -18,13 +18,6 @@ x[1] + x[2] + x[3] = 15;
 
 In addition, you have the `DOMAIN` operator. `DOMAIN Tuple` is the set `1..Len(Tuple)`. For example, `DOMAIN <<"hello", "world", "!">> = {1, 2, 3}`.
 
-{{% q %}}
-Given `DOMAIN Tuple` is the set of numbers `Tuple` is defined over, write an operator that gives you the values of the Tuple, ie the range.
-
-{{% ans range %}}
-`RANGE(T) == { T[x] : x \in DOMAIN T }`
-{{% /ans %}}
-{{%/q %}}
 If you add `EXTENDS Sequences` to your spec, they also do double duty as sequences, which adds some more functionality. None of these operations will mutate the sequence. If you want to pop the head, for example, you have to do `seq := Tail(seq)`.
 
 operator | operation | example

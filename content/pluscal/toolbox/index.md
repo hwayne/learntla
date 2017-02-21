@@ -42,7 +42,7 @@ Terms:
 - **What to check?:** This is the meat of what we care about. 
   - _Deadlock_ checks that the program can't Catch-22 itself. 
   - _Invariants_ check that some equation, for example `x = TRUE`, is true for all possible states TLC can reach.
-  - _Temporal Properties_ check that something is true over all possible "lifetimes", for example "x switches from TRUE to FALSE and back".
+  - _Temporal Properties_ check that something is true over all possible behaviors, aka "lifetimes". For example, "x switches from TRUE to FALSE and back".
 - **How to run?:** Runtime optimizations. This is out of scope.
 
 We can run the model by clicking the green arrow in the top left. TLC will explore the entire state space, looking for possible failures in our invariants. Since we don't actually have any invariants yet, it won't find any failures, so this will be successful. Notice that it lists of the diameter as 2 and the number of distincts states as 2. The former means that the longest interesting progression was two steps long: the initial state where `x = 5` and the `Add` step where `x = 6`. Since there's only one possible starting state, there are 2 distinct states total.

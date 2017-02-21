@@ -55,7 +55,7 @@ end either;
 ```
 
 {{% ans either %}}
-Fail, as the second branch can fail.
+Fail, as the second branch can fail. Since a spec only passes if every behavior passes, one behavior failing means the entire spec is broken.
 {{% /ans %}}
 {{%/q %}}
 
@@ -93,6 +93,7 @@ How many possible _behaviors_ are there after three loops? Keep in mind that dis
 There are 8 initial states. On each loop, the model chooses one of three variables and takes one of two actions with it, for a total of 6 paths per loop. So after three loops there are 8*6^3 ~ 1800 behaviors. However, there are only 8 possible current states: most of the behaviors lead to a duplicate outcome.
 {{% /ans %}}
 {{%/q %}}
+
 To give a better sense of where we're going, here's how we could write it instead, once we're more comfortable with the language:
 
 {{% code gates2 %}}

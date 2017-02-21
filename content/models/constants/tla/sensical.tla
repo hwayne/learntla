@@ -3,3 +3,7 @@ IsSensical(state) == /\ Len(state) = TSPACES \* Correct spaces
                         \E tower \in DOMAIN state:
                             \E disc \in DOMAIN state[tower]:
                                 n = state[tower][disc] 
+
+\* ...
+
+ASSUME IsSensical(SOLUTION)

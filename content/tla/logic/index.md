@@ -38,6 +38,21 @@ SumsToZero(S, N) == \E s \in SUBSET S:
 `\A x \in {}: FALSE` is still true!
 {{% /notice %}}
 
+{{% q %}}
+Given a set and an operator, determine whether the operator is commutative over _all_ elements in the set.
+
+{{% ans abelian %}}
+```tla
+IsCommutative(Op, S) == \A x \in S : 
+                          \A y \in S : Op(x,y) = Op(y,x)
+```
+Alternatively, we could put them on the same line:
+```tla
+IsCommutative(Op, S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)`
+```
+{{% /ans %}}
+{{%/q %}}
+
 ### `=>` and `<=>`
 
 `P => Q` means "If P is true, then Q must also be true." Note that P can be false and Q can be true, or both can be false. It's equivalent to writing `~P \/ Q`, which is how TLC interprets it.

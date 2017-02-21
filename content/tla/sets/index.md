@@ -15,6 +15,7 @@ If S is a set of tuples, you can filter on some relationship between the element
 
 As always, you can nest filters, and `{x \in {y \in S : P(y)} : Q(x)}` will filter on the filtered list. Generally, though, `{x \in S: P(x) /\ Q(x)}` is easier to understand.
 
+
 ### Mapping
 
 `{P(x): x \in S}` applies P to every element in the set. `{ x * x : x \in 1..4 }` is the set `{1, 4, 9, 16}`. `{ x % 2 = 1:x \in 1..8 }` is the set `{TRUE, FALSE}`. 
@@ -22,10 +23,10 @@ As always, you can nest filters, and `{x \in {y \in S : P(y)} : Q(x)}` will filt
 You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. `{ x + y : x \in 0..9, y \in { y * 10 : y \in 0..9} }` is the first hundred numbers, in case you wanted to obfusciate `0..99`.
 
 {{% q %}}
-Write an operator that takes a set of numbers and returns the set containing the squares of the odd numbers in the input.
+Given `DOMAIN Tuple` is the set of numbers `Tuple` is defined over, write an operator that gives you the values of the Tuple, ie the range.
 
-{{% ans sq-odds %}}
-`SquareOdds(S) == {x*x : x \in {y \in S : y % 2 = 1 }}`
+{{% ans range %}}
+`RANGE(T) == { T[x] : x \in DOMAIN T }`
 {{% /ans %}}
 {{%/q %}}
 
@@ -45,6 +46,16 @@ in set|  `\in` | `1 \in {1, 2}` | `1 \in {{1}, 2}`
 not in set | `\notin` | `1 \notin {}` | `{1} \notin {{1}}`
 is subset | `\subseteq` | `{1, 2} \subseteq {1, 2, 3}` | `{1, 2} \subseteq {1, 3}`
 
+
+{{% q %}}
+Write an operator that takes two sets S1 and S2 and determines if the double of every element in S1 is an element of S2.
+
+{{% ans double %}}
+`IsDoubleSubset(S1, S2) == {x * 2 : x \in S1} \subseteq S2`.
+If you wanted to check both ways (doubles of S2 are in S1), you could write two expressions with `\\/`.
+{{% /ans %}}
+{{%/q %}}
+
 operator | operation | example
 -------|-----------|--------
 `\union` | Set Union | `{1, 2} \union {2, 3} = {1, 2, 3}`
@@ -53,9 +64,24 @@ operator | operation | example
 `SUBSET S` | The set of all subsets of S | `SUBSET {1, 2} = {{}, {1}, {2}, {1, 2}}`
 `UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`
 
+{{% q %}}
+Given a sequence of sets, write an operator that determines if a given element is found in any of the sequence's sets. IE `Op("a", <<{"b", "c"}, {"a", "c"}>>) = TRUE`.
+
+{{% ans setrange %}}
+`InSeqSets(elem, Seq) == x \in UNION Range(Seq)`
+{{% /ans %}}
+{{%/q %}}
 If you add `EXTENDS FiniteSets`, you also get the following operators:
 
 operator | operation
 -------|-------
 IsFiniteSet(S) | TRUE iff S is finite
 Cardinality(S) | Number of elements of S, if S is finite
+
+{{% q %}}
+Given a set, write an operator that returns all subsets of length two. IE `Op(1..3) == {{1, 2}, {1, 3}, {2, 3}}`.
+
+{{% ans twos %}}
+`Op(S) == { subset \in SUBSET S : Cardinality(subset) = 2 }`
+{{% /ans %}}
+{{%/q %}}

@@ -41,7 +41,7 @@ S == {1, 2}
 Since each side is a set, you can use normal set expressions on them.
 
 {{% q %}}
-`EXTENDS Sequence` gives you the `Seq(S)` operator, which gives you the set of all sequences with a range in S. Unfortunately, you can't actually use this operator, since it will crash TLC. So let's make some better versions. First, write an operator that returns a tuple of with N copies of a set. For example `Op(S, 3) == S \X S \X S`.
+`EXTENDS Sequence` gives you the `Seq(S)` operator, which gives you the set of all sequences with a range in S. Unfortunately, you can't actually use this operator, since it will crash TLC. So let's make some better versions. First, write an operator that returns a tuple of N copies of a set. For example `Op(S, 3) == S \X S \X S`.
 
 {{% ans tup %}}
 `Tup(S, n) == [1..n -> S]`
