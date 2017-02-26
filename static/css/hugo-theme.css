@@ -208,6 +208,8 @@ p {
     margin: 1rem 0;
 }
 
+#top-bar.is_stuck { }
+
 /* hate css */
 .exercise {
     padding: 15px;

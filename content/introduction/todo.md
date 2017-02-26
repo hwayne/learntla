@@ -11,11 +11,4 @@ This guide is still under heavy revision: I put it up now because it might still
 * Better explanations of the examples
 * More examples, period.
 
-And some things that need to be added entirely:
-
-* Exercises
-* A library of useful TLA+ operators
-* How-tos for specific PlusCal, TLA+ cases
-* More targeted guides
-
 As always, if you have any questions, complaints, or comments, feel free to [send them my way](mailto:h@learntla.com).
