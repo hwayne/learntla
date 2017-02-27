@@ -26,7 +26,7 @@ You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. `{ x + y : x \in 0.
 Given `DOMAIN Tuple` is the set of numbers `Tuple` is defined over, write an operator that gives you the values of the Tuple, ie the range.
 
 {{% ans range %}}
-`RANGE(T) == { T[x] : x \in DOMAIN T }`
+`Range(T) == { T[x] : x \in DOMAIN T }`
 {{% /ans %}}
 {{%/q %}}
 
@@ -35,6 +35,7 @@ Given `DOMAIN Tuple` is the set of numbers `Tuple` is defined over, write an ope
 `CHOOSE x \in S : P(x)` is some x where P(x) is true. `CHOOSE x \in 1..8 : x % 2 = 1` will be one of 1, 3, 5, 7. TLC does _not_ branch here; while the number it chooses is arbitrary, it will _always_ return that number. This is similar to how CASE statements work: `CHOOSE x \in S : TRUE` is _some_ element of S, but TLC won't check all of them.
 
 TLC assumes that you always intend for there to be at least one element to choose. If there aren't any (trivial example: `CHOOSE x \in S : FALSE`), it will consider this a problem in your spec and raise an error. TLC will also raise if S is infinite because TLC can't evaluate P on an infinite number of elements. There still may be a problem with your spec, though, and it's a good idea to try it on a finite subset.
+
 
 ## Set Operators
 

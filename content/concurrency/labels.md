@@ -70,6 +70,12 @@ Bar:
 
 Sometimes this can cause issues: for example, switching two variables, or assigning to different records of the same structure. In these cases you can use `||` to chain assignments: `x := y || y := x;`
 
+### Optimization
+
+Every label specifies a branch point in your system: any process with an available label can run as the next step. For N processes with M sequential labels the total number of behaviors is `(MN)!/M!^N`, not counting initial states or nondeterministic labels (`either` or `with`). The more labels you have, the more exact your concurrency testing. The fewer labels you have, the faster your model will run. As always, there are tradeoffs.
+
 ### ENABLED
 
 Labels are converted into "Actions" by the PlusCal translator. I think actions are a bit out of scope for this guide, but there's one consequence of this we can find useful: we can 'apply' operators to Labels. The main one we're interested in is `ENABLED`. For a label `A`, `ENABLED A` means "this specific action can happen in the next step. For example, if we wanted to ensure that we don't download a file if a specific flag is set, we can write the invariant as `no_download_flag => ~ENABLED A`.
+
+TK example

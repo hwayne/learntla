@@ -34,6 +34,16 @@ Note that these use parenthesis, unlike DOMAIN, SUBSET, and UNION. A very rough 
 If the value is undefined (for example, `Tail(<<>>)`), the model considers that an error in your spec. And let's be honest, it probably is.
 {{% /notice %}}
 
+{{% q %}}
+Write an operator that takes a tuple and, if the tuple is length two, returns the reversed tuple, and otherwise raises an error.
+
+{{% ans twople %}}
+```
+Reverse(Twople) == IF Len(Twople) = 2 THEN <<Twople[2], Twople[1]>> ELSE ASSERT FALSE
+```
+{{% /ans %}}
+{{% /q %}}
+
 ### Structures
 
 Structures are hashes. They have keys and values. You specify them as `[key |-> value]` and query them with either `[key]` or `.key`. Both are legal and valid.

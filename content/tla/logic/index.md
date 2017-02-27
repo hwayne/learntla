@@ -28,6 +28,7 @@ SumsToZero(S, N) == \E s \in SUBSET S:
 ```
 {{% /ans %}}
 {{%/q %}}
+
 ### `\A`
 
 `\A` means "all". We write `\A x \in S : P(x)` to say "For every x in the set, P(x) is true." If we wanted to check that a set had no odd numbers in it, we could write `OnlyEvenNumbers(S) == \A x \in S : IsEven(x)`. If there are only even numbers, `HasEvenNumber` is true. Otherwise it's false. Simple.
@@ -67,4 +68,69 @@ Without looking back at the introduction, write an operator that returns the max
 Max(S) == CHOOSE x \in S : \A y \in S : y <= x
 ```
 {{% /ans %}}
-{{%/q %}}
+{{% /q %}}
+
+### CHOOSE
+
+While we introduced the CHOOSE operator back in sets, it really comes into its own when we add the logical operators. Many quantified properties, such as "the largest x such that P", can be expressed as "the x where all larger elements don't have P" or "the x where all of the other elements with P are smaller". For example, what is the largest prime in a set S?
+
+```
+IsPrime(n) == \A x \in 1..n : n % x # 0
+
+LargestPrime(S) == CHOOSE x \in S:
+                    /\ IsPrime(x)
+                    /\ \A y \in S:
+                        IsPrime(y) => y <= x
+                    \* or y > x => ~IsPrime(y)
+```
+
+{{% q %}}
+A prime number p is a _twin prime_ if p-2 is prime or p+2 is prime. Find the largest twin prime in S.
+{{% ans twin %}}
+
+```
+LargestTwinPrime(S) == CHOOSE x \in S:
+                    /\ IsPrime(x)
+                    /\  \/ IsPrime(x + 2)
+                        \/ IsPrime(x - 2)
+                    /\ \A y \in S:
+                        IsPrime(y) => y <= x
+                    \* or y > x => ~IsPrime(y)
+```
+{{% /ans %}}
+
+Now return the largest pair of twin primes, ordered by value. Assume that S may be missing numbers and, if one of the twin primes is missing, the pair is invalid. For example, the largest pair in `{3, 5, 13}` is `<<3, 5>>`, not `<<5, 13>>`. 
+
+{{% ans twinpair %}}
+```
+LargestTwinPair(S) == CHOOSE <<x, y>> \in S \X S:
+                         /\ IsPrime(x)
+                         /\ IsPrime(y)
+                         /\ x = y - 2
+                         /\ \A <<w, z>> \in S:
+                            /\ IsPrime(z)
+                            /\ IsPrime(w)
+                            /\ w = z - 2
+                               => z < y
+```
+{{% /ans %}}
+{{% /q %}}
+
+TKEX
+
+Given `stockprices` is a tuple of positive integers representing the value of a stock at a given time of day, write an operator that determines the maximum profit you could make by buying and selling a single stock. Assume for this problem that you cannot short; you must buy before you sell.
+
+```
+MaxProfit(stockprices) == 
+    LET sp == stockprices \* clean it up a bit
+        TimePair == 1..Len(sp) \X 1..Len(sp)
+        Profit[p \in TimePair] == sp[p[2]] - sp[p[1]] 
+        best == CHOOSE best \in TimePair :
+            /\ best[2] > best[1] \* Buy after sell
+            /\ Profit[best] > 0 \* Make money plz
+            /\ \A worse \in TimePair :
+                worse[2] > worse[1] => Profit[best] >= Profit[worse]
+    IN Profit[best]
+```
+
+Note this will crash if there is no possible pair, which is preferrable to paying trading fees twice on a zero-dollar profit.

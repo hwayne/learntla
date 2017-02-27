@@ -28,6 +28,10 @@ You can use them anywhere you use any other expression.
 { Five, SumWithFive(Five, Five) } \* { 5, 15 }
 ```
 
+{{% note tip %}}
+Remember, you can use the "No Behavior Spec" option in your TLC model to test various operators and cases.
+{{% /note %}}
+
 {{% q %}}
 Write an operator that tests if two numbers are not equal.
 
@@ -92,3 +96,5 @@ end define
 ```
 
 Your `define` block must come before the `begin`.
+
+TK add example
