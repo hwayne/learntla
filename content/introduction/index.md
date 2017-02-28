@@ -5,20 +5,41 @@ weight = 0
 
 ### What is TLA+?
 
-TLA+ is a _formal specification language_. Instead of writing code, you write a description of what the code should accomplish and what your abstract algorithm is. Then you can verify that your specification matches your expectations. Think of it like unit tests, except on your designs instead of the code.
+TLA+ is a _formal specification language_. It's a tool to design systems and algorithms, then programmatically verify those systems don't have critical bugs. It's the software equivalent of a blueprint.
 
-### How could I use it?
+### Why should I use it?
 
-People normally think of formal specification as a difficult tool for only critical systems, there are many cases where a few hours of TLA+ can find critical bugs before you've written any code. Some examples:
+Here's a simple TLA+ specification, representing people trading unique items. Can you find the bug?
 
-* Two jobs edit the same database record, except one makes a call to a laggy server that either returns a value immediately, after a few seconds, or times out. Can you guarantee that under no bizarre race conditions will the record ever get updated 'wrong'?
-* Will a given change the caching system make it possible for a critical system to receive the wrong information?
-* Will your maze generator ever make an impossible map?
+```
+People == {"alice", "bob"}
+Items == {"ore", "sheep", "brick"}
+(* --algorithm trade
+variable owner_of \in [Items -> People]
 
-### What's an example?
+process giveitem \in 1..3 \* up to three possible trades made
+variables item \in Items, 
+          owner = owner_of[item], 
+          to \in People,
+          origin_of_trade \in People
+begin Give:
+    if origin_of_trade = owner then 
+        owner_of[item] := to;
+    end if;
+end process;
+end algorithm; *)
+```
 
-TK 
+Since we check that the owner of an item is the one trading it away. So we should be safe against scams, right? But if we run the model checker, we find that's not true: Alice could trade an item to _herself_ and, before that process finishes running, resolve a parallel trade giving that same item to Bob. Then the first trade resolves and Alice gets the item back. Our algorithm fails for race conditions, and we know this because TLA+ explored every possible state and timeline.
 
-### How do I learn?
+There's a few different ways of fixing this. But does our fix work for more than two people? In TLA+, checking that is as simple as `People == {"alice", "bob", "eve"}`. Does it work if we can trade multiple items at once? `variable items \in SUBSET Items`. What about if there's multiple sheep, ore, and bricks? `amount_owned = [People \X Items -> 0..5]`. What if three people are all trading 1 ore and 1 sheep with each of the other players while Eve also trades Alice 0 brick? If it's in the possible state space, TLA+ will check it.
 
-Here.
+### Is it hard to use?
+
+Formal methods have a reputation for being difficult to the point where they're only worth it for critical systems. This means that all of the guides are written under the assumption that the reader is working on a critical system, where they have to know TLA+ inside and out to make absolutely that their system won't accidentally _kill people_.
+
+If a dangerous bug to you is "somebody dies", then yes, formal methods are hard. If a dangerous bug to you is "nobody dies but our customers get really mad and we have to spend two weeks tracking down and fixing the bug", then the small subset of TLA+ you'll need is actually pretty easy to learn. Just find a beginner-friendly guide and you're all set.
+
+### Where's a beginner-friendly guide?
+
+HEY

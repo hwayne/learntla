@@ -11,7 +11,7 @@ All of these assume finite functions.
 Range(f) == {f[x] : x \in DOMAIN f}
 ```
 
-Just a fairly simple application of mapping over a set. This also gives us a way to get the set of elements in a tuple/sequence/structre.
+Just a fairly simple application of mapping over a set. This also gives us a way to get the set of elements in a tuple/sequence/structure.
 
 ### Functions with a given property
 

@@ -28,6 +28,8 @@ Given `DOMAIN Tuple` is the set of numbers `Tuple` is defined over, write an ope
 {{% ans range %}}
 `Range(T) == { T[x] : x \in DOMAIN T }`
 {{% /ans %}}
+
+This is a useful enough operator that I'll assume it's available for all other examples and exercises.
 {{%/q %}}
 
 ### CHOOSE
