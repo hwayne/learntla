@@ -73,20 +73,9 @@ Write an operator that determines whether a second operator is commutative over 
 
 ## Integrating with PlusCal
 
-There are generally three ways to use operators with PlusCal:
+If your operator doesn't reference any PlusCal variables (such as `IsEmpty(S) == S = {}`), you can put it above the start of the PlusCal algorithm and it will be usable like any other expression.
 
-### Generic Helpers
-
-Anything that doesn't specifically reference your variables, like `IsEmpty(Set) == Set = {}`. The best place to put this are _before_ the `--algorithm` line, and your PlusCal code can use it like any other expression.
-
-### Invariants
-
-Something you want to check in a model, like `HasMoneyLeft == money > 0`. TLA+ parses top down; if you want to reference a variable in your operator, it has to come after the TLA+ definition. So your invariant has to go _after_ the `\* END TRANSLATION` block.
-
-
-### PlusCal Helpers
-
-A helper operator that uses PlusCal variables, like `CanGamble == money > 25`. You can't put it above the `--algorithm`, because it needs to know about the PlusCal variables, and you can't put it below the `end algorithm`, because PlusCal needs to know about the operator. To work around this edge case, PlusCal adds an additional structure called `define`:
+If your operator _does_ reference any PlusCal variables (such as `HasMoneyLeft == money > 0`), it has to appear in or after the algorithm. The first way to do this is to put it after the TLA+ translation. This is simple, but it also means the PlusCal can't call the operator. Fine for invariants, less-fine for conditionals. To place the operator directly in your code, you can use a  `define` block:
 
 ```
 define
@@ -97,4 +86,4 @@ end define
 
 Your `define` block must come before the `begin`.
 
-TK add example
+TK EXAMPLE

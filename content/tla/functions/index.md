@@ -143,7 +143,7 @@ First, write an operator that determines if a sequence is sorted or not.
 ```tla
 IsSorted(T) == \A x \in 1..Len(T):
                   \A y \in x..Len(T):
-                    x <= y
+                    T[x] <= T[y]
 ```
 {{< /ans >}}
 Next, we'll need a concept of permuting a sequence. The easiest way to that is to first create a permutation of its domain, and then map that over the original sequence. Start by writing an operator that takes some number n and returns all permutations of `<<1, 2, ..., n>>`. 
@@ -156,13 +156,13 @@ PermutationKey(n) == {key \in [1..n -> 1..n] : Range(key) = 1..n}
 Next, write an operator that takes a sequence and returns the corresponding permuted sequences.
 {{< ans permutations>}}
 ```tla
-Permutations(T) == { [P[x] \in 1..Len(T) |-> T[x]] : P \in PermutationKey(Len(T))}
+PermutationsOf(T) == { [x \in 1..Len(T) |-> T[P[x]]] : P \in PermutationKey(Len(T))}
 ```
 {{< /ans >}}
 Now write an operator that takes a sequence and returns the sorted sequence.
 {{< ans sort>}}
 ```tla
-Sort(T) == CHOOSE t \in Permutations(T) : IsSorted(T)
+Sort(T) == CHOOSE sorted_tuple \in PermutationsOf(T) : IsSorted(sorted_tuple)
 ```
 Note this solution involves generating all N! permutations of the sequence, which is why the TLC operator outsources to Java.
 {{< /ans >}}

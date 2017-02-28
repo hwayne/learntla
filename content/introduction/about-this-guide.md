@@ -5,11 +5,14 @@ weight = 3
 
 This guide focuses on the bare minimum required to get you up and running as fast as possible as well as some intermediate techniques to improve your models. This approach will ignore or skim over the vast majority of TLA+ in order to make that small chunk easier to learn. This doesn't mean the other parts boring, difficult, or useless. Far from it. But they're outside the scope of this guide.
 
+I'm assuming you have the following background:
 
-So why write a guide when the [canonical book](https://research.microsoft.com/en-us/um/people/lamport/tla/book.html) is freely available online? This is aimed at a slightly different audience. _Specifying Systems_ is a comprehensive work that covers the total power of TLA+, down to proving that the logic is mathematically consistent.  And you can do fantastic things with that power.
+* __You're an experienced programmer.__ This is not an introduction to programming, and TLA+ is not a user-friendly tool.
+* __You're familiar with testing.__ If you haven't used unit tests before, that'll be a lot more useful than learning this.
+* __You know some math.__ TLA+ borrows heavily from mathematical structures and syntax. If you've heard of de Morgan's laws, know what a set is, and can understand what `(P => Q) => (~Q => ~P)` means, you're fine. Otherwise, this should still be accessible but might be a little less intuitive.
 
-However, that power comes at a cost: TLA+ is also very _complicated_, and I've found that often scares people away. And while you can do fantastic things with 100% of TLA+, you can do _damn good_ things with 40% of it. You don't need to know about machine closure or except-syntax to check that your API won't crash if you POST twice in a row. _Specifying Systems_ is aimed at people building critical systems; this guide is aimed at software developers in startups who want to catch edge cases before they hurt a customer.
+__You need to download the [TLA+ Toolbox](http://lamport.azurewebsites.net/tla/toolbox.html#downloading).__ You should also have access to the following resources:
 
-If you want a more comprehensive guide to TLA+, I'd recommend reading Specifying Systems and the [PlusCal manual](https://research.microsoft.com/en-us/um/people/lamport/tla/pluscal.html). In fact, I'd recommend downloading both to use as a reference while reading this guide.
-
-**This guide assumes you're an experienced programmer.** If you're just starting out, most of this will probably be nonsensical. I'm deliberately glazing over a lot of the commonalities with other languages to focus on the new stuff.
+* [The PlusCal Manual](https://research.microsoft.com/en-us/um/people/lamport/tla/pluscal.html): PlusCal is the algorithmic interface to TLA+. We'll be covering everything about it in this guide, but it's nice to have a complete grammar reference.
+* [The TLA+ Cheat Sheet](http://lamport.azurewebsites.net/tla/summary-standalone.pdf): Exactly what it sounds like. Includes syntax for things out of this guide's scope.
+* [Specifying Systems](https://research.microsoft.com/en-us/um/people/lamport/tla/book.html): _Specifying Systems_ was written by Leslie Lamport, the inventor of TLA+, and remains the most comprehensive book on the subject. It's a lot more advanced than this guide is, but you should know it exists.

@@ -36,6 +36,7 @@ You have a system where for every user U, actions A and B both occur, but in an 
 #### Solution
 
 Create an operator to generate unique structures for each case.
+
 ```
 CONSTANT Users
 
@@ -47,4 +48,24 @@ process A \in UserProc("A")
 process B \in UserProc("B")
 ```
 
-Note that if Users is itself a struct, then you have to call a user with `Users[self.u]`.
+Note that if Users is itself a struct, then you have to call a user with `Users[self.u]`. Alternatively, use a tuple:
+
+```
+process A \in Users \X {"A"}
+process B \in Users \X {"B"}
+```
+
+### Varying number of processes
+
+#### Problem 
+
+You want to model your system with 2, 3, or 4 processors of the same type.
+
+#### Solution
+
+```
+variable num_processors \in 2..4
+
+process A \in 1..num_processors
+ \* ...
+```

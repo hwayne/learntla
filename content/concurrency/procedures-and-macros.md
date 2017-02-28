@@ -53,5 +53,5 @@ So when should you use which? Macros are faster and less complicated. If you can
 
 ### Order of operations
 
-PlusCal enforces a strict ordering of its blocks. The `define` block hass to come before any macros, which has to come before any procedures, which has to come before any processes.
+PlusCal enforces a strict ordering of its blocks. The `define` block has to come before any macros, which has to come before any procedures, which has to come before any processes.
 

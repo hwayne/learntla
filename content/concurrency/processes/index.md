@@ -47,3 +47,7 @@ In this case, the entire C step is blocked until the `await` is true. So the onl
 A troubling problem here: if we can say "don’t run this step unless X is true", can we have a situation where we can’t run any steps? For example, if we instead did `await x > 1`, we'd be able to do `A -> B` and then get stuck. This is called a _deadlock_. This is almost certainly a serious bug and TLC will flag this as an error in your algorithm.
 
 If a deadlock is _not_ an error in your system, then you can disable that check in the model.
+
+EXERCISE
+
+a deadlock
