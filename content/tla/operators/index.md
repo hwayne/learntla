@@ -28,9 +28,9 @@ You can use them anywhere you use any other expression.
 { Five, SumWithFive(Five, Five) } \* { 5, 15 }
 ```
 
-{{% note tip %}}
+{{% notice tip %}}
 Remember, you can use the "No Behavior Spec" option in your TLC model to test various operators and cases.
-{{% /note %}}
+{{% /notice %}}
 
 {{% q %}}
 Write an operator that tests if two numbers are not equal.

@@ -11,7 +11,7 @@ TLA+ is a _formal specification language_. It's a tool to design systems and alg
 
 Here's a simple TLA+ specification, representing people trading unique items. Can you find the bug?
 
-```
+```tla
 People == {"alice", "bob"}
 Items == {"ore", "sheep", "brick"}
 (* --algorithm trade

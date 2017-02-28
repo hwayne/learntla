@@ -22,13 +22,15 @@ You call a function with f[x], just like tuples and structs do. That's because t
 
 Similarly, you can write `DOMAIN F` to get the set of values F is defined on, and the `Range(F)` operator we wrote also works for functions.
 
-TKEX write an operator that takes a string (tuple of characters, here) and returns the number of occurrences of each string token.
-
-```
+{{% q %}}
+Write an operator that takes a string (tuple of characters, here) and returns the number of occurrences of each string token.
+{{< ans counter >}}
+```tla
 Counter(str) == [c \in Range(str) |-> Cardinality(n \in 1..Len(str) : str[n] = c)]
 \* TODO substring
 ```
-ENDEX
+{{< /ans >}}
+{{%/q %}}
 
 ## Function Sets
 
@@ -48,30 +50,31 @@ S == {1, 2}
 
 Since each side is a set, you can use normal set expressions on them.
 
-TKEX
-
+{{% q %}}
 For a given p in People and a in Animals, p either "like"s them, "hate"s them, or are "neutral". What is the set of all possible relationships between people, animals, and preferences?
-
+{{< ans pref >}}
 There's a few ways to do this. First, we could chain two function sets.
 
-```
-Pref == [People -> [Animals -> {"like", "hate", "neutral"}]].
+```tla
+Pref == [People -> [Animals -> {"like", "hate", "neutral"}]]
 ```
 
 For `pref \in Pref`, we would call it with `pref[p][a]`. We could also use a set of structures:
 
-```
+```tla
 Pref == [[person: People, animal: Animals] -> {"like", "hate", "neutral"}]
 ```
 
-This tends to be very enwieldy, as we end up having to call that with `pref[[person: p, animal: a]]`. Finally, we could use a tuple:
+This tends to be very awkward, as we end up having to call that with `pref[[person: p, animal: a]]`. Finally, we could use a tuple:
 
-```
+```tla
 Pref == [People \X Animals -> {"like", "hate", "neutral"}]
 ```
 
 We would call pref with `pref[<<p, a>>]`. I've personally found this to be the least cumbersome, and its the way we'll be writing multivariable functions going forward.
-ENDEX
+
+{{< /ans >}}
+{{%/q %}}
 
 {{% q %}}
 `EXTENDS Sequence` gives you the `Seq(S)` operator, which gives you the set of all sequences with a range in S. Unfortunately, you can't actually use this operator, since it will crash TLC. So let's make some better versions. First, write an operator that returns a tuple of N copies of a set. For example `Op(S, 3) == S \X S \X S`.
@@ -130,36 +133,37 @@ variable flags \in {
                    }
 ```
 
-TKEXERCISE
-
+{{% q %}}
 The TLC module provides a "Sort" operator, which takes a sequence of numbers and returns, surprisingly enough, the sorted sequence. This is done in the implementation layer, though, because sorting with the TLA tools is surprisingly tricky.
 
 First, write an operator that determines if a sequence is sorted or not.
 
-```
+
+{{< ans sorted >}}
+```tla
 IsSorted(T) == \A x \in 1..Len(T):
                   \A y \in x..Len(T):
                     x <= y
 ```
-
+{{< /ans >}}
 Next, we'll need a concept of permuting a sequence. The easiest way to that is to first create a permutation of its domain, and then map that over the original sequence. Start by writing an operator that takes some number n and returns all permutations of `<<1, 2, ..., n>>`. 
 
-```
+{{< ans permute>}}
+```tla
 PermutationKey(n) == {key \in [1..n -> 1..n] : Range(key) = 1..n}
 ```
-
+{{< /ans >}}
 Next, write an operator that takes a sequence and returns the corresponding permuted sequences.
-
-```
+{{< ans permutations>}}
+```tla
 Permutations(T) == { [P[x] \in 1..Len(T) |-> T[x]] : P \in PermutationKey(Len(T))}
 ```
-
+{{< /ans >}}
 Now write an operator that takes a sequence and returns the sorted sequence.
-
-```
+{{< ans sort>}}
+```tla
 Sort(T) == CHOOSE t \in Permutations(T) : IsSorted(T)
 ```
-
 Note this solution involves generating all N! permutations of the sequence, which is why the TLC operator outsources to Java.
-
-ENDEX
+{{< /ans >}}
+{{%/q %}}
