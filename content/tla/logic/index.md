@@ -44,12 +44,12 @@ Given a set and an operator, determine whether the operator is commutative over 
 
 {{% ans abelian %}}
 ```tla
-IsCommutative(Op, S) == \A x \in S : 
+IsCommutative(Op(_,_), S) == \A x \in S : 
                           \A y \in S : Op(x,y) = Op(y,x)
 ```
 Alternatively, we could put them on the same line:
 ```tla
-IsCommutative(Op, S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)`
+IsCommutative(Op(_,_), S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)`
 ```
 {{% /ans %}}
 {{%/q %}}
@@ -124,7 +124,7 @@ Given `stockprices` is a tuple of positive integers representing the value of a 
 ```tla
 MaxProfit(stockprices) == 
     LET sp == stockprices \* clean it up a bit
-        TimePair == 1..Len(sp) \X 1..Len(sp)
+        TimePair == (1..Len(sp)) \X (1..Len(sp))
         Profit[p \in TimePair] == sp[p[2]] - sp[p[1]] 
         best == CHOOSE best \in TimePair :
             /\ best[2] > best[1] \* Buy after sell

@@ -85,5 +85,3 @@ end define
 ```
 
 Your `define` block must come before the `begin`.
-
-TK EXAMPLE

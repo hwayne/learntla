@@ -1,10 +1,9 @@
 +++
 title = "Messages"
 weight = 1
-draft = true
 +++
 
-A common question when starting with PlusCal is how to implement message queues. While you rarely have to test that your queue works, you often use them to pass information around your system, and often bugs can appear in the communication layer. So it's useful to know how to simulate them. Here's a few examples.
+A common question when starting with PlusCal is how to implement message queues. While you rarely have to test that your queue works, you often use them to pass information around your system, and often bugs can appear in the communication layer. So it's useful to know how to simulate them.
 
 Let's start by making a simple FIFO queue.
 
@@ -66,7 +65,7 @@ end process;
 
 ### Duplicate messages
 
-Two common cases of messages are "the server accidentally pushes the same message twice" and "the client fails to delete the pulled-message". The former case is doable with `queue \o <<message, message>>`. The latter is doable with an either statement:
+Two common cases of messages are "the server accidentally pushes the same message twice" and "the client fails to delete the pulled message". The former case is doable with `queue \o <<message, message>>`. The latter is doable with an either statement:
 
 ```tla
 macro broken_pop(queue, receiver)
@@ -80,8 +79,36 @@ begin
 end macro
 ```
 
-One example of this is AWS SQS, which guarantees that every message is received at least once, but not necessarily exactly once.
-
 ## Publish/Subscribe
 
 In a pub/sub system, the server pushes the same message to multiple clients. Instead of a single queue, we can assign one queue to each process.
+
+```tla
+variable queue = <<>>,
+         subscribers = 1..3,
+         sub_queues = [s \in subscribers |-> <<>>];
+
+macro publish(message)
+  sub_queues := [ s \in subscribers |-> Append(sub_queues[s], message)];
+begin
+end macro;
+
+process sub \in subscribers
+begin
+\* sub_queues[self] is appropriate queue
+end process;
+```
+
+Sometimes we cannot guarantee that every receiver will receive every message. We can simulate that by pushing to only a subset of the receivers.
+
+```tla
+macro lossy_publish(message)
+begin
+  with to_receive \in SUBSET DOMAIN sub_queues do
+    sub_queues := [ s \in subscribers |-> 
+                      IF s \in to_receive
+                      THEN Append(sub_queues[s], message)
+                      ELSE sub_queues[s]
+                  ];
+end macro;
+```
