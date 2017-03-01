@@ -1,10 +1,4 @@
-+++
-title = "Structure of a Spec"
-weight = 0
-+++
-
-```
-<pluscal options>
+pluscal options
 ---- MODULE name_of_file ----
 (* import statements *)
 EXTENDS <MODULE1>, <M2>, ...
@@ -35,8 +29,8 @@ define
 end define;
 
 macro Macro(<var1>, <var2> ...) 
-    <UnlabeledPlusCal>
 begin
+    <UnlabeledPlusCal>
 end macro;
 
 procedure Procedure(<var1>, <var2>)
@@ -55,6 +49,7 @@ variables v1 = <Exp>, v2 \in <Set>; \* local to process
 begin
     <LabeledPlusCal>
 end process;
+
 process Process \in <Set> \* one process per element
 variables v1 \in <Set>; \* similar processes can choose different elements
 begin
@@ -73,4 +68,4 @@ end process;
 end algorithm; *)
 
 ====
-```
+

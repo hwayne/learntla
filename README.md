@@ -5,8 +5,4 @@ This is the source code used to build the site [Learn TLA+](http://www.learntla.
 1. Clone repo
 2. Get [Hugo](https://gohugo.io/)
 3. Run with `hugo server` (on port 1313)
-
-### Contributing
-
-* Check that nothing explodes.
-* If you're adding or changing code, confirm it works as intended in the TLA+ toolbox.
+4. Yell at me for not putting the Pygments formatter up yet

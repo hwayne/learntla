@@ -27,7 +27,6 @@ Write an operator that takes a string (tuple of characters, here) and returns th
 {{< ans counter >}}
 ```tla
 Counter(str) == [c \in Range(str) |-> Cardinality(n \in 1..Len(str) : str[n] = c)]
-\* TODO substring
 ```
 {{< /ans >}}
 {{%/q %}}
