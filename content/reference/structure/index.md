@@ -1,6 +1,6 @@
 +++
 title = "Structure of a Spec"
-weight = 0
+weight = 2
 +++
 
 {{% code structure %}}
