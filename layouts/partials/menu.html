@@ -122,17 +122,9 @@
 
 
      <section id="footer">
-       {{ range $i, $e := where .Site.Pages "Section" "" }}
-       {{ if (ne $i 0)}} ●{{ end }}<a href= {{ $e.RelPermalink }}>
-         <span>{{ $e.Title }}</span>
-       </a>
-       {{ end }}
-        ● <a href="mailto:h@learntla.com"><span>Contact</span></a>
-        ● <a href="http://www.chicagohomeless.org/"><span>Donate</span></a>
        
        <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a> because I can't do websites to save my life</p>
 
-       <p><br />Written by <a href="http://hillelwayne.com">Hillel Wayne</a>. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
      </section>
   </div>
 </nav>
