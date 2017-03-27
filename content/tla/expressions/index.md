@@ -9,18 +9,18 @@ We've been implicitly using _expressions_ up until now; we just haven't clarifie
 
 We've used these for a while now: /\ is and, \/ is or. We can join expressions with them. The one sublety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an indented junction, TLA+ considers that the start of a subclause. For example,
 
-```
+```tla
 /\ TRUE
- \/ TRUE
+  \/ TRUE
 /\ FALSE \* (T \/ T) /\ F
 
 /\ TRUE
- \/ TRUE
- \/ FALSE \* (T /\ (T \/ F))
+  \/ TRUE
+  \/ FALSE \* (T /\ (T \/ F))
 
 \/ TRUE
 \/ TRUE
- /\ FALSE \* T \/ (T /\ F)
+  /\ FALSE \* T \/ (T /\ F)
 ```
 
 Etc. As a general rule of thumb:
@@ -35,7 +35,7 @@ Generally if you mess this up the spec will crash, so you're unlikely to get a l
 
 Any expression can use LET-IN to add local operators and definitions to just that expression alone.
 
-```
+```tla
 LET IsEven(x) == x % 2 = 0
 IN  IsEven(5)
 
@@ -55,7 +55,7 @@ The whitespace does not matter: we can write `LET IsEven(x) == x % 2 = 0 Five ==
 
 This is exactly what you expect it to be.
 
-```
+```tla
 IsEven(x) == IF x % 2 = 0 
              THEN TRUE
              ELSE FALSE
@@ -67,7 +67,7 @@ As before, alignment doesn't matter, but you should align them anyway unless you
 
 Case is _mostly_ how you'd expect it to act, with one subtle difference.
 
-```
+```tla
 CASE x = 1 -> TRUE
   [] x = 2 -> TRUE
   [] x = 3 -> 7
@@ -76,7 +76,7 @@ CASE x = 1 -> TRUE
 
 OTHER is the default. If none of the cases match and you leave out an OTHER, TLC considers that an error. If _more than one match_, though, TLC will pick one for you and _not_ branch. In other words, the following code
 
-```
+```tla
 CASE TRUE -> FALSE
   [] TRUE -> TRUE
 ```
