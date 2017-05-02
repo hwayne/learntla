@@ -12,5 +12,5 @@ begin
     await x < -1;
     x := x + 1;
   D:
-    assert x # 0;
+    assert x /= 0;
 end process

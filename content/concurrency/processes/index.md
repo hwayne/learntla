@@ -28,7 +28,7 @@ TLC can choose in which order to run the possible steps, where each step corresp
 
 {{% code fail1 %}}
 
-This will fail, as the sequence `C -> A -> B -> D` sets x as `0 + 1 -> 1 - 1 -> 0 * 3 -> 0 # 0`.
+This will fail, as the sequence `C -> A -> B -> D` sets x as `0 + 1 -> 1 - 1 -> 0 * 3 -> 0 /= 0`.
 
 If there are multiple instances of the same process, TLC advances them one at a time.
 
