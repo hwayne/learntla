@@ -55,7 +55,7 @@ What happens if we change `x = 5` to `x \in 1..5`? Retranslate the algorithm and
 These numbers are mostly metadata: they don't effect if the spec is valid or not, but it's helpful to look at them if you need to make optimizations.
 {{% /notice %}}
 
-Let's actually make it fail an invariant, then! Move back to the model overview and add `x # 6` to the "Invariants" section. This, unsurprisingly, says that a core invariant of our program is that x is never 6. This obviously fails when x is five, which is one of the potential initial states. When we rerun the model, we get something like this:
+Let's actually make it fail an invariant, then! Move back to the model overview and add `x /= 6` to the "Invariants" section. This, unsurprisingly, says that a core invariant of our program is that x is never 6. This obviously fails when x is five, which is one of the potential initial states. When we rerun the model, we get something like this:
 
 ![](img/invariant.png)
 

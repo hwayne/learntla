@@ -58,7 +58,7 @@ process client \in some_set
 variable message = Null
 begin
   Poll:
-    await queue # <<>>;
+    await queue /= <<>>;
     message := pop(queue, message);
 end process;
 ```

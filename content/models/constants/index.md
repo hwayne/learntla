@@ -27,7 +27,7 @@ What if we also wanted to vary the solution? For example, we all know that it's 
 ``` tla
 CONSTANT SOLUTION
 \* ...
-assert tower # SOLUTION
+assert tower /= SOLUTION
 ```
 
 And now we can put the new solution in an ordinary assignment:
