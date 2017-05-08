@@ -1,5 +1,6 @@
 +++
 title = "Multistep Invariants"
+weight = 3
 +++
 
 If we want to check an invariant only after a specific action, we can use `assert`. But what if we want to check an invariant only after a specific sequence of actions? For example, if we move forward and then backwards, we should be in the same position as we started. TLA+ doesn't provide a native way to test those, but we can use sequences to write our own.
@@ -70,9 +71,9 @@ define MoveInvariant ==
      []a = <WEST, WEST> -> TRUE
 ```
 
-{% notice note %}
+{{% notice note %}}
 We could have replaced two of the cases with `[] OTHERWISE -> TRUE`, but by enumerating them explicitly, any missed cases will raise an error. Pattern matching! 
-{% /notice %}
+{{% /notice %}}
 
 ### Advanced Cases
 

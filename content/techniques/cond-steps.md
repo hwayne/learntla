@@ -1,5 +1,6 @@
 +++
 title = "Conditional Steps"
+weight = 1
 +++
 
 Sometimes you may want to combine `either` with labels, so that branching steps are possible. For example:
