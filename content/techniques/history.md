@@ -65,10 +65,10 @@ define MoveInvariant ==
     a    == <<recent[2].action, 
               recent[3].action>>
   IN CASE
-       a = <EAST, EAST> -> TRUE
-     []a = <EAST, WEST> -> from = to
-     []a = <WEST, EAST> -> from = to
-     []a = <WEST, WEST> -> TRUE
+       a = <<EAST, EAST>> -> TRUE
+     []a = <<EAST, WEST>> -> from = to
+     []a = <<WEST, EAST>> -> from = to
+     []a = <<WEST, WEST>> -> TRUE
 ```
 
 {{% notice note %}}
@@ -77,8 +77,12 @@ We could have replaced two of the cases with `[] OTHERWISE -> TRUE`, but by enum
 
 ### Advanced Cases
 
-TK
+With a full history, we can also write more sophisticated invariants. For example, in this case, we don't need to compare the last two actions, since we can operate over the whole history:
+
+```
+MoveInvariant == xpos = Len(---) - Len(----)
+```
 
 ## With multiple processes
 
-TK
+This gets more complicated with multiple processes. At that point you want to model both the overall history and the individual process history. TK
