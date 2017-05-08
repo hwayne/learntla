@@ -1,5 +1,6 @@
 +++
 title = "Using Model Values"
+weight = 2
 +++
 
 When should you be using model values instead of strings and numbers? The main advantage of model values is they compare false to everything but themselves. If `M` is a model value, `M = 0`, `M = "0"`, and `M = {0}` are all false. In contrast, `0 = "0"` isn't false. It's an _error in your spec_.
@@ -12,7 +13,6 @@ How do we represent N clients and one server? The following way seems reasonable
 
 ```tla
 process clients \in 1..N
-
 process server = 1
 ```
 
