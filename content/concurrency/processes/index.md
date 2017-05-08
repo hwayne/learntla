@@ -13,7 +13,7 @@ All processes in a behavior must be comparable. So if you write "process = 1", y
 
 You can get a process’s value with "self":
 
-``` tla
+```tla
 process foo = "bar"
 begin
   print self; \* prints "bar"
@@ -48,6 +48,6 @@ A troubling problem here: if we can say "don’t run this step unless X is true"
 
 If a deadlock is _not_ an error in your system, then you can disable that check in the model.
 
-EXERCISE
+## Example
 
-a deadlock
+TK Client/Server
