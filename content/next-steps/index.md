@@ -3,6 +3,8 @@ title = "Next Steps"
 weight = 0
 +++
 
+TK Delete all of this
+
 In a relative sense, we've only covered a small portion of TLA+. I tried to keep this condensed to the parts I personally find most useful, which meant most of TLA+ was left out. After all, we spent more time on functions than _all_ of temporal logic. And we haven't even touched entire topics, like interface refinement, or the proof system, or even what 'temporal logic' means!
 
 To be honest, I don't think I'm the right person to teach those things. I still consider myself a beginner: if you read everything in this guide, you probably now know as much as I do. If you want to learn more, you'll have to dive in. So let's talk about what to read next.
