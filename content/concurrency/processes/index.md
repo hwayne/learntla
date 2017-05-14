@@ -50,4 +50,49 @@ If a deadlock is _not_ an error in your system, then you can disable that check 
 
 ## Example
 
-TK Client/Server
+Let's model a very simple deadlock system: the "Dining Philosophers" problem. We set it up as follows:
+
+* There are N philosophers sitting around a circular table.
+* Between every two philosophers is a fork, with N forks in all.
+* A philosopher needs to pick up both adjacent forks to eat. As soon as they finish eating, they put down both forks.
+* A philosopher can only pick up one fork at a time.
+* If a philosopher picks up a fork and does not have a second, they will hold the first fork while waiting for the second.
+
+In less poetic terms, each process shares two resources with two other processes, one for each 'adjacent' one. Here's the equivalent PlusCal model:
+
+```tla
+EXTENDS Integers, Sequences, TLC
+CONSTANTS NumPhilosophers, NULL
+ASSERT NumPhilosphers \in Int
+NP == NumPhilosophers
+
+(* --algorithm dining_philosophers
+
+variables forks = [fork \in 1..NP |-> NULL]
+
+define
+LeftFork(p) == p
+RightFork(p) == IF p = NP THEN 1 ELSE p + 1
+
+AvailableForks(p) ==
+  { x \in {LeftFork(p), RightFork(p)}: forks[x] = NULL }
+
+end define;
+process philosopher \in 1..NP
+variables hungry = TRUE;
+begin P:
+  while hungry do
+    with fork \in AvailableForks(self) do
+      forks[fork] := self;
+    end with;
+    Eat:
+      if forks[LeftFork(self)] = self /\ forks[RightFork(self)] = self then
+        hungry := FALSE;
+        forks[LeftFork(self)] := NULL ||
+        forks[RightFork(self)] := NULL;
+      end if;
+  end while;
+end process;
+end algorithm; *)
+
+```
