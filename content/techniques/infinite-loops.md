@@ -39,3 +39,14 @@ There's an infinite number of possible states here: `x = 1`, `x = 2`, etc. The n
 
 ```
 variable x = 0, time = 0;
+begin Adder:
+  while time < 10 do
+    x := x + 1;
+    time := time + 1;
+  end while
+end algorithm;
+```
+
+However, this can quickly get untenable. Another options is to use the regular loops and switch to a depth-first search. This lets you force the model to terminate a finite number of steps.
+![](../img/depth-first.png)
+One pitfall with depth-first search is that your model might have an error, but you don't reach it in the specified time.
