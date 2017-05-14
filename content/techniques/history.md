@@ -17,7 +17,7 @@ begin
       or
         xpos := xpos - 1
       end either;
-      t := t - 1;
+      t := t + 1;
     end while;
 ```
 
@@ -40,14 +40,14 @@ begin
   Move:
     while t < 10 do
       either 
-        xpos := xpos + 1
-        action := EAST
+        xpos := xpos + 1;
+        action := EAST;
       or
-        xpos := xpos - 1
-        action := WEST
+        xpos := xpos - 1;
+        action := WEST;
       end either;
-      actions := Append(actions, Action(acton, xpos))
-      t := t - 1;
+      actions := Append(actions, Action(action, xpos));
+      t := t + 1;
     end while;
 end algorithm; *)
 ```
@@ -59,7 +59,7 @@ define MoveInvariant ==
   IF Len(actions) > 2 THEN \* require two after init
   LET 
     len == Len(actions)
-    recent == Subseq(actions, len-3, len)
+    recent == SubSeq(actions, len-2, len)
     from == recent[1].state
     to   == recent[3].state
     a    == <<recent[2].action, 
@@ -69,6 +69,8 @@ define MoveInvariant ==
      []a = <<EAST, WEST>> -> from = to
      []a = <<WEST, EAST>> -> from = to
      []a = <<WEST, WEST>> -> TRUE
+  ELSE TRUE
+end define;
 ```
 
 {{% notice note %}}
@@ -80,9 +82,12 @@ We could have replaced two of the cases with `[] OTHERWISE -> TRUE`, but by enum
 With a full history, we can also write more sophisticated invariants. For example, in this case, we don't need to compare the last two actions, since we can operate over the whole history:
 
 ```
-MoveInvariant == xpos = Len(---) - Len(----)
+MoveInvariant ==
+  LET count(token) ==
+    Len(SelectSeq(actions, LAMBDA y: y.action = token))
+  IN xpos = count(EAST) - count(WEST)
 ```
 
-## With multiple processes
+### Limitations
 
-This gets more complicated with multiple processes. At that point you want to model both the overall history and the individual process history. TK
+Multistep invariants get clunky when you have multiple processes, since you have to store the state, action, and process. Additionally, it gets less useful when applying invariants to complex states.

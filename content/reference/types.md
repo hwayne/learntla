@@ -103,8 +103,8 @@ Tail(T) = <<"b", "c", "d">>
 
 <<"e">> \o T = <<"e", "a", "b", "c", "d">>
 Append(T, "e") = <<"a", "b", "c", "d", "e">>
-Subset(T, 2, 3) = <<"b", "c">>
-SelectSeq(T, lambda x: x \in {"a", "d"}) = <<"a", "d">>
+SubSeq(T, 2, 3) = <<"b", "c">>
+SelectSeq(T, LAMBDA x: x \in {"a", "d"}) = <<"a", "d">>
 ```
 
 ## Structures
