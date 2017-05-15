@@ -9,6 +9,9 @@ Whenever we write invariants, we're saying "for an arbitrary state, this will ne
 
 We call these properties _Liveness_. And to answer specify these temporal properties, we use a few new operators.
 
+{{% notice note %}}
+ TODO
+{{% /notice %}}
 ### `[]`
 
 `[]` is probably the most important operator and the one we're least likely to use. `[]` means _always_: `[]P` means that P is true for all states.
@@ -19,7 +22,7 @@ Basically, an invariant. When you put `P` in the invariant box, TLC interprets t
 
 `<>` means _eventually_: `<>P` means that for every possible behavior, at least one state has P as true. For example, the following code is wrong under the temporal property `<>(x = 1)`
 
-``` tla
+```tla
 (* --algorithm example
 variables x = 3
 begin
@@ -52,3 +55,9 @@ As with before, `<>(x = 1)` is not true: we can do `4 -> 2 -> 0`. But the tempor
 ### `<>[]`
 
 `<>[]` means _stays as_: `<>[]P` says that at some point P becomes true and then **stays** true. If your program terminates, the final state has to have P as true. Note that P can switch between true and false, as long as it eventually becomes permanently true.
+
+## Example
+
+Let's go back to the dining philosopher's algorithm we wrote in the last chapter. Here's what the code looks like with the release:
+
+TODO
