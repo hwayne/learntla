@@ -63,7 +63,7 @@ In less poetic terms, each process shares two resources with two other processes
 ```tla
 EXTENDS Integers, Sequences, TLC
 CONSTANTS NumPhilosophers, NULL
-ASSERT NumPhilosphers \in Int
+ASSERT NumPhilosphers \in Int \* TK
 NP == NumPhilosophers
 
 (* --algorithm dining_philosophers
@@ -94,5 +94,8 @@ begin P:
   end while;
 end process;
 end algorithm; *)
-
 ```
+
+If we set `NumPhilosophers` to 1, this works. If we set it to 2, though, the model deadlocks. Each philosopher can pick up their left fork, leading to a case where every philosopher has exactly one fork and no others are available. Since each will only release their fork once they eat, and since they need two forks to eat, the entire system stalls out. We can 'fix' this by providing a timeout, but that can lead to a 'livelock' problem, which we'll cover in the next chapter. However, it _does_ fix the deadlock, so let's put that down here:
+
+TK
