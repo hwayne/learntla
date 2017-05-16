@@ -87,7 +87,7 @@ elsif x = 6 then
   skip;
 else
   skip;
-endif;
+end if;
 ```
 
 ### While
