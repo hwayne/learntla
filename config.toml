@@ -7,4 +7,4 @@ PygmentsCodeFences = false
 
 [Params]
   Author = "Hillel Wayne"
-  menu = ["introduction", "pluscal", "tla", "models", "concurrency", "temporal-logic", "reference", "techniques"]
+  menu = ["introduction", "pluscal", "tla", "models", "concurrency", "temporal-logic", "techniques", "reference"]
