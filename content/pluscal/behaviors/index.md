@@ -98,4 +98,4 @@ To give a better sense of where we're going, here's how we could write it instea
 
 {{% code gates2 %}}
 
-
+The `flags \in [1..3 -> BOOLEAN]` bit is called a [function set](/tla/functions). We'll be covering it later.
