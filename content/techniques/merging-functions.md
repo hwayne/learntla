@@ -1,5 +1,6 @@
 +++
 title = "Merging Functions"
+weight = 1.5
 +++
 
 In addition to general debugging tools, extending TLC adds two function operators:

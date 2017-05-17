@@ -59,7 +59,7 @@ Here's the full code, along with the ability to trade:
 In this one, we're less interested in arbitrage between vendors as we are between trading. If we run the model, it will pass. Looking back, we have a problem with our model: since there are only two items available, all trades will just cause you to lose an item. We can prevent that kind of error by adding a guard on trades:
 
 ``` tla
-ASSUME ValidTrades # {}
+ASSUME ValidTrades /= {}
 ```
 
 So we need to run this with at least three items. Since vendor arbitrage doesn't matter, we can drop to one vendor to speed up our checks. When we rerun, we get a spec failure:

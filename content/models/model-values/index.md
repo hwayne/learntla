@@ -43,6 +43,6 @@ variables x \in Foos, y \in Foos;
 
 If Foos is the model set `{f1, f2, f3}`, that's nine possible starting states. To a rough approximation, your program will take nine times as long to finish as it would if `Foos` just had one element. That's comprehensive, but not always necessary.
 
-_Symmetry sets_ are one possible optimization you can make here. It tells TLC to ignore any states that are just permutations of model values of an existing state. `<<t2, t1>> = <<t3, t1>> = <<t2, t3>> ...`, and `<<t1, t1>> = <<t2, t2>> = <<t3, t3>>`. In this case, there are only two initial states: `x = y` and `x # y`.
+_Symmetry sets_ are one possible optimization you can make here. It tells TLC to ignore any states that are just permutations of model values of an existing state. `<<t2, t1>> = <<t3, t1>> = <<t2, t3>> ...`, and `<<t1, t1>> = <<t2, t2>> = <<t3, t3>>`. In this case, there are only two initial states: `x = y` and `x /= y`.
 
 In most cases, this is a safe optimization: all you care about are the similiarities and differences of values, not the exact values themselves. There are some cases where this can cause problems, though. If you ever use a model value in an ordinary assignment, it's possible to miss states that could violate safety invariants. And as we'll see later, combining temporal properties and symmetry sets is almost always a bad idea.

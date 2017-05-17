@@ -36,7 +36,7 @@ Remember, you can use the "No Behavior Spec" option in your TLC model to test va
 Write an operator that tests if two numbers are not equal.
 
 {{% ans neq %}}
-`Neq(a,b) == a # b` works, as does `Neq(a,b) == ~(a = b)`.
+`Neq(a,b) == a /= b` works, as does `Neq(a,b) == ~(a = b)`.
 {{% /ans %}}
 {{%/q %}}
 

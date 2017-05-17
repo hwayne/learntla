@@ -7,6 +7,6 @@ begin
   B:
     x := 0;
   C:
-    assert x # 2;
+    assert x /= 2;
 end process
 end algorithm; *)

@@ -10,8 +10,8 @@ end define;
 
 begin
 while TRUE do
-  assert tower[3] # <<1, 2, 3>>;
-  with from \ \in {x \in D : tower[x] # <<>>},
+  assert tower[3] /= <<1, 2, 3>>;
+  with from \ \in {x \in D : tower[x] /= <<>>},
        to \in {
                 y \in D : 
                   \/ tower[y] = <<>>

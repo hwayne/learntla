@@ -14,6 +14,6 @@ begin
 end process
 ```
 
-How do we assert the variant "the sum of x between the two processes is not 4?" With a single process algorithm, we could write `x # 4`. But to do the same with multiple processes, we have to let the PlusCal abstraction leak.
+How do we assert the variant "the sum of x between the two processes is not 4?" With a single process algorithm, we could write `x /= 4`. But to do the same with multiple processes, we have to let the PlusCal abstraction leak.
 
-When we translate an algorithm, TLA+ will create all of the corresponding variables. When we have multiple processes, TLA+ will instead create a function with a domain on the process identifiers and the range the actual values of x per process. So instead of having for example `x \in 1..2`, we instead have `x == [ProcSet -> 1..2]`. So in this case, the appropriate invariant is `x[1] + x[2] # 4`.
+When we translate an algorithm, TLA+ will create all of the corresponding variables. When we have multiple processes, TLA+ will instead create a function with a domain on the process identifiers and the range the actual values of x per process. So instead of having for example `x \in 1..2`, we instead have `x == [ProcSet -> 1..2]`. So in this case, the appropriate invariant is `x[1] + x[2] /= 4`.

@@ -5,13 +5,13 @@ EXTENDS TLC, Sequences, Integers
 variables tower = <<<<1, 2, 3>>, <<>>, <<>>>>, 
 
 define 
-  D == DOMAIN tower;
+  D == DOMAIN tower
 end define;
 
 begin
 while TRUE do
-  assert tower[3] # <<1, 2, 3>>;
-  with from \in {x \in D : tower[x] # <<>>},
+  assert tower[3] /= <<1, 2, 3>>;
+  with from \in {x \in D : tower[x] /= <<>>},
        to \in {
                 y \in D : 
                   \/ tower[y] = <<>>

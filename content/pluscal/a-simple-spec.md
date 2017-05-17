@@ -73,7 +73,7 @@ I assume that you're familiar with other programming languages. To make modeling
 logic | operator | `TRUE` | `FALSE`
 ------|--------|--------|-------
 equal | `=` | `1 = 1` | `1 = 2`
-not equal | `#` | `1 # 2` | `1 # 1`
+not equal | `/=` | `1 /= 2` | `1 /= 1`
 and | `/\` | `TRUE /\ TRUE` | `TRUE /\ FALSE`
 or | `\/` | `FALSE \/ TRUE` | `FALSE \/ FALSE`
 not | `~` | `~FALSE` | `~TRUE`
@@ -87,7 +87,7 @@ elsif x = 6 then
   skip;
 else
   skip;
-endif;
+end if;
 ```
 
 ### While

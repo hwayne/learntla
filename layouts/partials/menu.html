@@ -38,7 +38,6 @@
       {{ $value := $.Scratch.Get "currentItem" }}
       {{ $first := (index $value 0).Page }}
 
-      {{ if not (isset $first.Params "reference")}}
       <li class="dd-item {{ if eq $page.RelPermalink $first.RelPermalink }}active{{ end }} {{if in $page.RelPermalink $first.RelPermalink }}parent{{ end }}" data-nav-id="{{ $first.RelPermalink }}">
         <a href="{{ $first.RelPermalink }}">
           <span>
@@ -65,51 +64,6 @@
         </ul>
         {{ end }}
       </li>
-      {{ end }}
-      {{ end }}
-      {{ end }}
-
-      <li class="dd-item divider">
-        <span>
-        Reference
-        </span>
-        </li>
-
-      {{ range $i, $key := $menuItems }}
-      {{ if ne $key "" }}
-
-      {{ $.Scratch.Set "currentItem" (index $page.Site.Sections $key) }}
-      {{ $value := $.Scratch.Get "currentItem" }}
-      {{ $first := (index $value 0).Page }}
-
-      {{ if isset $first.Params "reference" }}
-      <li class="dd-item {{ if eq $page.RelPermalink $first.RelPermalink }}active{{ end }} {{if in $page.RelPermalink $first.RelPermalink }}parent{{ end }}" data-nav-id="{{ $first.RelPermalink }}">
-        <a href="{{ $first.RelPermalink }}">
-          <span>
-            {{ if isset $first.Params "icon" }}
-              {{ printf $first.Params.icon | safeHTML }}
-            {{ end }}
-             {{ $first.Title }}
-            {{ if $page.Site.Params.showVisitedLinks}}
-              <i class="fa fa-check read-icon"></i>
-             {{ end }}
-           </span>
-        </a>
-        {{ if gt $value.Len 1}}
-        <ul>
-          {{ range $k, $p := $value }}
-          {{ if gt $k 0 }}
-            <li class="dd-item {{ if eq $page.RelPermalink $p.Page.RelPermalink }}active{{ end }}" data-nav-id="{{ $p.Page.RelPermalink }}">
-              <a href="{{ $p.Page.RelPermalink }}">
-                <span>{{ $p.Page.Title }}    {{ if $page.Site.Params.showVisitedLinks}}  <i class="fa fa-check read-icon">  {{ end }} </i></span>
-              </a>
-            </li>
-          {{ end }}
-          {{ end }}
-        </ul>
-        {{ end }}
-      </li>
-      {{ end }}
       {{ end }}
       {{ end }}
     </ul>
