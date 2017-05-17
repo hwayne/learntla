@@ -9,9 +9,6 @@ Whenever we write invariants, we're saying "for an arbitrary state, this will ne
 
 We call these properties _Liveness_. And to answer specify these temporal properties, we use a few new operators.
 
-{{% notice note %}}
- TODO
-{{% /notice %}}
 ### `[]`
 
 `[]` is probably the most important operator and the one we're least likely to use. `[]` means _always_: `[]P` means that P is true for all states.
@@ -60,4 +57,39 @@ As with before, `<>(x = 1)` is not true: we can do `4 -> 2 -> 0`. But the tempor
 
 Let's go back to the dining philosopher's algorithm we wrote in the last chapter. Here's what the code looks like with the release:
 
-TODO
+```
+fair process philosopher \in 1..NP
+variables hungry = TRUE;
+begin P:
+  while hungry do
+    either
+     with fork \in AvailableForks(self) do
+       forks[fork] := self;
+     end with;
+    or
+     await AvailableForks(self) = {};
+     with fork \in HeldForks(self) do
+      forks[fork] := NULL;
+     end with;
+    end either;
+    Eat:
+      if Cardinality(HeldForks(self)) = 2 then
+        hungry := FALSE;
+        forks[LeftFork(self)] := NULL ||
+        forks[RightFork(self)] := NULL;
+      end if;
+  end while;
+end process;
+```
+
+The only change to the code is that we made the process fair, so as to avoid stuttering. We can guarantee in here that the system never deadlocks; at any point, at least one philosopher can do _something_. However, that's not quite enough: can we guarantee that every philosopher finishes eating? Normal invariants aren't enough to model that. But we can do that with a temporal operator:
+
+```
+<>(\A p \in 1..NP: ~hungry[p])
+```
+
+Checks that at some point in every behavior, every philosopher is not hungry. However, this doesn't check they _remain_ not hungry, and if something flips them back, it'd still be a valid spec. We could instead use `[]<>` to get that extra guarantee, but there's no need for that here. If we put that into our temporal properties to check and run the spec, we get a very long error:
+
+![](livelock.png)
+
+Each philosopher can put their fork down and immediately pick it back up again, which prevents anybody else from having two forks. This is a _livelock_. How could rewrite the algorithm to prevent livelocks? Does your solution scale to three or more philosophers?

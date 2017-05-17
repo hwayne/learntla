@@ -61,9 +61,9 @@ Let's model a very simple deadlock system: the "Dining Philosophers" problem. We
 In less poetic terms, each process shares two resources with two other processes, one for each 'adjacent' one. Here's the equivalent PlusCal model:
 
 ```tla
-EXTENDS Integers, Sequences, TLC
+EXTENDS Integers, Sequences, TLC, FiniteSets
 CONSTANTS NumPhilosophers, NULL
-ASSERT NumPhilosphers \in Int \* TK
+ASSUME NumPhilosophers > 0
 NP == NumPhilosophers
 
 (* --algorithm dining_philosophers
@@ -74,8 +74,11 @@ define
 LeftFork(p) == p
 RightFork(p) == IF p = NP THEN 1 ELSE p + 1
 
+HeldForks(p) ==
+  { x \in {LeftFork(p), RightFork(p)}: forks[x] = p}
+
 AvailableForks(p) ==
-  { x \in {LeftFork(p), RightFork(p)}: forks[x] = NULL }
+  { x \in {LeftFork(p), RightFork(p)}: forks[x] = NULL}
 
 end define;
 process philosopher \in 1..NP
@@ -86,7 +89,7 @@ begin P:
       forks[fork] := self;
     end with;
     Eat:
-      if forks[LeftFork(self)] = self /\ forks[RightFork(self)] = self then
+      if Cardinality(HeldForks(self)) = 2 then
         hungry := FALSE;
         forks[LeftFork(self)] := NULL ||
         forks[RightFork(self)] := NULL;
@@ -98,4 +101,29 @@ end algorithm; *)
 
 If we set `NumPhilosophers` to 1, this works. If we set it to 2, though, the model deadlocks. Each philosopher can pick up their left fork, leading to a case where every philosopher has exactly one fork and no others are available. Since each will only release their fork once they eat, and since they need two forks to eat, the entire system stalls out. We can 'fix' this by providing a timeout, but that can lead to a 'livelock' problem, which we'll cover in the next chapter. However, it _does_ fix the deadlock, so let's put that down here:
 
-TK
+```
+process philosopher \in 1..NP
+variables hungry = TRUE;
+begin P:
+  while hungry do
+    either
+     with fork \in AvailableForks(self) do
+       forks[fork] := self;
+     end with;
+    or
+     await AvailableForks(self) = {};
+     with fork \in HeldForks(self) do
+      forks[fork] := NULL;
+     end with;
+    end either;
+    Eat:
+      if Cardinality(HeldForks(self)) = 2 then
+        hungry := FALSE;
+        forks[LeftFork(self)] := NULL ||
+        forks[RightFork(self)] := NULL;
+      end if;
+  end while;
+end process;
+```
+
+Note the TODO

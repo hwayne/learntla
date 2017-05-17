@@ -3,7 +3,7 @@ title = "Using Temporal Properties"
 weight = 2
 +++
 
-Most often, you're not interested in checking temporal properties. In the cases you are, you can often express what you want through invariants. Sometimes, though, you don't have any other option. Here are some things to watch out for.
+Most often, you're not interested in checking temporal properties. If you are, though, here are some things to watch out for.
 
 ### Liveness is Slow
 
@@ -17,7 +17,7 @@ An especially important one to watch out for are symmetric models. TLC can check
 
 ### Stuttering and Fairness
 
-If you want to check that a system terminates, add `PlusCal options (terminate)` in a comment to your module. If you run into stuttering problems in a system that you don't expect to terminate, add `PlusCal options (wf)`. If either of these are the base, I recommend reading the official documentation to understand why this works.
+Regular processes can stutter. Sometimes this is part of what you expect in your system- maybe you can't rely on the message queue always being available. If not, though, you need to explicitly use `fair process`.
 
 ## Recommendations
 
