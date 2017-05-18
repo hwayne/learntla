@@ -21,6 +21,8 @@ How do we get around this? What we want is something called _fairness_: the prop
 
 {{% code fairness %}}
 
+Confirm this works as expected.
+
 {{% notice note %}}
 There's a way to enforce fairness for a single process app, but it's a bit finicky so I'm leaving it out.
 {{% /notice %}}

@@ -3,7 +3,7 @@ title = "Using Model Values"
 weight = 2
 +++
 
-When should you be using model values instead of strings and numbers? The main advantage of model values is they compare false to everything but themselves. If `M` is a model value, `M = 0`, `M = "0"`, and `M = {0}` are all false. In contrast, `0 = "0"` isn't false. It's an _error in your spec_.
+When should you be using model values instead of strings and numbers? The main advantage of model values is they compare false to everything but themselves. If `M` is a model value, `M = 0`, `M = "0"`, and `M = {0}` are all false. In contrast, `0 = "0"` isn't false. It's an error in your spec.
 
 In theory, you'll never want to compare two incomparables. In practice, we sometimes need to work around limitations in TLA+. As a good rule of thumb, if you're not directly processing strings as part of your system, **prefer model values to strings**.
 
