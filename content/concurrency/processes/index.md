@@ -7,11 +7,11 @@ Our old code ran everything in a single process- that’s the begin block. If we
 
 {{% code processes %}}
 
-All processes must be assigned a value. There are two ways to do this. First, you can say "process = foo", which will create one copy of that process. Or you could say "process \in bar", in which case it will create one copy of that process for each element in bar. So if you write `process \in {1, 3, 5}`, you have three copies of that process running your behavior. 
+All processes must be assigned a value. There are two ways to do this. First, you can say `process = foo`, which will create one copy of that process. Or you could say `process \in bar`, in which case it will create one copy of that process for each element in `bar`. So if you write `process \in {1, 3, 5}`, you have three copies of that process running your behavior. 
 
-All processes in a behavior must be comparable. So if you write "process = 1", you can’t have a second defined as "process bar = ‘bar’". 1 and ‘bar’ are not comparable. This is a case where model values and model sets can be very useful, since every model value is comparable to everything else (it's unequal to everything except itself).
+All processes in a behavior must be comparable. So if you write `process = 1`, you can’t have a second defined as `process bar = 'bar'`. 1 and ‘bar’ are not comparable. This is a case where model values and model sets can be very useful, since every model value is comparable to everything else (it's unequal to everything except itself).
 
-You can get a process’s value with "self":
+You can get a process’s value with `self`:
 
 ```tla
 process foo = "bar"
@@ -101,7 +101,7 @@ end algorithm; *)
 
 If we set `NumPhilosophers` to 1, this works. If we set it to 2, though, the model deadlocks. Each philosopher can pick up their left fork, leading to a case where every philosopher has exactly one fork and no others are available. Since each will only release their fork once they eat, and since they need two forks to eat, the entire system stalls out. We can 'fix' this by providing a timeout, but that can lead to a 'livelock' problem, which we'll cover in the next chapter. However, it _does_ fix the deadlock, so let's put that down here:
 
-```
+```tla
 process philosopher \in 1..NP
 variables hungry = TRUE;
 begin P:
@@ -125,5 +125,3 @@ begin P:
   end while;
 end process;
 ```
-
-Note the TODO

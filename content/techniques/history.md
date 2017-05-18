@@ -29,7 +29,7 @@ CONSTANTS EAST, WEST, INIT
 
 Action(action, state) == [action |-> action, state |-> state]
 
-(*--algorithm alg
+(* --algorithm alg
 variables 
   xpos = 0, 
   t = 0,
@@ -81,7 +81,7 @@ We could have replaced two of the cases with `[] OTHERWISE -> TRUE`, but by enum
 
 With a full history, we can also write more sophisticated invariants. For example, in this case, we don't need to compare the last two actions, since we can operate over the whole history:
 
-```
+```tla
 MoveInvariant ==
   LET count(token) ==
     Len(SelectSeq(actions, LAMBDA y: y.action = token))

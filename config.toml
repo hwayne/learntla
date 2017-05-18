@@ -3,7 +3,7 @@ baseurl = "http://learntla.com"
 title = "Learn TLA"
 theme = "hugo-theme-learn"
 googleAnalytics = "UA-90708265-1"
-PygmentsCodeFences = false
+PygmentsCodeFences = true
 
 [Params]
   Author = "Hillel Wayne"

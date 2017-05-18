@@ -1,6 +1,6 @@
 +++
 title = "Labels"
-weight = 2
+weight = 3
 +++
 
 ### Valid Labels
@@ -47,7 +47,7 @@ end either;
 Foo: \* Necessary because of the A label
 ```
 
-- You can not put labels in a `with` statement.
+- You cannot put labels in a `with` statement.
 
 ```
 with x \in {1, 2} do
@@ -68,7 +68,7 @@ Bar:
   x := 2; \* INVALID
 ```
 
-Sometimes this can cause issues: for example, switching two variables, or assigning to different records of the same structure. In these cases you can use `||` to chain assignments: `x := y || y := x;`
+Sometimes this can cause issues: for example, switching two variables, or assigning to different records of the same structure. In these cases you can use `||` to chain assignments: `x := y || y := x;`.
 
 ### Optimization
 

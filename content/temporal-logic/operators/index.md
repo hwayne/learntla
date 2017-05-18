@@ -7,13 +7,11 @@ weight = 1
 
 Whenever we write invariants, we're saying "for an arbitrary state, this will never happen." And this has been very useful. But safety only tells us that bad things won't happen. Sometimes, we want to ask a whether good things _do_ happen. Will the trade eventually happen? Does every thread at some point get priority? Does our algorithm _finish_?
 
-We call these properties _Liveness_. And to answer specify these temporal properties, we use a few new operators.
+We call these properties _Liveness_. To specify these temporal properties, we use a few new operators.
 
 ### `[]`
 
-`[]` is probably the most important operator and the one we're least likely to use. `[]` means _always_: `[]P` means that P is true for all states.
-
-Basically, an invariant. When you put `P` in the invariant box, TLC interprets that as the temporal property `[]P`. The only difference is that TLC is hyper-optimized to handle invariants, so the entire invariants box is basically a convenience thing. So while `[]` implicitly powers all of our invariants, we almost never need to write it explicitly.
+`[]P` means that P is true for all states. In other words, an invariant. When you put `P` in the invariant box, TLC interprets that as the temporal property `[]P`. The only difference is that TLC is hyper-optimized to handle invariants, so the entire invariants box is basically a convenience thing. So while `[]` implicitly powers all of our invariants, we almost never need to write it explicitly.
 
 ### `<>`
 
@@ -57,7 +55,7 @@ As with before, `<>(x = 1)` is not true: we can do `4 -> 2 -> 0`. But the tempor
 
 Let's go back to the dining philosopher's algorithm we wrote in the last chapter. Here's what the code looks like with the release:
 
-```
+```tla
 fair process philosopher \in 1..NP
 variables hungry = TRUE;
 begin P:
@@ -84,7 +82,7 @@ end process;
 
 The only change to the code is that we made the process fair, so as to avoid stuttering. We can guarantee in here that the system never deadlocks; at any point, at least one philosopher can do _something_. However, that's not quite enough: can we guarantee that every philosopher finishes eating? Normal invariants aren't enough to model that. But we can do that with a temporal operator:
 
-```
+```tla
 <>(\A p \in 1..NP: ~hungry[p])
 ```
 
