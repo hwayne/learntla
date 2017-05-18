@@ -32,13 +32,13 @@ Our solution works, but misses the business case: we don't want to not make the 
 
 {{% code await_macro %}}
 
-If we run this, though, we get a deadlock. That's because all of our processes are waiting for the limit to refresh... which we never actually coded. Here's one way of doing this:
+If we run this, though, we get a deadlock. That's because all of our processes are waiting for the limit to refresh, which we never actually coded. Here's one way of doing this:
 
 {{% code limit_process %}}
 
 If we add that, the spec passes as normal.
 
-### A Complication
+### Asynchronous Workers
 
 Let's add a complication: all of the processes are running on different workers, so they don't automatically know the number of calls made. In order to avoid going past the limit, we need to share that information, which takes time. One way we can do this is by having each process query a central cache that only move forward if there's enough calls remaining. One representation would be
 
@@ -46,7 +46,7 @@ Let's add a complication: all of the processes are running on different workers,
 
 When we run this, we see it fails, as between the get and the request another process can make a call. If we want to resolve this we need some form of locking or priority. This will work, but it also explodes the diameter. Every process needs to wait on every other process, even when there's plenty of calls to go around. We should instead look for a more optimized way of handling this issue.
 
-### Preassignment
+### Sempahores
 
 One solution we can use is to reserve calls: when a process checks that there are calls remaining, it reserves N calls that are considered made in our cache but not in the API endpoint. Then, once we make the appropriate calls, we return the necessary reserves.
 

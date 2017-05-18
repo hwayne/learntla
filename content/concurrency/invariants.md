@@ -1,6 +1,6 @@
 +++
 title = "Concurrent Invariants"
-weight = 3.5
+weight = 4
 +++
 
 Sometimes, we want to enforce invariants _between_ processes. For example, only one thread may have a lock at the same time, or the total values across all processes must be less than a certain threshold. Here's one example:

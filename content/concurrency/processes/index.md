@@ -7,13 +7,13 @@ Our old code ran everything in a single process- that’s the begin block. If we
 
 {{% code processes %}}
 
-All processes must be assigned a value. There are two ways to do this. First, you can say "process = foo", which will create one copy of that process. Or you could say "process \in bar", in which case it will create one copy of that process for each element in bar. So if you write `process \in {1, 3, 5}`, you have three copies of that process running your behavior. 
+All processes must be assigned a value. There are two ways to do this. First, you can say `process = foo`, which will create one copy of that process. Or you could say `process \in bar`, in which case it will create one copy of that process for each element in `bar`. So if you write `process \in {1, 3, 5}`, you have three copies of that process running your behavior. 
 
-All processes in a behavior must be comparable. So if you write "process = 1", you can’t have a second defined as "process bar = ‘bar’". 1 and ‘bar’ are not comparable. This is a case where model values and model sets can be very useful, since every model value is comparable to everything else (it's unequal to everything except itself).
+All processes in a behavior must be comparable. So if you write `process = 1`, you can’t have a second defined as `process bar = 'bar'`. 1 and ‘bar’ are not comparable. This is a case where model values and model sets can be very useful, since every model value is comparable to everything else (it's unequal to everything except itself).
 
-You can get a process’s value with "self":
+You can get a process’s value with `self`:
 
-``` tla
+```tla
 process foo = "bar"
 begin
   print self; \* prints "bar"
@@ -48,6 +48,80 @@ A troubling problem here: if we can say "don’t run this step unless X is true"
 
 If a deadlock is _not_ an error in your system, then you can disable that check in the model.
 
-EXERCISE
+## Example
 
-a deadlock
+Let's model a very simple deadlock system: the "Dining Philosophers" problem. We set it up as follows:
+
+* There are N philosophers sitting around a circular table.
+* Between every two philosophers is a fork, with N forks in all.
+* A philosopher needs to pick up both adjacent forks to eat. As soon as they finish eating, they put down both forks.
+* A philosopher can only pick up one fork at a time.
+* If a philosopher picks up a fork and does not have a second, they will hold the first fork while waiting for the second.
+
+In less poetic terms, each process shares two resources with two other processes, one for each 'adjacent' one. Here's the equivalent PlusCal model:
+
+```tla
+EXTENDS Integers, Sequences, TLC, FiniteSets
+CONSTANTS NumPhilosophers, NULL
+ASSUME NumPhilosophers > 0
+NP == NumPhilosophers
+
+(* --algorithm dining_philosophers
+
+variables forks = [fork \in 1..NP |-> NULL]
+
+define
+LeftFork(p) == p
+RightFork(p) == IF p = NP THEN 1 ELSE p + 1
+
+HeldForks(p) ==
+  { x \in {LeftFork(p), RightFork(p)}: forks[x] = p}
+
+AvailableForks(p) ==
+  { x \in {LeftFork(p), RightFork(p)}: forks[x] = NULL}
+
+end define;
+process philosopher \in 1..NP
+variables hungry = TRUE;
+begin P:
+  while hungry do
+    with fork \in AvailableForks(self) do
+      forks[fork] := self;
+    end with;
+    Eat:
+      if Cardinality(HeldForks(self)) = 2 then
+        hungry := FALSE;
+        forks[LeftFork(self)] := NULL ||
+        forks[RightFork(self)] := NULL;
+      end if;
+  end while;
+end process;
+end algorithm; *)
+```
+
+If we set `NumPhilosophers` to 1, this works. If we set it to 2, though, the model deadlocks. Each philosopher can pick up their left fork, leading to a case where every philosopher has exactly one fork and no others are available. Since each will only release their fork once they eat, and since they need two forks to eat, the entire system stalls out. We can 'fix' this by providing a timeout, but that can lead to a 'livelock' problem, which we'll cover in the next chapter. However, it _does_ fix the deadlock, so let's put that down here:
+
+```tla
+process philosopher \in 1..NP
+variables hungry = TRUE;
+begin P:
+  while hungry do
+    either
+     with fork \in AvailableForks(self) do
+       forks[fork] := self;
+     end with;
+    or
+     await AvailableForks(self) = {};
+     with fork \in HeldForks(self) do
+      forks[fork] := NULL;
+     end with;
+    end either;
+    Eat:
+      if Cardinality(HeldForks(self)) = 2 then
+        hungry := FALSE;
+        forks[LeftFork(self)] := NULL ||
+        forks[RightFork(self)] := NULL;
+      end if;
+  end while;
+end process;
+```

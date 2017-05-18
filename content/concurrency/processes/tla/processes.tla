@@ -4,13 +4,13 @@
 (* --algorithm algorithm_name
 variables global_variables
 
-process process_name = foo
+process p_name = foo
 variables local_variables
 begin
   \* pluscal code 
 end process
 
-process process_group \in bar
+process p_group \in bar \* set
 variables local_variables
 begin
   \* pluscal code 

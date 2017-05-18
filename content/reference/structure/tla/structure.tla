@@ -50,7 +50,8 @@ begin
     <LabeledPlusCal>
 end process;
 
-process Process \in <Set> \* one process per element
+\* making a process fair means it cannot 'stutter', or stall out.
+fair process Process \in <Set> \* one process per element
 variables v1 \in <Set>; \* similar processes can choose different elements
 begin
     <LabeledPlusCal>
