@@ -7,7 +7,7 @@ We've been implicitly using _expressions_ up until now; we just haven't clarifie
 
 ### Logical Junctions
 
-We've used these for a while now: /\ is and, \/ is or. We can join expressions with them. The one sublety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an indented junction, TLA+ considers that the start of a subclause. For example,
+We've used these for a while now: `/\` is and, `\/` is or. We can join expressions with them. The one subtlety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an indented junction, TLA+ considers that the start of a subclause. For example,
 
 ```tla
 /\ TRUE
@@ -81,7 +81,7 @@ CASE TRUE -> FALSE
   [] TRUE -> TRUE
 ```
 
-_May or may not be true._ Sometimes that's what you want, more often it isn't. Be careful.
+_May or may not be true._ Be careful.
 
 ## Nesting
 

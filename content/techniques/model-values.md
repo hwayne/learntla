@@ -32,7 +32,7 @@ process server = Server
 
 ### Sets
 
-If a value could be true, false, or unknown, how do we best represent it? For two of those we'd want to use booleans, however "unknown" is a string and can't be compare to booleans. Instead, we can write `{TRUE, FALSE, UNKNOWN}` and make `UNKOWN` a model value.
+If a value could be true, false, or unknown, how do we best represent it? For two of those we'd want to use booleans, however "unknown" is a string and can't be compare to booleans. Instead, we can write `{TRUE, FALSE, UNKNOWN}` and make `UNKNOWN` a model value.
 
 This is especially important when working with functions. A function's domain must be a set, and all elements in a set must be comparable to each other. So you can't have a function that mixes strings and numbers, but you can have one that mixes strings and model values.
 

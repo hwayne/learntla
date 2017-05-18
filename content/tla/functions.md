@@ -18,7 +18,7 @@ Or multiple variables:
 
 `Sum == [x, y \in S |-> x + y]`
 
-You call a function with f[x], just like tuples and structs do. That's because tuples and structs _are_ functions! Specifically, tuples are just functions where the domain is 1..n. One consequence of this is that TLA+ is essentially structurally subtyped. If you write `Squares == [n \in 1..100 |-> n * n]`, then `Squares` is also by definition a tuple, and you can use sequence operators on it.
+You call a function with f[x], just like tuples and structs do. That's because tuples and structs _are_ functions! Specifically, tuples are just functions where the domain is 1..n. One consequence of this is that TLA+ is essentially structurally subtyped. If you write `Squares == [n \in 1..100 |-> n * n]`, then `Squares` is also by definition a sequence, and you can use sequence operators on it.
 
 Similarly, you can write `DOMAIN F` to get the set of values F is defined on, and the `Range(F)` operator we wrote also works for functions.
 
@@ -93,7 +93,7 @@ Now write an operator that returns all sequences with a range in S of length n o
 
 In most cases where programmers think of using "functions", operators are actually more applicable. Operators are generally more powerful than functions. For example, you can define an operator over all subsets of the integers, but you can't do the same for functions. Additionally, you cannot use functions as invariants. In general, if you want something to take arbitrary inputs, use an operator.
 
-What makes functions useful is that you can define them over a _finite_ domain and a finite range. In such a case it's assignable like any other variable. This, combined with set operators on the sets of functions, vastly increases the power of your specifications.
+What makes functions useful is that you can define them over a finite domain and a finite range. In such a case it's assignable like any other variable. This, combined with set operators on the sets of functions, vastly increases the power of your specifications.
 
 As one example, recall the code we write to simulate the three flags:
 
