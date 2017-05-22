@@ -7,7 +7,7 @@ V == Vendors
 P == 1..MaxPrice
 
 ValidMarkets == LET Markets == [V \X I -> [buy : P, sell : P]]
-                IN {m \in Markets : 
+                IN {m \in Markets :
                     \A item \in I, vendors \in V \X V:
                       m[<<vendors[1], item>>].buy <= m[<<vendors[2], item>>].sell
                    }
@@ -19,7 +19,7 @@ variables market \in ValidMarkets,
           trades \in ValidTrades,
           backpack = {}, \* items we have
           actions = 0,
-          profit = 0; 
+          profit = 0;
 
 begin
   Act:
@@ -39,7 +39,7 @@ begin
       or
         Trade:
           with items \in (SUBSET backpack) \cap (DOMAIN trades) do
-            backpack := (backpack \ items) \cup trades[items];
+            backpack := (backpack \ items) \cup {trades[items]};
           end with;
       end either;
       Loop:
