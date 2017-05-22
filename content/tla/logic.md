@@ -3,7 +3,7 @@ title = "Logic"
 weight = 20
 +++
 
-In this section, we'll introduce the basics of propositional logic. Even if you're unfamiliar with the idea, you've almost certainly used it in programming before. 
+In this section, we'll introduce the basics of propositional logic. Even if you're unfamiliar with the idea, you've almost certainly used it in programming before.
 
 ### `\E`
 
@@ -44,7 +44,7 @@ Given a set and an operator, determine whether the operator is commutative over 
 
 {{% ans abelian %}}
 ```tla
-IsCommutative(Op(_,_), S) == \A x \in S : 
+IsCommutative(Op(_,_), S) == \A x \in S :
                           \A y \in S : Op(x,y) = Op(y,x)
 ```
 Alternatively, we could put them on the same line:
@@ -75,7 +75,7 @@ Max(S) == CHOOSE x \in S : \A y \in S : y <= x
 While we introduced the CHOOSE operator back in sets, it really comes into its own when we add the logical operators. Many quantified properties, such as "the largest x such that P", can be expressed as "the x where all larger elements don't have P" or "the x where all of the other elements with P are smaller". For example, what is the largest prime in a set S?
 
 ```tla
-IsPrime(n) == \A x \in 1..n : n % x /= 0
+IsPrime(x) == x > 1 /\ ~\E d \in 2..(x-1) : x % d = 0
 
 LargestPrime(S) == CHOOSE x \in S:
                     /\ IsPrime(x)
@@ -99,7 +99,7 @@ LargestTwinPrime(S) == CHOOSE x \in S:
 ```
 {{% /ans %}}
 
-Now return the largest pair of twin primes, ordered by value. Assume that S may be missing numbers and, if one of the twin primes is missing, the pair is invalid. For example, the largest pair in `{3, 5, 13}` is `<<3, 5>>`, not `<<5, 13>>`. 
+Now return the largest pair of twin primes, ordered by value. Assume that S may be missing numbers and, if one of the twin primes is missing, the pair is invalid. For example, the largest pair in `{3, 5, 13}` is `<<3, 5>>`, not `<<5, 13>>`.
 
 {{% ans twinpair %}}
 ```tla
@@ -122,10 +122,10 @@ Given `stockprices` is a tuple of positive integers representing the value of a 
 
 {{< ans profit >}}
 ```tla
-MaxProfit(stockprices) == 
+MaxProfit(stockprices) ==
     LET sp == stockprices \* clean it up a bit
         TimePair == (1..Len(sp)) \X (1..Len(sp))
-        Profit[p \in TimePair] == sp[p[2]] - sp[p[1]] 
+        Profit[p \in TimePair] == sp[p[2]] - sp[p[1]]
         best == CHOOSE best \in TimePair :
             /\ best[2] > best[1] \* Buy after sell
             /\ Profit[best] > 0 \* Make money plz
