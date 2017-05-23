@@ -66,6 +66,7 @@ operator | operation | example
 `S1 \ S2` | The elements in S1 not in S2 | `{1, 2} \ {2, 3} = {1}`, `{2, 3} \ {1, 2} = {3}`
 `SUBSET S` | The set of all subsets of S | `SUBSET {1, 2} = {{}, {1}, {2}, {1, 2}}`
 `UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`
+`S1 \X S2` | Cartesian Product | `{1,2} \X {3,4} = {<<1, 3>>, <<1, 4>>, <<2, 3>>, <<2, 4>>}`
 
 {{% q %}}
 Given a sequence of sets, write an operator that determines if a given element is found in any of the sequence's sets. IE `Op("a", <<{"b", "c"}, {"a", "c"}>>) = TRUE`.
