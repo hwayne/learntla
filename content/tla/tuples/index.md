@@ -12,7 +12,7 @@ Did I mention they're 1-indexed? They're 1-indexed.
 {{% /notice %}}
 
 ```
-x = <<4, 5, 6>>;
+x == <<4, 5, 6>>;
 x[1] + x[2] + x[3] = 15;
 ```
 
@@ -43,6 +43,27 @@ Reverse(Twople) == IF Len(Twople) = 2 THEN <<Twople[2], Twople[1]>> ELSE ASSERT 
 ```
 {{% /ans %}}
 {{% /q %}}
+
+#### Sets of Tuples
+
+Sometimes, you need a set of tuples or sequences. For example, given a chessboard, you might represent the squares as a pair of two integers. The construct, then, for every possible point in the grid would be `1..8 \X 1..8`. `\X` here is the _Cartesian product_ operator: `set1 \X set2` is the set of all tuples `t` where `t[1] \in set1` and `t[2] \in set2`.
+
+```
+chessboard_squares == {"a", "b", "c", "d", "e", "f", "g", "h"} \X 1..8
+<<"a", 2>> \in chessboard_squares
+<<2, "a">> \notin chessboard_squares
+<<"b", 10>> \notin chessboard_squares
+```
+
+You can combine more than two sets with `\X`, but how they combine depends on how you group the sets. Given `a \in A`, `b \in B`, and `c \in C`:
+
+```
+<<a, b, c>> \in A \X B \X C
+<<<<a, b>>, c>> \in (A \X B) \X C
+<<a, <<b, c>>>> \in A \X (B \X C)
+```
+
+The first is a tuple of length three, the latter two are tuples of length two, one element of which is a tuple of length two.
 
 ### Structures
 
