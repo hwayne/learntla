@@ -93,7 +93,7 @@ So far we haven't done anything too out of the ordinary. Everything so far is ea
 1. $1,000 has completely disappeared from the system
 1. The SEC shuts you down for fraud.
 
-We already have all of the tools to check this. First, we need to figure out whatan invariant would break here, for example, the total money in the system:
+We already have all of the tools to check this. First, we need to figure out what an invariant would break here, for example, the total money in the system:
 
 {{% code 6 %}}
 
