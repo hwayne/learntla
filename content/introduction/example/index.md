@@ -39,7 +39,7 @@ Immediately, you’ll see a bunch of code appear. That’s the TLA+ translation 
 
 ![](img/model.png)
 
-It’s okay for it to be empty right now; even without any configuration we’ll be able to use it in the next section.
+Under "What to Check" select the "Termination" property so that the program will attempt to run through all proposed options.
 
 ### Assertions and Sets
 
