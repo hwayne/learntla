@@ -43,8 +43,9 @@ LET IsEven(x) == x % 2 = 0
     Five == 5
 IN  IsEven(Five)
 
-LET IsEven(x) == LET Zero == 2
-                 IN  x % Zero = Zero
+LET IsEven(x) == LET Two == 2
+                     Zero == 0
+                 IN x % Two = Zero
     Five == 5
 IN  IsEven(Five)
 ```
