@@ -29,7 +29,7 @@ You can only have one PlusCal algorithm per file.
 As for the PlusCal itself, here's the layout of a basic single process algorithm:
 
 ```
-variables x = 1, y = {2}, z \in {3, 4};
+variables x = 1, y \in {3, 4}, z = {3, 4};
 begin
   \* your code here
 end algorithm;
@@ -37,9 +37,9 @@ end algorithm;
 
 In the `variables` block, `=` is assignment. Everywhere else, `=` is the equality check and `:=` is assignment.
 
-You might have noticed the `z \in {3, 4}`. That's set notation. It means that for the purposes of this algorithm, z can be 3 **or** 4. When you check the model, TLC will make sure it works for __all__ possible values of z. It will first test that nothing fails with `z = 3`, and then test that nothing fails with `z = 4`. 
+You might have noticed the `y \in {3, 4}`. That's set notation. It means that for the purposes of this algorithm, y can be 3 **or** 4. When you check the model, TLC will make sure it works for __all__ possible values of y. It will first test that nothing fails with `y = 3`, and then test that nothing fails with `y = 4`. 
 
-You could also write `z = {3, 4}`, which means that z is the **set** {3, 4}. Any sort of data structure can be assigned to a variable in TLA+.
+Contrast `y \in {3, 4}` with `z = {3, 4}`, which means that z is the **set** {3, 4}. Any sort of data structure can be assigned to a variable in TLA+.
 
 {{% notice note %}}
 Since TLA+ is a specification language, it was designed to output really nice documents. That's why we use TeX like `\in` and `\union` and such. Fun fact: Leslie Lamport, the inventor of TLA+, also invented LaTeX! Another fun fact: we won't be talking about outputting as a specification in any way whatsoever. Cool stuff, but not _immediately_ relevant to model checking.
