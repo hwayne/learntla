@@ -89,13 +89,13 @@ A prime number p is a _twin prime_ if p-2 is prime or p+2 is prime. Find the lar
 {{% ans twin %}}
 
 ```tla
-IsTwinPrime(x) == /\ IsPrime(x)
-                  /\ \/ IsPrime(x + 2)
+IsTwinPrime(x) == /\\ IsPrime(x)
+                  /\\ \/ IsPrime(x + 2)
                      \/ IsPrime(x - 2)
 
 LargestTwinPrime(S) == CHOOSE x \in S:
-                    /\ IsTwinPrime(x)
-                    /\ \A y \in S: IsTwinPrime(y) => y <= x
+                    /\\ IsTwinPrime(x)
+                    /\\ \A y \in S: IsTwinPrime(y) => y <= x
                     \* or y > x => ~ IsTwinPrime(y)
 ```                    
 {{% /ans %}}
@@ -112,7 +112,7 @@ LargestTwinPair(S) == CHOOSE <<x, y>> \in S \X S:
                             /\\ IsPrime(z)
                             /\\ IsPrime(w)
                             /\\ w = z - 2
-                               => z < y
+                            => z < y
 ```
 {{% /ans %}}
 {{% /q %}}
