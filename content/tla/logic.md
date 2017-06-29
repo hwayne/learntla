@@ -89,14 +89,15 @@ A prime number p is a _twin prime_ if p-2 is prime or p+2 is prime. Find the lar
 {{% ans twin %}}
 
 ```tla
+IsTwinPrime(x) == /\ IsPrime(x)
+                  /\ \/ IsPrime(x + 2)
+                     \/ IsPrime(x - 2)
+
 LargestTwinPrime(S) == CHOOSE x \in S:
-                    /\\ IsPrime(x)
-                    /\\  \/ IsPrime(x + 2)
-                        \/ IsPrime(x - 2)
-                    /\\ \A y \in S:
-                        IsPrime(y) => y <= x
-                    \* or y > x => ~IsPrime(y)
-```
+                    /\ IsTwinPrime(x)
+                    /\ \A y \in S: IsTwinPrime(y) => y <= x
+                    \* or y > x => ~ IsTwinPrime(y)
+```                    
 {{% /ans %}}
 
 Now return the largest pair of twin primes, ordered by value. Assume that S may be missing numbers and, if one of the twin primes is missing, the pair is invalid. For example, the largest pair in `{3, 5, 13}` is `<<3, 5>>`, not `<<5, 13>>`.
