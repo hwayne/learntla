@@ -12,5 +12,5 @@ end define;
 
 begin
 while TRUE do
-  assert tower[TSPACES] /= <<1, 2, 3>>;
+  assert tower[TSPACES] /= FullTower;
   \* rest is the same
