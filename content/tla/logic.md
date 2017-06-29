@@ -70,6 +70,16 @@ Max(S) == CHOOSE x \in S : \A y \in S : y <= x
 {{% /ans %}}
 {{% /q %}}
 
+Both `=>` and `<=>` follow the same precedence rules as logical junctions. In other words, TLC interprets
+
+```
+/\ A
+/\ B
+  => C
+```
+
+as `A /\ (B => C)`, whereas without the indent it's interpreted as `(A /\ B) => C`.
+
 ### CHOOSE
 
 While we introduced the CHOOSE operator back in sets, it really comes into its own when we add the logical operators. Many quantified properties, such as "the largest x such that P", can be expressed as "the x where all larger elements don't have P" or "the x where all of the other elements with P are smaller". For example, what is the largest prime in a set S?
