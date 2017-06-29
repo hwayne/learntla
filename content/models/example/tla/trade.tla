@@ -38,8 +38,8 @@ begin
           end with;
       or
         Trade:
-          with items \in (SUBSET backpack) \cap (DOMAIN trades) do
-            backpack := (backpack \ items) \cup {trades[items]};
+          with items \in (SUBSET backpack) \intersect (DOMAIN trades) do
+            backpack := (backpack \ items) \union {trades[items]};
           end with;
       end either;
       Loop:
