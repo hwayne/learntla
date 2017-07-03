@@ -21,7 +21,7 @@ begin
     end while;
 ```
 
-In order to test our invariant, we need some way of knowing the previous action, as well as how it changed the position. We can do this by adding a `history` variable, and then appending the last action and state with each step.
+In order to test our invariant, we need some way of knowing the previous action, as well as how it changed the position. We can do this by adding a "history" variable, and then appending the last action and state with each step. In the following example, the history variable is named `actions`.
 
 ```tla
 EXTENDS Integers, TLC, Sequences
