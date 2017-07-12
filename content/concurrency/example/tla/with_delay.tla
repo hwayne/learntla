@@ -18,11 +18,9 @@ end process
 
 
 process get_collection = 0
-variable gc_local = 0;
 begin 
   GCGetCalls:
     await made_calls <= max_calls - 1;
-    gc_local := made_calls;
   Request:
     make_calls(1);
     either goto GCGetCalls 
@@ -31,7 +29,6 @@ begin
 end process;
 
 process get_put \in 1..3
-variable gp_local = 0;
 begin
   GPGetCalls:
     await made_calls <= max_calls - 2;
