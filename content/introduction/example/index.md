@@ -31,7 +31,7 @@ The TLA+ Toolbox is the main (and only) IDE for TLA+. Using TLA+ has enough movi
 
 ![](img/intro_toolbox.png)
 
-Let's open it up and add our current project. There's two parts to a specification: the modules and the models. Modules have our code, models test them. [Elaborate] Try creating a new spec with the above code in it, and then translate that into TLA+ (on Mac it’s ⌘T).
+Let's open it up and add our current project. There's two parts to a specification: the modules and the models. Modules have our code, models test them. Try creating a new spec with the above code in it, and then translate that into TLA+ (on Mac it’s ⌘T).
 
 ![](img/translated.png)
 
