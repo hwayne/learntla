@@ -17,7 +17,7 @@ Here’s one way:
 
 Before we start messing with it, let's break down the current syntax we have. Since TLA+ is a specification language, it enforces certain restrictions on the structure of your program. 
 
-* If the filename is "transfer", the first line of the spec must be `---- MODULE transfer ----`. You must have at least four dashes on each side. Similarly, the last line must be at least four equal signs. Anything before the MODULE or after the bottom are ignored.
+* If the filename is "transfer", the first line of the spec must be `---- MODULE transfer ----`. You must have at least four dashes on each side. Similarly, the last line must be at least four equal signs. Anything before the MODULE or after the bottom is ignored.
 * EXTENDS is the equivalent of an import statement.
 * `\*` is a comment, `(* *)` are comment blocks. Note that the algorithm is in a comment block. This is intentional. Since PlusCal algorithms aren't syntatically valid TLA+, we can't run it in a TLA file. Instead, you leave them in comments and let the PlusCal translator translate it.
 * `variables` is, shockingly enough, variables. Note that we use `=` when declaring variables, while in the algorithm itself we use `:=`. Outside of variable definition = is the comparison operator. Not equals is written as /=. `1 + 2 = 3; 2 + 3 /= 4.`
@@ -39,11 +39,11 @@ Immediately, you’ll see a bunch of code appear. That’s the TLA+ translation 
 
 ![](img/model.png)
 
-It’s okay for it to be empty right now; even without any configuration we’ll be able to use it in the next section.
+It’s okay for the model to be empty right now; even without any configuration we’ll be able to use it in the next section.
 
 ### Assertions and Sets
 
-Can Alice's account go negative? Right now our spec allows that, which we don't want. We can start by adding a basic assert check after the transaction. This is the same as asserts in any other language. In TLA+, though, it's mostly (mostly) used for debugging. That's because TLA+ has vastly more powerful tools for checking contracts and properties. But let's start small.
+Can Alice's account go negative? Right now our spec allows that, which we don't want. We can start by adding a basic assert check after the transaction. This is the same as asserts in any other language. In TLA+, though, it's (mostly) used for debugging. That's because TLA+ has vastly more powerful tools for checking contracts and properties. But let's start small.
 
 Here's what our code looks like with the assert:
 
@@ -63,7 +63,7 @@ When we run this, we immediately get an error:
 
 ![](img/model_assert_fail.png)
 
-We can fix this by wrapping the check if an if-block:
+We can fix this by wrapping the check in an if-block:
 
 {{% code 4 %}}
 
@@ -126,4 +126,4 @@ When we run this, we find an error.
 
 There's a gap between when we check that Alice has enough money and when we actually transfer the money. With one process this wasn't a problem, but with two, it means her account can go negative. TLC is nice enough to provide the initial state and steps required to reproduce the bug.
 
-This example only covers a small subsection of the tool; we haven't even touched temporal properties, liveness, or set manipulation yet. Hopefully, though, this has shown you that even a cursory knowledge of TLA+ is enough discover interesting problems.
+This example only covers a small subsection of the tool; we haven't even touched temporal properties, liveness, or set manipulation yet. Hopefully, though, this has shown you that even a cursory knowledge of TLA+ is enough to discover interesting problems.
