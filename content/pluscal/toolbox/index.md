@@ -64,7 +64,7 @@ Let's actually make it fail an invariant, then! Move back to the model overview 
 Not only does this show us what failed, it shows us **how** it failed. In this case, "Initial Predicate" tells us the starting state: x is five. The following "action" line shows that the "Add" step finished and x changed to 6, which invalidates our invariant.
 
 {{% notice tip %}}
-TLA+ Toolbox doesn't have a default shortcut for "Run Model". You can set one by going to preferences, then "globals", then "keys". It'll make things smoother.
+The TLA+ Toolbox maps the F11 key to "Run Model".
 {{% /notice %}}
 
 ## Evaluating Expressions
