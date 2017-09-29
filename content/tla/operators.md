@@ -58,7 +58,7 @@ RECURSIVE SetReduce(_, _, _)
 
 SetReduce(Op(_, _), S, value) == IF S = {} THEN value
                               ELSE LET s == CHOOSE s \in S: TRUE
-                              IN SetReduce(Op, S \ {s}, Op(s, value)) 
+                                   IN SetReduce(Op, S \ {s}, Op(s, value)) 
 
 CandlesOnChannukah == SetReduce(Sum, 2..9, 0) \* 44
 ```
