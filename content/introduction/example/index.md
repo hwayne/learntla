@@ -27,7 +27,7 @@ So how do we run this? Well, we can't. First of all, we it's not real code, we h
 
 ### TLA+ Toolbox
 
-The TLA+ Toolbox is the main (and only) IDE for TLA+. Using TLA+ has enough moving parts that using an IDE is the right choice here, regardless of your preferences.
+The [TLA+ Toolbox](https://github.com/tlaplus/tlaplus/releases/latest) is the IDE for TLA+. Using TLA+ has enough moving parts that using an IDE is the right choice here, regardless of your preferences.
 
 ![](img/intro_toolbox.png)
 
