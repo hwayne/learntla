@@ -16,7 +16,7 @@ We've used these for a while now: `/\` is and, `\/` is or. We can join expressio
 
 /\ TRUE
   \/ TRUE
-  \/ FALSE \* (T /\ (T \/ F))
+  \/ FALSE \* (T \/ T \/ F)
 
 \/ TRUE
 \/ TRUE
