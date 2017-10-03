@@ -3,6 +3,9 @@ title = "Introduction"
 weight = 0
 +++
 
+{{% notice note %}}
+*If you want a video introduction, come watch my [Strange Loop talk](https://www.youtube.com/watch?v=_9B__0S21y8) on TLA+!*
+{{% /notice %}}
 ### What is TLA+?
 
 TLA+ is a _formal specification language_. It's a tool to design systems and algorithms, then programmatically verify those systems don't have critical bugs. It's the software equivalent of a blueprint.
