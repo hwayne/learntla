@@ -3,8 +3,10 @@ baseurl = "http://learntla.com"
 title = "Learn TLA"
 theme = "hugo-theme-learn"
 googleAnalytics = "UA-90708265-1"
+pygmentsUseClassic = true
 PygmentsCodeFences = true
 
 [Params]
   Author = "Hillel Wayne"
-  menu = ["introduction", "pluscal", "tla", "models", "concurrency", "temporal-logic", "techniques", "reference"]
+  disableSearch = true
+  disableInlineCopyToClipBoard = true
