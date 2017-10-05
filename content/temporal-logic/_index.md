@@ -1,6 +1,6 @@
 +++
 title = "Temporal Properties"
-weight = 0
+weight = 500
 +++
 
 When I said we were barely going to cover TLA+, I wasn't kidding.

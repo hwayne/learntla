@@ -1,6 +1,6 @@
 +++
 title = "TLA+"
-weight = 0
+weight = 200
 +++
 
 Now that we have our PlusCal scaffold, it's time to learn TLA+ proper. TLA+ is a mathematical description language. Instead of saying how to find the value you want, you instead say the properties of what you want. For example, the largest element of a set is `CHOOSE x \in S : \A y \in S : y <= x`. That's not an algorithm. It's just "the number that's bigger than the other numbers." 

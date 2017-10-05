@@ -1,6 +1,7 @@
 +++
 title = "Messages"
 weight = 1
+hidden = true
 +++
 
 A common question when starting with PlusCal is how to implement message queues. While you rarely have to test that your queue works, you often use them to pass information around your system, and often bugs can appear in the communication layer. So it's useful to know how to simulate them.
