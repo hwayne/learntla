@@ -23,7 +23,7 @@ Before we start messing with it, let's break down the current syntax we have. Si
 * `variables` is, shockingly enough, variables. Note that we use `=` when declaring variables, while in the algorithm itself we use `:=`. Outside of variable definition = is the comparison operator. Not equals is written as /=. `1 + 2 = 3; 2 + 3 /= 4.`
 * `A:` and `B:` are labels. They define the steps the algorithm takes. Understanding how labels work is critical to writing more complex algorithms, as they define the places where your concurrency can go horribly awry. We'll be diving into them a bit deeper later.
 
-So how do we run this? Well, we can't. First of all, we it's not real code, we have to transpile it first. Also, we don't exactly 'run' it. Instead, we design models to test against it. Let's get that set up right now.
+So how do we run this? Well, we can't. First of all, it's not real code, we have to transpile it first. Also, we don't exactly 'run' it. Instead, we design models to test against it. Let's get that set up right now.
 
 ### TLA+ Toolbox
 
