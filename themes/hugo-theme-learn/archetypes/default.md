@@ -1,9 +1,7 @@
----
-title: "Some Title"
-weight: 5
-prev: /prev/path
-next: /next/path
-toc: true
----
++++
+title = "{{ replace .TranslationBaseName "-" " " | title }}"
+date =  {{ .Date }}
+weight = 5
++++
 
-Lorem Ipsum
+Lorem Ipsum.
