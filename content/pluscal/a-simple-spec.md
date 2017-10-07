@@ -3,7 +3,7 @@ title = "A Simple Spec"
 weight = 2
 +++
 
-TLA+ started as a notation, and the model checker, TLC, only came out 5 years later. As it was never intended to be run, there's some assumptions of it being a read document instead of being runable code. That means that there's a little bit of boilerplate we'll need to get through first.
+TLA+ started as a notation, and the model checker, TLC, only came out 5 years later. As it was never intended to be run, there's some assumptions of it being a read document instead of being runnable code. That means that there's a little bit of boilerplate we'll need to get through first.
 
 In order for TLC to analyze a spec, it **must** have the following format:
 
