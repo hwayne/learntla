@@ -8,7 +8,7 @@ weight = 1
 {{% /notice %}}
 ### What is TLA+?
 
-TLA+ is a _formal specification language_. It's a tool to design systems and algorithms, then programmatically verify those systems don't have critical bugs. It's the software equivalent of a blueprint.
+TLA+ is a _formal specification language_. It's a tool to design systems and algorithms, then programmatically verify that those systems don't have critical bugs. It's the software equivalent of a blueprint.
 
 ### Why should I use it?
 
