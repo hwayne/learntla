@@ -37,11 +37,15 @@ end while
 
 The inner loop will happen twice. Each time the model can either add two or double x, meaning that there's four possible end results:
 
-```
-     3
-  5     6
-7  10 8  12
-```
+{{<mermaid>}}
+graph TD;
+A[3] -->|A| B[5]
+A    -->|B| C[6]
+B    -->|A| BB[7]
+B    -->|B| BC[10]
+C    -->|A| CB[8]
+C    -->|B| CC[12]
+{{< /mermaid >}}
 
 {{% q %}}
 Will the following code pass or fail?
@@ -71,10 +75,14 @@ end with;
 
 This creates a separate timeline for each element in the set.
 
-```
- a=1 a=2 a=3
- x+1 x+2 x+3
-```
+{{<mermaid>}}
+graph LR;
+e["end with"];
+with ---|"a = 1"|x1(x+1);
+with ---|"a = 2"|x2(x+2);
+with ---|"a = 3"|x3(x+3);
+x1 --- e; x2 --- e; x3 --- e; 
+{{< /mermaid >}}
 
 ## Example
 

@@ -10,3 +10,4 @@ PygmentsCodeFences = true
   Author = "Hillel Wayne"
   disableSearch = true
   disableInlineCopyToClipBoard = true
+  disableAssetsBusting = true
