@@ -71,7 +71,7 @@ operator | operation | example
 Given a sequence of sets, write an operator that determines if a given element is found in any of the sequence's sets. IE `Op("a", <<{"b", "c"}, {"a", "c"}>>) = TRUE`.
 
 {{% ans setrange %}}
-`InSeqSets(elem, Seq) == x \in UNION Range(Seq)`
+`InSeqSets(elem, Seq) == elem \in UNION Range(Seq)`
 {{% /ans %}}
 {{%/q %}}
 If you add `EXTENDS FiniteSets`, you also get the following operators:

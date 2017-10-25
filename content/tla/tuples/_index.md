@@ -35,11 +35,11 @@ If the value is undefined (for example, `Tail(<<>>)`), the model considers that 
 {{% /notice %}}
 
 {{% q %}}
-Write an operator that takes a tuple and, if the tuple is length two, returns the reversed tuple, and otherwise raises an error.
+Write an operator that takes a tuple and, if the tuple is length two, returns the reversed tuple, and otherwise returns the original tuple.
 
 {{% ans twople %}}
 ```
-Reverse(Twople) == IF Len(Twople) = 2 THEN <<Twople[2], Twople[1]>> ELSE ASSERT FALSE
+Reverse(Twople) == IF Len(Twople) = 2 THEN <<Twople[2], Twople[1]>> ELSE Twople
 ```
 {{% /ans %}}
 {{% /q %}}
