@@ -4,4 +4,3 @@ begin
   made_calls := made_calls + n;
   assert made_calls <= max_calls;
 end macro;
-
