@@ -3,7 +3,7 @@ title = "Constants"
 weight = 5
 +++
 
-Let's go back to our old Hanoi solver. As a refresher, this is the code we started with.
+Let's go back to our old [Hanoi solver](/tla/tuples/#example). As a refresher, this is the code we started with.
 
 {{% code hanoi %}}
 

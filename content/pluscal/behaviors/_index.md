@@ -25,11 +25,9 @@ variables x = 3, i = 2;
 begin
 while i > 0 do
   either 
-    A: 
-      x := x + 2;
+    x := x + 2;
   or 
-    B: 
-      x := x * 2;
+    x := x * 2;
   end either;
   i := i - 1;
 end while
@@ -39,12 +37,12 @@ The inner loop will happen twice. Each time the model can either add two or doub
 
 {{<mermaid>}}
 graph TD;
-A[3] -->|A| B[5]
-A    -->|B| C[6]
-B    -->|A| BB[7]
-B    -->|B| BC[10]
-C    -->|A| CB[8]
-C    -->|B| CC[12]
+A[3] --> B[5]
+A    --> C[6]
+B    --> BB[7]
+B    --> BC[10]
+C    --> CB[8]
+C    --> CC[12]
 {{< /mermaid >}}
 
 {{% q %}}
@@ -78,9 +76,9 @@ This creates a separate timeline for each element in the set.
 {{<mermaid>}}
 graph LR;
 e["end with"];
-with ---|"a = 1"|x1(x+1);
-with ---|"a = 2"|x2(x+2);
-with ---|"a = 3"|x3(x+3);
+with ---x1(x+1);
+with ---x2(x+2);
+with ---x3(x+3);
 x1 --- e; x2 --- e; x3 --- e; 
 {{< /mermaid >}}
 
