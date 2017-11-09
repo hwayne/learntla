@@ -67,7 +67,7 @@ The first is a tuple of length three, the latter two are tuples of length two, o
 
 ### Structures
 
-Structures are hashes. They have keys and values. You specify them as `[key |-> value]` and query them with either `[key]` or `.key`. Both are legal and valid.
+Structures are hashes. They have keys and values. You specify them as `[key |-> value]` and query them with either `["key"]` or `.key`. Both are legal and valid.
 
 ```
 x = [a |-> 1, b |-> {2, 3}];
