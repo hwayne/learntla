@@ -39,7 +39,7 @@ There's a few different ways of fixing this. But does our fix work for more than
 
 ### Is it hard to use?
 
-Formal methods have a reputation for being difficult to the point where they're only worth it for critical systems. This means that all of the guides are written under the assumption that the reader is working on a critical system, where they have to know TLA+ inside and out to make absolutely that their system won't accidentally _kill people_.
+Formal methods have a reputation for being difficult to the point where they're only worth it for critical systems. This means that all of the guides are written under the assumption that the reader is working on a critical system, where they have to know TLA+ inside and out to make absolutely sure that their system won't accidentally _kill people_.
 
 If a dangerous bug to you is "somebody dies", then yes, formal methods are hard. If a dangerous bug to you is "nobody dies but our customers get really mad and we have to spend two weeks tracking down and fixing the bug", then the small subset of TLA+ you'll need is actually pretty easy to learn. Just find a beginner-friendly guide and you're all set.
 
