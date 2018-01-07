@@ -120,7 +120,7 @@ PlusCal supports multiprocess algorithms. The processes can be completely differ
 
 The accounts are global variables, while money is a local variable to the process. This means that there are 400 possible initial states, as the first transfer can be one dollar and the second seven. However, there are actually 2400 possible behaviors! That's because TLC can choose which order to run the processes in, as well as how to interleave them.
 
-When we run this, we find an error. 
+However, `MoneyNotNegative` doesn't make sense anymore, since there's now two values for money. Make sure to uncheck that invariant to avoid an error and rerun. You should get the following error:
 
 ![](img/multiprocess_fail.png)
 
