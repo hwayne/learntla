@@ -33,7 +33,7 @@ end process;
 end algorithm; *)
 ```
 
-Since we check that the owner of an item is the one trading it away. So we should be safe against scams, right? But if we run the model checker, we find that's not true: Alice could trade an item to _herself_ and, before that process finishes running, resolve a parallel trade giving that same item to Bob. Then the first trade resolves and Alice gets the item back. Our algorithm fails for race conditions, and we know this because TLA+ explored every possible state and timeline.
+Since we check that the owner of an item is the one trading it away, we should be safe against scams, right? But if we run the model checker, we find that's not true: Alice could trade an item to _herself_ and, before that process finishes running, resolve a parallel trade giving that same item to Bob. Then the first trade resolves and Alice gets the item back. Our algorithm fails for race conditions, and we know this because TLA+ explored every possible state and timeline.
 
 There's a few different ways of fixing this. But does our fix work for more than two people? In TLA+, checking that is as simple as `People == {"alice", "bob", "eve"}`. Does it work if we can trade multiple items at once? `variable items \in SUBSET Items`. What about if there's multiple sheep, ore, and bricks? `amount_owned = [People \X Items -> 0..5]`. What if three people are all trading 1 ore and 1 sheep with each of the other players while Eve also trades Alice 0 brick? If it's in the possible state space, TLA+ will check it.
 
