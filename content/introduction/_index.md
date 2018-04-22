@@ -45,4 +45,6 @@ If a dangerous bug to you is "somebody dies", then yes, formal methods are hard.
 
 ### Where's a beginner-friendly guide?
 
-HEY
+Hello! This guide covers the basics of TLA+ in an easy, hands-on way. If you want to start from the beginning, you can learn more about what we'll cover [here](about-this-guide). If you want to dive in right away, why not try a [whirlwind tour](example)?
+
+Either way, welcome to TLA+!

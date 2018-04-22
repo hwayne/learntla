@@ -46,10 +46,10 @@ Reverse(Twople) == IF Len(Twople) = 2 THEN <<Twople[2], Twople[1]>> ELSE Twople
 
 #### Sets of Tuples
 
-Sometimes, you need a set of tuples or sequences. For example, given a chessboard, you might represent the squares as a pair of two integers. The construct, then, for every possible point in the grid would be `1..8 \X 1..8`. `\X` here is the _Cartesian product_ operator: `set1 \X set2` is the set of all tuples `t` where `t[1] \in set1` and `t[2] \in set2`.
+Sometimes, you need a set of tuples or sequences. For example, given a chessboard, you might represent the squares as a pair of two integers. The construct, then, for every possible point in the grid would be `(1..8) \X (1..8)`. `\X` here is the _Cartesian product_ operator: `set1 \X set2` is the set of all tuples `t` where `t[1] \in set1` and `t[2] \in set2`.
 
 ```
-chessboard_squares == {"a", "b", "c", "d", "e", "f", "g", "h"} \X 1..8
+chessboard_squares == {"a", "b", "c", "d", "e", "f", "g", "h"} \X (1..8)
 <<"a", 2>> \in chessboard_squares
 <<2, "a">> \notin chessboard_squares
 <<"b", 10>> \notin chessboard_squares
@@ -109,7 +109,7 @@ This kind of problem flips TLA+ on its head. Instead of checking if our solution
 
 Everything should look familiar with the exception of the set syntax we use to define "from" and "to". We're covering that in more detail next section, but for now, it's roughly a set filter. For example, `from` is defined as being one of the numbers such that that tower has at least one element in it.
 
-For `to`, we pull it from a more restricted set: We either want the tower to be empty, or have a smaller top stone than the tower we're moving from. Finally, in the block itself, we simulate a move with `Tail` and concatting. The concat is a bit of a hack, actually- while it seems like `Append` would be the appropriate operator here, it would put it at the wrong end of the sequence. For example, `Append(<<2, 1>>, 3) = <<2, 1, 3>>`, when we actually want `<<3, 2, 1>>`.
+For `to`, we pull it from a more restricted set: We either want the tower to be empty, or have a bigger top stone than the tower we're moving from. Finally, in the block itself, we simulate a move with `Tail` and concatting. The concat is a bit of a hack, actually- while it seems like `Append` would be the appropriate operator here, it would put it at the wrong end of the sequence. For example, `Append(<<2, 1>>, 3) = <<2, 1, 3>>`, when we actually want `<<3, 2, 1>>`.
 
 ![](img/solution.png)
 
