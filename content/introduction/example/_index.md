@@ -80,7 +80,7 @@ Can you transfer a negative amount of money? We could add an `assert money > 0` 
 
 A few things should leap out here. First, this isn't part of the PlusCal algorithm. It's pure TLA+ that we put in the bottom of the file so as to be able to reference the transpiled TLA+. TLA+ can reference anything that your PlusCal can, as long as it comes after the `END TRANSLATION` marker. Second, it doesn't change anything. Instead, it's a property of the system. If money is negative, MoneyNotNegative is false. Otherwise, it's true. Properties are specified with `==`.
 
-How is this different from `assert`? Assert checks in one place. We can specify MoneyNotNegative as an _Invariant_ of the system, something that must be true in all possible system states. It'll check before money is pulled from Alice's account, being the deposit and the withdrawal, etc. If we added a `money := money - 2` step anywhere the MoneyNotNegative invariant will catch that the spec fails when `money = 1`.
+How is this different from `assert`? Assert checks in one place. We can specify MoneyNotNegative as an _Invariant_ of the system, something that must be true in all possible system states. It becomes part of the model, and then it'll check before money is pulled from Alice's account, being the deposit and the withdrawal, etc. If we added a `money := money - 2` step anywhere the MoneyNotNegative invariant will catch that the spec fails when `money = 1`.
 
 ### One step further: checking Atomicity
 
@@ -120,7 +120,7 @@ PlusCal supports multiprocess algorithms. The processes can be completely differ
 
 The accounts are global variables, while money is a local variable to the process. This means that there are 400 possible initial states, as the first transfer can be one dollar and the second seven. However, there are actually 2400 possible behaviors! That's because TLC can choose which order to run the processes in, as well as how to interleave them.
 
-However, `MoneyNotNegative` doesn't make sense anymore, since there's now two values for money. Make sure to uncheck that invariant to avoid an error and rerun. You should get the following error:
+However, `MoneyNotNegative` doesn't make sense anymore, since there's now two values for money. If you'd added that to the model make sure to uncheck it to avoid an error and rerun. You should get the following error:
 
 ![](img/multiprocess_fail.png)
 

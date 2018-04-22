@@ -45,7 +45,7 @@ Terms:
   - _Temporal Properties_ check that something is true over all possible behaviors, aka "lifetimes". For example, "x switches from TRUE to FALSE and back".
 - **How to run?:** Runtime optimizations. This is out of scope.
 
-We can run the model by clicking the green arrow in the top left. TLC will explore the entire state space, looking for possible failures in our invariants. Since we don't actually have any invariants yet, it won't find any failures, so this will be successful. Notice that it lists of the diameter as 2 and the number of distinct states as 2. The former means that the longest interesting progression was two steps long: the initial state where `x = 5` and the `Add` step where `x = 6`. Since there's only one possible starting state, there are 2 distinct states total.
+We can run the model by clicking the green arrow in the top left. TLC will explore the entire state space, looking for possible failures in our invariants. Since we don't actually have any invariants yet, it won't find any failures, so this will be successful. Notice that it lists the diameter as 2 and the number of distinct states as 2. The former means that the longest interesting progression was two steps long: the initial state where `x = 5` and the `Add` step where `x = 6`. Since there's only one possible starting state, there are 2 distinct states total.
 
 ![](img/model_run.png)
 
@@ -69,6 +69,6 @@ The TLA+ Toolbox maps the F11 key to "Run Model".
 
 ## Evaluating Expressions
 
-Switch back to the main overview section. Change the behavior spec to "no behavior spec". This tells TLC that there’s no system you are modelling, and you’re just playing around with the TLA+ syntax. We can’t run anything here. But what we can do is go over to "model checking results" and put TLA in "evaluate constant expression". Try putting in `CHOOSE y \in {1, 2, 3} : y*y = 4` in that box and rerun the model. You should see `2` appear in the "Value" box.
+Switch back to the main overview section. Change the behavior spec to "no behavior spec". This tells TLC that there’s no system you are modelling, and you’re just playing around with the TLA+ syntax. We can’t run anything here. But what we can do is go over to the "model checking results" tab and put TLA in "evaluate constant expression". Try putting in `CHOOSE y \in {1, 2, 3} : y*y = 4` in that box and rerun the model. You should see `2` appear in the "Value" box.
 
 We won’t be using the "no behavior spec" mode for testing actual systems, but it’s a nice tool to test that you understand how some TLA+ expression will work. Don’t worry, we’ll be reintroducing this when we dive into TLA+ proper.

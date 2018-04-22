@@ -3,7 +3,7 @@ title = "Operators"
 weight = 1
 +++
 
-An operator is a thing that does a thing. It's what programmers might refer to as a function. You use a `==` for them.
+An operator is a thing that does a thing. It's what programmers might refer to as a function. You use a `==` to define them.
 
 ```
 Five == 5
