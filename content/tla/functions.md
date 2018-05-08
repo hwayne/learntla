@@ -26,7 +26,7 @@ Similarly, you can write `DOMAIN F` to get the set of values F is defined on, an
 Write an operator that takes a string (tuple of characters, here) and returns the number of occurrences of each string token.
 {{< ans counter >}}
 ```tla
-Counter(str) == [c \in Range(str) |-> Cardinality(n \in 1..Len(str) : str[n] = c)]
+Counter(str) == [c \in Range(str) |-> Cardinality({n \in 1..Len(str) : str[n] = c})]
 ```
 {{< /ans >}}
 {{%/q %}}
