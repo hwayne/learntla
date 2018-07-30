@@ -9,7 +9,9 @@ Our old code ran everything in a single process- that’s the begin block. If we
 
 All processes must be assigned a value. There are two ways to do this. First, you can say `process = foo`, which will create one copy of that process. Or you could say `process \in bar`, in which case it will create one copy of that process for each element in `bar`. So if you write `process \in {1, 3, 5}`, you have three copies of that process running your behavior. 
 
-All processes in a behavior must be comparable. So if you write `process = 1`, you can’t have a second defined as `process bar = 'bar'`. 1 and ‘bar’ are not comparable. This is a case where model values and model sets can be very useful, since every model value is comparable to everything else (it's unequal to everything except itself).
+Process values are used to select which process to run, so all processes in a behavior *must* be comparable and *should* be unique. If you write `process = 1`, you can’t have a second defined as `process bar = 'bar'` because 1 and ‘bar’ are not comparable. Additionally, you shouldn't have a second process also defined as `process = 1` because when `1` is selected the first process will always run and the second process will always be ignored.
+
+This is a case where model values and model sets can be very useful, since every model value is comparable to everything else (it's unequal to everything except itself).
 
 You can get a process’s value with `self`:
 
