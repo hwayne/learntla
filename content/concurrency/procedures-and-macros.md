@@ -18,7 +18,7 @@ end macro;
 
 And call them with `Name(value1, ...)`. Simple. There's just a few caveats you have to keep in mind:
 
-1. A macro is shorthand code, not its own process. So they can't have labels, `with` statements, while loops, etc. 
+1. A macro is shorthand code, not its own process. So they can't have labels, multiple assignments, while loops, etc. 
 1. This happens inline.
 
 Macros must be defined after any `define` block and before any processes.
