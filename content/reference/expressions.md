@@ -50,7 +50,7 @@ Bool(FALSE) = FALSE
 ```tla
 (\E x \in {1, 2, 3} : x > 2) = TRUE
 (CHOOSE x \in {1, 2, 3} : x > 2) = 3
-(CHOOSE x \in {1, 2, 3} : x <= 2) = \* 1 or 2, arbitrary
+(CHOOSE x \in {1, 2, 3} : x <= 2) = \* 1 or 2, deterministic, always the same
 
 (\A x \in {1, 2, 3} : x > 4) = FALSE
 (CHOOSE x \in {1, 2, 3} : x > 4) = \* error
