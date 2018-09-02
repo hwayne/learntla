@@ -82,6 +82,10 @@ A few things should leap out here. First, this isn't part of the PlusCal algorit
 
 How is this different from `assert`? Assert checks in one place. We can specify MoneyNotNegative as an _Invariant_ of the system, something that must be true in all possible system states. It becomes part of the model, and then it'll check before money is pulled from Alice's account, being the deposit and the withdrawal, etc. If we added a `money := money - 2` step anywhere the MoneyNotNegative invariant will catch that the spec fails when `money = 1`.
 
+{{% notice note %}}
+*If the model complains that MoneyInvariant is an unknown operator, you may have put the definition after the close of the module. Remember, everything after the first line beginning with `====` is ignored!*
+{{% /notice %}}
+
 ### One step further: checking Atomicity
 
 So far we haven't done anything too out of the ordinary. Everything so far is easily coverable in a real system by unit and property tests. There's still a lot more ground to cover, but I want to show that we can already use what we've learned to find more complicated bugs. Alice wants to give Bob 1,000 dollars. If we're unlucky, it could play out like this:
