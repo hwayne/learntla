@@ -93,7 +93,7 @@ Right now we're a little limited in what we can practically do, but we can alrea
 This isn't the most optimal way of writing it, but I wanted to showcase both `with` and `either` here. You could probably use just the `either`. `BOOLEAN` is a TLA+ builtin and is equal to the set `{TRUE, FALSE}`. As you can see, every step this picks a single flag and either sets it to true or false. Fairly simple, if cumbersome.
 
 {{% q %}}
-How many possible _behaviors_ are there after three loops? Keep in mind that distinct behaviors can have the same end state.
+How many possible _behaviors_ are there after three loop iterations? Keep in mind that distinct behaviors can have the same end state.
 
 {{% ans 3havior %}}
 There are 8 initial states. On each loop, the model chooses one of three values and takes one of two actions with it, for a total of 6 paths per loop. So after three loops there are 8*6^3 ~ 1800 behaviors. However, there are only 8 possible current states: most of the behaviors lead to a duplicate outcome.
