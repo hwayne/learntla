@@ -49,4 +49,8 @@ end algorithm;
 
 However, this can quickly get untenable. Another options is to use the regular loops and switch to a depth-first search. This lets you force the model to terminate a finite number of steps.
 ![](../img/depth-first.png)
-One pitfall with depth-first search is that your model might have an error, but you don't reach it in the specified time.
+
+The last option is to use a state constraint. A state constraint is a formula restricting the possible states: When a state does not comply with the constraint, model will finish running.
+![](../img/state-constraint.png)
+
+One pitfall with depth-first search and state constraint is that your model might have an error, but you don't reach it in the specified time.
