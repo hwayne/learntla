@@ -7,7 +7,7 @@ In this section, we'll introduce the basics of propositional logic. Even if you'
 
 ### `\E`
 
-`\E` means "exists". We write `\E x \in S : P(x)` to say "there is at least one x in the set such that P(x) is true." It's the equivalent of a python `any()` or a Ruby `any?`. If we wanted to check that a set had an even  number in it, we could write `HasEvenNumber(S) == \E x \in S : IsEven(x)`
+`\E` means "exists". We write `\E x \in S : P(x)` to say "there is at least one x in the set `S` such that P(x) is true." It's the equivalent of a python `any()` or a Ruby `any?`. If we wanted to check that a set had an even  number in it, we could write `HasEvenNumber(S) == \E x \in S : IsEven(x)`
 
 `~\E` is the opposite: it says that there are no such elements. `\E x \in {}: Foo` is always false, since there are no elements in `{}`.
 
@@ -60,6 +60,10 @@ IsCommutative(Op(_,_), S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)`
 
 `P <=> Q` means "Either both P and Q are true or both are false." It's equivalent to writing `(~P /\ ~Q) \/ (P /\ Q)`. `P <=> ~Q` is P XOR Q.
 
+{{% notice tip %}}
+When `P` and `Q` are booleans, `P <=> Q` is equal to `P = Q`. when `P` and `Q` are not booleans, `P <=> Q` is a TLC error. This means TLC will catch it if you accidentally didn't use booleans
+{{% /notice %}}
+
 {{% q %}}
 Without looking back at the introduction, write an operator that returns the maximum number of a set.
 
@@ -78,7 +82,15 @@ Both `=>` and `<=>` follow the same precedence rules as logical junctions. In ot
   => C
 ```
 
-as `A /\ (B => C)`, whereas without the indent it's interpreted as `(A /\ B) => C`.
+as `A /\ (B => C)`, whereas 
+
+```
+/\ A
+/\ B
+=> C
+```
+
+Is `(A /\ B) => C`.
 
 ### CHOOSE
 

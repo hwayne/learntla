@@ -7,8 +7,8 @@ We've been implicitly using _expressions_ up until now; we just haven't clarifie
 
 ### Logical Junctions
 
-We've used these for a while now: `/\` is "and", `\/` is "or". We can join expressions with them. The one subtlety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an indented junction, TLA+ considers that the start of a subclause. For example,
-
+We've used these for a while now: `/\` is "logical and", `\/` is "logical or". We can join expressions with them. The one subtlety is that this is the _only_ case where TLA+ is whitespace sensitive. If you start a line with an aligned junction, TLA+ considers that the start of a subclause. For example,
+TK REWRITE THIS
 ```tla
 /\ TRUE
   \/ TRUE
@@ -30,6 +30,8 @@ Etc. As a general rule of thumb:
 * Use only one type of operator per level of indentation.
 
 Generally if you mess this up the spec will crash, so you're unlikely to get a logic bug through this.
+
+If there's any ambiguity to the precedence of an expression, it's considered invalid. So you can write `(A /\ B) \/ C` and `A /\ (B \/ C)`, but `A /\ B \/ C` is an error. `=` has a higher level of precedence than `/\` or `\/`. 
 
 ### LET-IN
 

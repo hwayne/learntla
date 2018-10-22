@@ -3,15 +3,13 @@ title = "Sets"
 weight = 4
 +++
 
-You've seen sets before. `{1, 2}` is a set. `1..N` is the set of all numbers between 1 and N. `x \in S` checks whether S contains x, unless you use it in a PlusCal `variables` statement or a `with` (where it creates new behaviors). Like everything else, you can nest them: `{{{}}}` is a set containing a set containing an empty set.
+You've seen sets before. `{1, 2}` is a set. `1..N` is the set of all numbers between 1 and N. `x \in S` checks whether S contains x, unless you use it in a PlusCal `variables` statement or a `with` (where it creates new behaviors). Like everything else, you can nest them: `{{{}}` is a set containing a single element, which is a set containing a single element, which is the empty set.
 
 Often, we're interested in some transformation of the set, such as "the set of male participants under 60" or "The owners of the pets." In this section we'll cover three ways to transform a set and how they are combined.
 
 ### Filtering
 
 We can filter a set with `{x \in S: P(x)}`, which is the set of all x \in S where P(x) is true. For example, `{x \in 1..8 : x % 2 = 1}` is the set `{1, 3, 5, 7}`. P must return a boolean, so `{ x \in 1..4 : x * x }` raises an error.
-
-If S is a set of tuples, you can filter on some relationship between the elements of the tuple by instead using `<<...>> \in S`. If you want the set of ordered pairs, you could do `{<<x, y>> \in S \X S : x >= y}`.
 
 As always, you can nest filters, and `{x \in {y \in S : P(y)} : Q(x)}` will filter on the filtered list. Generally, though, `{x \in S: P(x) /\ Q(x)}` is easier to understand.
 
@@ -55,7 +53,6 @@ Write an operator that takes two sets S1 and S2 and determines if the double of 
 
 {{% ans double %}}
 `IsDoubleSubset(S1, S2) == {x * 2 : x \in S1} \subseteq S2`.
-If you wanted to check both ways (doubles of S2 are in S1), you could write two expressions with `\\/`.
 {{% /ans %}}
 {{%/q %}}
 
@@ -67,11 +64,15 @@ operator | operation | example
 `SUBSET S` | The set of all subsets of S | `SUBSET {1, 2} = {{}, {1}, {2}, {1, 2}}`
 `UNION S` | Flatten set of sets | `UNION {{1}, {1, 2}, {5}} = {1, 2, 5}`
 
+{{% notice tip %}}
+You can also use `\cup` for `\union` and `\cap` for `\intersect`.
+{{% /notice %}}
+
 {{% q %}}
 Given a sequence of sets, write an operator that determines if a given element is found in any of the sequence's sets. IE `Op("a", <<{"b", "c"}, {"a", "c"}>>) = TRUE`.
 
 {{% ans setrange %}}
-`InSeqSets(elem, Seq) == elem \in UNION Range(Seq)`
+`InSeqSets(elem, seq) == elem \in UNION Range(seq)`
 {{% /ans %}}
 {{%/q %}}
 If you add `EXTENDS FiniteSets`, you also get the following operators:
@@ -82,7 +83,7 @@ IsFiniteSet(S) | TRUE iff S is finite
 Cardinality(S) | Number of elements of S, if S is finite
 
 {{% q %}}
-Given a set, write an operator that returns all subsets of length two. IE `Op(1..3) == {{1, 2}, {1, 3}, {2, 3}}`.
+Given a set, write an operator that returns all subsets with two elements in them. IE `Op(1..3) == {{1, 2}, {1, 3}, {2, 3}}`.
 
 {{% ans twos %}}
 `Op(S) == { subset \in SUBSET S : Cardinality(subset) = 2 }`

@@ -84,13 +84,13 @@ x1 --- e; x2 --- e; x3 --- e;
 
 ## Example
 
-_Specify a system with three flags that can be on or off, as well as can change the state of a flag._
+_Specify a system with three flags that can be `TRUE` or `FALSE`, where the system can also set any of the flags to `TRUE` or `FALSE`._
 
 Right now we're a little limited in what we can practically do, but we can already start constructing simple patterns. Here's one way to write this in PlusCal:
 
 {{% code gates %}}
 
-This isn't the most optimal way of writing it, but I wanted to showcase both `with` and `either` here. You could probably use just the `either`. `BOOLEAN` is a TLA+ builtin and is equal to the set `{TRUE, FALSE}`. As you can see, every step this picks a single flag and either sets it to true or false. Fairly simple, if cumbersome.
+This isn't the most optimal way of writing it, but I wanted to showcase both `with` and `either` here. You could probably use just the `either`. `BOOLEAN` is a TLA+ builtin and is equal to the set `{TRUE, FALSE}`. As you can see, every step picks a single flag and either sets it to true or false. Fairly simple, if cumbersome.
 
 {{% q %}}
 How many possible _behaviors_ are there after three loops? Keep in mind that distinct behaviors can have the same end state.

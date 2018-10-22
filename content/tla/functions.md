@@ -44,10 +44,13 @@ That generates every function which maps an element of A to an element of B. A a
 ```
 S == {1, 2}
 [s \in S |-> S] = [1 |-> {1, 2}, 2 |-> {1, 2}]
-[S -> S] = {[1 |-> 1, 2 |-> 1], [1 |-> 1, 2 |-> 2], [1 |-> 2, 2 |-> 1], [1 |-> 2, 2 |-> 2]} 
+[S -> S] = {[1 |-> 1, 2 |-> 1], 
+            [1 |-> 1, 2 |-> 2], 
+            [1 |-> 2, 2 |-> 1], 
+            [1 |-> 2, 2 |-> 2]} 
 ```
 
-Since each side is a set, you can use normal set expressions on them.
+In the expression `[A -> B]`, `A` and `B` can be any set expressions.
 
 {{% q %}}
 For a given p in People and a in Animals, p either "like"s them, "hate"s them, or are "neutral". What is the set of all possible relationships between people, animals, and preferences?
@@ -76,7 +79,7 @@ We would call pref with `pref[<<p, a>>]`. I've personally found this to be the l
 {{%/q %}}
 
 {{% q %}}
-`EXTENDS Sequences` gives you the `Seq(S)` operator, which gives you the set of all sequences with a range in S. Unfortunately, you can't actually use this operator, since it will crash TLC. So let's make some better versions. First, write an operator that returns a tuple of N copies of a set. For example `Op(S, 3) == S \X S \X S`.
+`EXTENDS Sequences` gives you the `Seq(S)` operator, which gives you the set of all sequences with a range in S. Unfortunately, you can't use it with `\A`, `\E`, or `CHOOSE`, as it's an infinite set. Let's make a finite version. First, write an operator that returns a tuple of N copies of a set. For example `Op(S, 3) == S \X S \X S`.
 
 {{% ans tup %}}
 `Tup(S, n) == [1..n -> S]`
@@ -91,9 +94,9 @@ Now write an operator that returns all sequences with a range in S of length n o
 
 ## Using Functions
 
-In most cases where programmers think of using "functions", operators are actually more applicable. Operators are generally more powerful than functions. For example, you can define an operator over all subsets of the integers, but you can't do the same for functions. Additionally, you cannot use functions as invariants. In general, if you want something to take arbitrary inputs, use an operator.
+In most cases where programmers think of using "functions", operators are actually more applicable. Since you don't need to provide the domain of the operator, it's often easier to write than a function would be. In general, if you want something to take arbitrary inputs, use an operator.
 
-What makes functions useful is that you can define them over a finite domain and a finite range. In such a case it's assignable like any other variable. This, combined with set operators on the sets of functions, vastly increases the power of your specifications.
+What makes functions useful is that the value of a variable can be a function. This, combined with set operators on the sets of functions, vastly increases the power of your specifications.
 
 As one example, recall the code we write to simulate the three flags:
 

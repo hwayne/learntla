@@ -113,3 +113,44 @@ begin
                   ];
 end macro;
 ```
+
+---
+
+---
+title: "Practical TLA+ Now Available"
+date: "2018-10-17"
+categories:
+  - Programming
+tags:
+  - TLA+
+  - Formal Methods
+draft: true
+
+---
+
+I am delighted to announce that my book, [Practical TLA+](https://www.apress.com/us/book/9781484238288), is now available! When I stumbled into TLA+ in 2016 I had no idea it would so define my passions, my values, and my career. I _definitely_ didn't think I'd be writing a book. But 11 months and 220 pages later, here we are! This is the largest project I've ever done and I'm incredibly excited to share it with you all.
+
+g
+_Practical TLA+_ is designed to take you from a complete outsider in formal methods to a happy user at your day-to-day job. The first six chapters cover most of the syntax and semantics, which by itself would be a solid introduction to TLA+. But part two is where the book really shines: it's all about _using_ TLA+. It covers all sorts of different approaches, techniques, and pitfalls to writing specs. Everything from fleshing out abstract specs to modeling adversarial agents to why you always want a `TypeInvariant`.
+
+The book is also designed to be _accessible_. My technical editor and I went through the book together, line by line, making sure every explanation was clear and every step was explained. On average, we spent a half hour on each page. I honestly believe this is the best introduction to TLA+ available.
+
+### FAQ
+
+**What makes this different from [_Learn TLA+_](http://learntla.com/)?**
+
+_Practical TLA+_ is much more comprehensive. It covers the same material with greater depth, properly explains temporal logic, and actually talks about the module system. More importantly, it focuses much more on how to _use_ TLA+. The second half of the book is packed with applications, techniques, and large scale examples. To give a sense of scale, the last two proper chapters are each about a single spec. Those two chapters combined are about as long as _the entirety_ of _Learn TLA+_.
+
+Most importantly, I wrote _Learn TLA+_ as I was, well, _learning_ TLA+. I wrote _Practical TLA+_ with two more years of experience with writing specs, teaching people, and communicating the ideas. I think it shows in the quality of the text.
+
+On the other hand, _Learn TLA+_ is free and has exercises in it. Tradeoffs!
+
+**What's happening to _Learn TLA+_?**
+
+Nothing. _Learn TLA+_ will always be freely available online. I'll be fixing some of the factual errors in it and prolly writing a C-syntax version of the guide but otherwise I'll be leaving it alone. I will still be reviewing pull requests, of course, if people want to [contribute fixes or additions](https://github.com/hwayne/learntla). Ultimately I see it being a shared project of the community. I wrote it because I believe free, online documentation is critical to the success of any project, and _Learn TLA+_ will stay that way.
+
+**Now what?**
+
+I [made workshops](/consulting) for TLA+ and Alloy and am currently looking for clients. If think you might be interested, [please contact me](mailto:consulting@hillelwayne.com).
+
+My next major project will likely be writing a free online [Alloy](http://alloytools.org/) guide. There's already an [amazing book](https://mitpress.mit.edu/books/software-abstractions) for Alloy but I believe the lack of friction-free documentation is limiting adoption.

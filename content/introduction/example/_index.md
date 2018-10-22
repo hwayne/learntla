@@ -17,21 +17,21 @@ Here’s one way:
 
 Before we start messing with it, let's break down the current syntax we have. Since TLA+ is a specification language, it enforces certain restrictions on the structure of your program. 
 
-* If the filename is "transfer", the first line of the spec must be `---- MODULE transfer ----`. You must have at least four dashes on each side. Similarly, the last line must be at least four equal signs. Anything before the MODULE or after the bottom is ignored.
+* If the filename is "transfer", the first line of the spec must be `---- MODULE transfer ----`. You must have at least four dashes on each side. Similarly, the last line must be at least four equal signs. Anything before the `---- MODULE` or after the bottom is ignored.
 * EXTENDS is the equivalent of an import statement.
-* `\*` is a comment, `(* *)` are comment blocks. Note that the algorithm is in a comment block. This is intentional. Since PlusCal algorithms aren't syntatically valid TLA+, we can't run it in a TLA file. Instead, you leave them in comments and let the PlusCal translator translate it.
-* `variables` is, shockingly enough, variables. Note that we use `=` when declaring variables, while in the algorithm itself we use `:=`. Outside of variable definition = is the comparison operator. Not equals is written as /=. `1 + 2 = 3; 2 + 3 /= 4.`
+* We write line comments with `\*` and block comments with `(* *)`. Note that the algorithm is in a comment block. This is intentional. Since PlusCal algorithms aren't syntatically valid TLA+, we can't run it in a TLA file. Instead, you leave them in comments and let the PlusCal translator translate it.
+* `variables` is, shockingly enough, variables. Note that we use `=` when declaring variables, while in the algorithm itself we use `:=`. Outside of variable definition `=` is the comparison operator. Not equals is written as `/=`. So we have the expressions `1 + 2 = 3` and  `2 + 3 /= 4`.
 * `A:` and `B:` are labels. They define the steps the algorithm takes. Understanding how labels work is critical to writing more complex algorithms, as they define the places where your concurrency can go horribly awry. We'll be diving into them a bit deeper later.
 
 So how do we run this? Well, we can't. First of all, it's not real code, we have to transpile it first. Also, we don't exactly 'run' it. Instead, we design models to test against it. Let's get that set up right now.
 
 ### TLA+ Toolbox
 
-The [TLA+ Toolbox](https://github.com/tlaplus/tlaplus/releases/latest) is the IDE for TLA+. Using TLA+ has enough moving parts that using an IDE is the right choice here, regardless of your preferences.
+The [TLA+ Toolbox] (https://lamport.azurewebsites.net/tla/toolbox.html#downloading) is the IDE for TLA+. Using TLA+ has enough moving parts that using an IDE is the right choice here, regardless of your preferences.
 
 ![](img/intro_toolbox.png)
 
-Let's open it up and add our current project. There's two parts to a specification: the modules and the models. Modules have our code, models test them. Try creating a new spec with the above code in it, and then translate that into TLA+ (on Mac it’s ⌘T).
+Let's open it up and add our current project. There's two parts to a specification: the modules and the models. Modules have our code, models test them. Try creating a new spec with the above code in it, and then translate that into TLA+. You can find translation under `TK` or using a shortcut. On Windows the shortcut is ctrl-T and on Mac it’s ⌘T).
 
 ![](img/translated.png)
 
@@ -43,13 +43,13 @@ It’s okay for the model to be empty right now; even without any configuration 
 
 ### Assertions and Sets
 
-Can Alice's account go negative? Right now our spec allows that, which we don't want. We can start by adding a basic assert check after the transaction. This is the same as asserts in any other language. In TLA+, though, it's (mostly) used for debugging. That's because TLA+ has vastly more powerful tools for checking contracts and properties. But let's start small.
+Can Alice's account go negative? Right now our spec allows that, which we don't want. We can start by adding a basic assert check after the transaction. This is the same as asserts in any other language. TLA+ also has vastly more powerful tools for checking contracts and properties, but let's start small.
 
 Here's what our code looks like with the assert:
 
 {{% code assertion %}}
 
-Standard practice for unit testing {and test-driven development: write a breaking test, fix it, write a working test}. If we run this, the model will successfully pass.
+If we run this, the model will successfully pass.
 
 At the very least, it works for the one number we tried. That doesn't mean it works for all cases. When testing, it’s often hard to choose just the right test cases to surface the bugs you want to find. This is because most languages make it easy to test a specific state but not a large set of them. In TLA+, though, testing a wide range is simple:
 
@@ -69,7 +69,7 @@ We can fix this by wrapping the check in an if-block:
 
 Which now runs properly.
 
-Quick aside: this is closer to testing all possible cases, but isn't testing all possible cases. Would the algorithm break if money was, say, 4997? If we actually wanted to test all possible cases, we could replace `money \in 1..20` with `money \in Nat`, where `Nat` is the set of natural numbers. This is perfectly valid TLA+. Unfortunately, it's also something the model checker can't handle. TLC can only check a subset of TLA+, and infinite sets aren't part of that.
+Quick aside: this is closer to testing all possible cases, but isn't testing all possible cases. Would the algorithm break if money was, say, 4997? If we actually wanted to test all possible cases, we could replace `money \in 1..20` with `money \in Nat`, where `Nat` is the set of natural numbers. This is perfectly valid TLA+. Unfortunately, it's also something the model checker can't handle. TLC can only check a subset of TLA+, and an infinite of initial states isn't in that subset.
 
 ### TLA+ and Invariants
 
@@ -78,7 +78,7 @@ Can you transfer a negative amount of money? We could add an `assert money > 0` 
 {{% code 5 %}}
 
 
-A few things should leap out here. First, this isn't part of the PlusCal algorithm. It's pure TLA+ that we put in the bottom of the file so as to be able to reference the transpiled TLA+. TLA+ can reference anything that your PlusCal can, as long as it comes after the `END TRANSLATION` marker. Second, it doesn't change anything. Instead, it's a property of the system. If money is negative, MoneyNotNegative is false. Otherwise, it's true. Properties are specified with `==`.
+A few things should leap out here. First, this isn't part of the PlusCal algorithm. It's pure TLA+ that we put in the bottom of the file so as to be able to reference the transpiled TLA+. TLA+ can reference anything that your PlusCal can, as long as it comes after the `\* END TRANSLATION` marker. Second, it doesn't change anything. Instead, it's just a definition, or _operator_. If money is negative, MoneyNotNegative is false. Otherwise, it's true. Operators are specified with `==`. We can use this operator to test if the money is, well, not negative.
 
 How is this different from `assert`? Assert checks in one place. We can specify MoneyNotNegative as an _Invariant_ of the system, something that must be true in all possible system states. It becomes part of the model, and then it'll check before money is pulled from Alice's account, being the deposit and the withdrawal, etc. If we added a `money := money - 2` step anywhere the MoneyNotNegative invariant will catch that the spec fails when `money = 1`.
 
@@ -87,11 +87,11 @@ How is this different from `assert`? Assert checks in one place. We can specify 
 So far we haven't done anything too out of the ordinary. Everything so far is easily coverable in a real system by unit and property tests. There's still a lot more ground to cover, but I want to show that we can already use what we've learned to find more complicated bugs. Alice wants to give Bob 1,000 dollars. If we're unlucky, it could play out like this:
 
 1. System checks that Alice has enough money
-1. $1,000 is deducted from her account
-1. Eve smashes in the server with a baseball bat
-1. Bob never receives the money
-1. $1,000 has completely disappeared from the system
-1. The SEC shuts you down for fraud.
+2. $1,000 is deducted from her account
+3. Eve smashes in the server with a baseball bat
+4. Bob never receives the money
+5. $1,000 has completely disappeared from the system
+6. The SEC shuts you down for fraud.
 
 We already have all of the tools to check this. First, we need to figure out how to represent the broken invariant. We could do that by requiring the total money in the system is always the same:
 

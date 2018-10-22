@@ -45,14 +45,14 @@ Terms:
   - _Temporal Properties_ check that something is true over all possible behaviors, aka "lifetimes". For example, "x switches from TRUE to FALSE and back".
 - **How to run?:** Runtime optimizations. This is out of scope.
 
-We can run the model by clicking the green arrow in the top left. TLC will explore the entire state space, looking for possible failures in our invariants. Since we don't actually have any invariants yet, it won't find any failures, so this will be successful. Notice that it lists the diameter as 2 and the number of distinct states as 2. The former means that the longest interesting progression was two steps long: the initial state where `x = 5` and the `Add` step where `x = 6`. Since there's only one possible starting state, there are 2 distinct states total.
+We can run the model by clicking the green arrow in the top left. TLC will explore the entire state space, looking for possible failures in our invariants. Since we don't actually have any invariants yet, it won't find any failures, so this will be successful. Notice that it lists the diameter as 2 and the number of distinct states as 2. The former means that the longest possible behavior was two steps long: the initial state where `x = 5` and the `Add` step where `x = 6`. Since there's only one possible starting state, there are 2 distinct states total.
 
 ![](img/model_run.png)
 
 What happens if we change `x = 5` to `x \in 1..5`? Retranslate the algorithm and rerun the model. You'll see that while the diameter is still 2, there are now 10 distinct states. Since there are five potential initial values, TLC will run the model with all of them in case one of them fails the (still nonexistent) invariants.
 
 {{% notice info %}}
-These numbers are mostly metadata: they don't effect if the spec is valid or not, but it's helpful to look at them if you need to make optimizations.
+The diameter and number of distinct states don't directly affect if the spec is valid or not, but it's helpful to look at them if you need to make optimizations.
 {{% /notice %}}
 
 Let's actually make it fail an invariant, then! Move back to the model overview and add `x /= 6` to the "Invariants" section. This, unsurprisingly, says that a core invariant of our program is that x is never 6. This obviously fails when x is five, which is one of the potential initial states. When we rerun the model, we get something like this:

@@ -3,7 +3,7 @@ title = "Operators"
 weight = 1
 +++
 
-An operator is a thing that does a thing. It's what programmers might refer to as a function. You use a `==` to define them.
+An operator is a thing that does a thing. It's what programmers might refer to as a "pure function". You use a `==` to define them.
 
 ```
 Five == 5
@@ -39,6 +39,8 @@ Write an operator that tests if two numbers are not equal.
 `Neq(a,b) == a /= b` works, as does `Neq(a,b) == ~(a = b)`.
 {{% /ans %}}
 {{%/q %}}
+
+Operators and expressions do not "mutate" variable, just return values. If you want to update the value of something in PlusCal, you must make an assignment with `:=`.
 
 ### Higher-Order Operators
 
