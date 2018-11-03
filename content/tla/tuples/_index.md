@@ -70,7 +70,7 @@ The first is a tuple of length three, the latter two are tuples of length two, o
 Structures are hashes. They have keys and values. You specify them as `[key |-> value]` and query them with either `["key"]` or `.key`. Both are legal and valid.
 
 ```
-x = [a |-> 1, b |-> {2, 3}];
+x == [a |-> 1, b |-> {2, 3}];
 x.a = 1;
 x["b"] = {2, 3};
 ```
@@ -78,7 +78,7 @@ x["b"] = {2, 3};
 Aside from that, there's one extra trick structures have. Instead of `key |-> value`, you can do `key : set`. In that case, instead of a structure you get the set of all structures which have, for each given key, a value in the set.
 
 ```
-x = [a : {1}, b : {2, 3}];
+x == [a : {1}, b : {2, 3}];
 x = { [a |-> 1, b |-> 2], [a |-> 1, b -> 3] }
 ```
 
@@ -93,7 +93,7 @@ If you use `:` syntax and _any_ of the values are not sets, then the entire cons
 Any type can be squeezed inside any other type.
 
 ```
-x = [a |-> {<<>>, <<1, 2, 3>>, <<3, 2, 1>>}, b |-> <<[a |-> 0]>>];
+x == [a |-> {<<>>, <<1, 2, 3>>, <<3, 2, 1>>}, b |-> <<[a |-> 0]>>];
 x.b[1].a; \* 0
 ```
 
