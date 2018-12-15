@@ -4,7 +4,7 @@ weight = 1
 +++
 
 {{% notice note %}}
-*If you want a video introduction, come watch my [Strange Loop talk](https://www.youtube.com/watch?v=_9B__0S21y8) on TLA+!*
+I now have a [book available](/book)! You can check it out [here](https://www.apress.com/us/book/9781484238288) and read more about it [here](/book).
 {{% /notice %}}
 ### What is TLA+?
 
