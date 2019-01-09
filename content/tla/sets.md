@@ -82,7 +82,7 @@ IsFiniteSet(S) | TRUE iff S is finite
 Cardinality(S) | Number of elements of S, if S is finite
 
 {{% q %}}
-Given a set, write an operator that returns all subsets of length two. IE `Op(1..3) == {{1, 2}, {1, 3}, {2, 3}}`.
+Given a set, write an operator that returns all subsets of length two. IE `Op(1..3) = {{1, 2}, {1, 3}, {2, 3}}`.
 
 {{% ans twos %}}
 `Op(S) == { subset \in SUBSET S : Cardinality(subset) = 2 }`
