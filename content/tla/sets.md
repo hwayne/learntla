@@ -78,7 +78,7 @@ If you add `EXTENDS FiniteSets`, you also get the following operators:
 
 operator | operation
 -------|-------
-IsFiniteSet(S) | TRUE iff S is finite
+IsFiniteSet(S) | TRUE if S is finite
 Cardinality(S) | Number of elements of S, if S is finite
 
 {{% q %}}
