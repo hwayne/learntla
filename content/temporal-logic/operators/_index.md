@@ -90,4 +90,4 @@ Checks that at some point in every behavior, every philosopher is not hungry. Ho
 
 ![](livelock.png)
 
-Each philosopher can put their fork down and immediately pick it back up again, which prevents anybody else from having two forks. This is a _livelock_. How could rewrite the algorithm to prevent livelocks? Does your solution scale to three or more philosophers?
+Each philosopher can put their fork down and immediately pick it back up again, which prevents anybody else from having two forks. This is a _livelock_. How could we write the algorithm to prevent livelocks? Does your solution scale to three or more philosophers?
