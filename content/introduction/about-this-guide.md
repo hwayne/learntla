@@ -13,7 +13,7 @@ I'm assuming you have the following background:
 
 __You need to download the [TLA+ Toolbox](https://github.com/tlaplus/tlaplus/releases/latest).__ You should also have access to the following resources:
 
-* [The PlusCal Manual](https://research.microsoft.com/en-us/um/people/lamport/tla/pluscal.html): PlusCal is the algorithmic interface to TLA+. We'll be covering everything about it in this guide, but it's nice to have a complete grammar reference. We will be using the p-version of the manual.
+* [The PlusCal Manual](https://lamport.azurewebsites.net/tla/p-manual.pdf): PlusCal is the algorithmic interface to TLA+. We'll be covering everything about it in this guide, but it's nice to have a complete grammar reference. We will be using the p-version of the manual.
 * [The TLA+ Cheat Sheet](http://lamport.azurewebsites.net/tla/summary-standalone.pdf): Exactly what it sounds like. Includes syntax for things out of this guide's scope.
 * [Specifying Systems](https://research.microsoft.com/en-us/um/people/lamport/tla/book.html): _Specifying Systems_ was written by Leslie Lamport, the inventor of TLA+, and remains the most comprehensive book on the subject. It's a lot more advanced than this guide is, but you should know it exists.
 
