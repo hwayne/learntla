@@ -103,13 +103,13 @@ end process;
 Sometimes we cannot guarantee that every receiver will receive every message. We can simulate that by pushing to only a subset of the receivers.
 
 ```tla
-macro lossy_publish(message)
-begin
+macro lossy_publish(message) begin
   with to_receive \in SUBSET DOMAIN sub_queues do
     sub_queues := [ s \in subscribers |-> 
                       IF s \in to_receive
                       THEN Append(sub_queues[s], message)
                       ELSE sub_queues[s]
                   ];
+  end with;
 end macro;
 ```
