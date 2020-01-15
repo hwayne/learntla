@@ -20,7 +20,7 @@ As always, you can nest filters, and `{x \in {y \in S : P(y)} : Q(x)}` will filt
 
 `{P(x): x \in S}` applies P to every element in the set. `{ x * x : x \in 1..4 }` is the set `{1, 4, 9, 16}`. `{ x % 2 = 1:x \in 1..8 }` is the set `{TRUE, FALSE}`. 
 
-You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. `{ x + y : x \in 0..9, y \in { y * 10 : y \in 0..9} }` is the first hundred numbers, in case you wanted to obfusciate `0..99`.
+You can also write `{P(x, y, ...) : x \in S, y \in T, ...}`. `{ x + y : x \in 0..9, y \in { y * 10 : y \in 0..9} }` is the first hundred numbers, in case you wanted to obfuscate `0..99`.
 
 {{% q %}}
 Given `DOMAIN Tuple` is the set of numbers `Tuple` is defined over, write an operator that gives you the values of the Tuple, ie the range.
