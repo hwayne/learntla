@@ -126,4 +126,4 @@ S.b    = 2
 
 ## Bags
 
-See _Specifying Systems_.
+See [Specifying Systems](https://lamport.azurewebsites.net/tla/book.html).
