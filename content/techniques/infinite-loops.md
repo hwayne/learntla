@@ -47,7 +47,7 @@ begin Adder:
 end algorithm;
 ```
 
-However, this can quickly get untenable. Another options is to use the regular loops and switch to a depth-first search. This lets you force the model to terminate a finite number of steps.
+However, this can quickly get untenable. Another options is to use the regular loops and switch to a depth-first search. This lets you force the model to terminate in a finite number of steps.
 ![](../img/depth-first.png)
 
 The last option is to use a state constraint. A state constraint is a formula restricting the possible states: When a state does not comply with the constraint, model will finish running.
