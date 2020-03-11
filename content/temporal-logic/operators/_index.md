@@ -86,7 +86,7 @@ The only change to the code is that we made the process fair, so as to avoid stu
 <>(\A p \in 1..NP: ~hungry[p])
 ```
 
-Checks that at some point in every behavior, every philosopher is not hungry. However, this doesn't check they _remain_ not hungry, and if something flips them back, it'd still be a valid spec. We could instead use `[]<>` to get that extra guarantee, but there's no need for that here. If we put that into our temporal properties to check and run the spec, we get a very long error:
+Checks that at some point in every behavior, every philosopher is not hungry. However, this doesn't check they _remain_ not hungry, and if something flips them back, it'd still be a valid spec. We could instead use `<>[]` to get that extra guarantee, but there's no need for that here. If we put that into our temporal properties to check and run the spec, we get a very long error:
 
 ![](livelock.png)
 
