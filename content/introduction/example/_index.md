@@ -53,7 +53,7 @@ Standard practice for unit testing {and test-driven development: write a breakin
 
 At the very least, it works for the one number we tried. That doesn't mean it works for all cases. When testing, it’s often hard to choose just the right test cases to surface the bugs you want to find. This is because most languages make it easy to test a specific state but not a large set of them. In TLA+, though, testing a wide range is simple:
 
-{{% code 3 %}}
+{{% code "3" %}}
 
 The only thing we changed was `money = 5` to `money \in 1..20`. That means, as you probably can tell, that for the purposes of this algorithm money can be any number from 1 to 20. This means that when checking a model there are 20 possible starting states: (10, 10, 1), (10, 10, 2), etc. TLA+ will try all twenty possibilities and see if any of them break the assertion. This scales; if we wrote `alice_account \in {5, 10}`, there would be 40 possible starting states.
 
@@ -65,7 +65,7 @@ When we run this, we immediately get an error:
 
 We can fix this by wrapping the check in an if-block:
 
-{{% code 4 %}}
+{{% code "4" %}}
 
 Which now runs properly.
 
@@ -75,7 +75,7 @@ Quick aside: this is closer to testing all possible cases, but isn't testing all
 
 Can you transfer a negative amount of money? We could add an `assert money > 0` to the beginning of the algorithm. This time, though, we're going to introduce a new method in preparation for the next section
 
-{{% code 5 %}}
+{{% code "5" %}}
 
 
 A few things should leap out here. First, this isn't part of the PlusCal algorithm. It's pure TLA+ that we put in the bottom of the file so as to be able to reference the transpiled TLA+. TLA+ can reference anything that your PlusCal can, as long as it comes after the `END TRANSLATION` marker. Second, it doesn't change anything. Instead, it's a property of the system. If money is negative, MoneyNotNegative is false. Otherwise, it's true. Properties are specified with `==`.
@@ -99,7 +99,7 @@ So far we haven't done anything too out of the ordinary. Everything so far is ea
 
 We already have all of the tools to check this. First, we need to figure out how to represent the broken invariant. We could do that by requiring the total money in the system is always the same:
 
-{{% code 6 %}}
+{{% code "6" %}}
 
 Then, we declare the checked Invariant to the model:
 
@@ -112,7 +112,7 @@ When we run this, TLC finds a counterexample: between steps A and B the invarian
 
 How do we solve this? It depends on the level of abstraction we care about. If you were designing a database, you'd want to spec the exact steps required to keep the system consistent. At our level, though, we probably have access to database transactions and can 'abstract out' the atomicity checks. The way we do that is to combine A and B into a single "Transaction" step. That tells TLA+ that both actions happen simultaneously, and the system never passes through an invalid state.
 
-{{% code 7 %}}
+{{% code "7" %}}
 
 ### Multiprocess Algorithms
 
@@ -120,7 +120,7 @@ As a final part of our example, let's discuss concurrency. Right now our system 
 
 PlusCal supports multiprocess algorithms. The processes can be completely different algorithms happening concurrently or the same one happening in parallel (or both). The latter is what we want to spec. Here's what it would look like if we could make two transactions:
 
-{{% code 8 %}}
+{{% code "8" %}}
 
 The accounts are global variables, while money is a local variable to the process. This means that there are 400 possible initial states, as the first transfer can be one dollar and the second seven. However, there are actually 2400 possible behaviors! That's because TLC can choose which order to run the processes in, as well as how to interleave them.
 
