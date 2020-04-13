@@ -79,7 +79,7 @@ Aside from that, there's one extra trick structures have. Instead of `key |-> va
 
 ```
 x == [a : {1}, b : {2, 3}];
-x = { [a |-> 1, b |-> 2], [a |-> 1, b -> 3] }
+x = { [a |-> 1, b |-> 2], [a |-> 1, b |-> 3] }
 ```
 
 You can also use `DOMAIN` on structures, which will give the set of keys, as strings.
