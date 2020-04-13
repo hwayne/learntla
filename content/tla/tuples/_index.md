@@ -51,7 +51,6 @@ Sometimes, you need a set of tuples or sequences. For example, given a chessboar
 ```
 chessboard_squares == {"a", "b", "c", "d", "e", "f", "g", "h"} \X (1..8)
 <<"a", 2>> \in chessboard_squares
-<<2, "a">> \notin chessboard_squares
 <<"b", 10>> \notin chessboard_squares
 ```
 
