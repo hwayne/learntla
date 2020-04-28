@@ -49,7 +49,7 @@ IsCommutative(Op(_,_), S) == \A x \in S :
 ```
 Alternatively, we could put them on the same line:
 ```tla
-IsCommutative(Op(_,_), S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)`
+IsCommutative(Op(_,_), S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)
 ```
 {{% /ans %}}
 {{%/q %}}
