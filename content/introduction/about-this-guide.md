@@ -3,7 +3,7 @@ title = "About This Guide"
 weight = 3
 +++
 
-This guide focuses on the bare minimum required to get you up and running as fast as possible as well as some intermediate techniques to improve your models. This approach will ignore or skim over the vast majority of TLA+ in order to make that small chunk easier to learn. This doesn't mean the other parts boring, difficult, or useless. Far from it. But they're outside the scope of this guide.
+This guide focuses on the bare minimum required to get you up and running as fast as possible as well as some intermediate techniques to improve your models. This approach will ignore or skim over the vast majority of TLA+ in order to make that small chunk easier to learn. This doesn't mean the other parts are boring, difficult, or useless. Far from it. But they're outside the scope of this guide.
 
 I'm assuming you have the following background:
 
