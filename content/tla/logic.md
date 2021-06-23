@@ -138,7 +138,7 @@ MaxProfit(stockprices) ==
         TimePair == (1..Len(sp)) \X (1..Len(sp))
         Profit[p \in TimePair] == sp[p[2]] - sp[p[1]]
         best == CHOOSE best \in TimePair :
-            /\ best[2] > best[1] \* Buy after sell
+            /\ best[2] > best[1] \* Sell after buy
             /\ Profit[best] > 0 \* Make money plz
             /\ \A worse \in TimePair :
                 worse[2] > worse[1] => Profit[best] >= Profit[worse]
