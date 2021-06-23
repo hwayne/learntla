@@ -44,12 +44,12 @@ Given a set and an operator, determine whether the operator is commutative over 
 
 {{% ans abelian %}}
 ```tla
-IsCommutative(Op(_,_), S) == \A x \in S :
+IsCommutative(Op(\_,\_), S) == \A x \in S :
                           \A y \in S : Op(x,y) = Op(y,x)
 ```
 Alternatively, we could put them on the same line:
 ```tla
-IsCommutative(Op(_,_), S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)
+IsCommutative(Op(\_,\_), S) == \A x \in S, y \in S : Op(x,y) = Op(y,x)
 ```
 {{% /ans %}}
 {{%/q %}}
