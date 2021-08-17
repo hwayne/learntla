@@ -122,7 +122,7 @@ LargestTwinPair(S) == CHOOSE <<x, y>> \in S \X S:
                             /\\ IsPrime(z)
                             /\\ IsPrime(w)
                             /\\ w = z - 2
-                            => z < y
+                            => z <= y
 ```
 {{% /ans %}}
 {{% /q %}}
