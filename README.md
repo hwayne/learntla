@@ -1,3 +1,5 @@
+**THIS HAS BEEN REPLACED BY https://github.com/hwayne/learntla-v2/**
+
 This is the source code used to build the site [Learn TLA+](http://www.learntla.com). The guide is aimed at beginners to formal method who want to use it for simple (but useful!) specifications. "Keep the server from exploding", not "Keep the spaceship from exploding".
 
 ### Setup
